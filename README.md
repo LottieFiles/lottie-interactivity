@@ -25,7 +25,7 @@ npm install --save @lottiefiles/lottie-player && npm install (package here)
 
 ## via source
 
-download and include interactivity.min.js or interactivity.js in to your html page. Lottie webplayer as mentioned in requirements is necessary for this library to work.
+Download and include interactivity.min.js or interactivity.js in to your html page. Lottie webplayer as mentioned in requirements is necessary for this library to work.
 
 # Demo
 
@@ -54,6 +54,7 @@ const Ilottie = new LottieInteractivity();
 ```
 
 Setup configuration
+
 The name of the object ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this array and therefore multiple actions such as "seek", "stop" and "loop", can be set. Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value between 0 and 1.
 
 ```javascript
