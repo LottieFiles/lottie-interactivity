@@ -15,6 +15,7 @@ The library uses the [Lottie Web-Player](https://www.lottiefiles.com/web-player)
 ## via cdn
 
 `<script src="https://unpkg.com/@lottiefiles/lottie-player@0.2.0/dist/lottie-player.js"></script>`
+
 `script link from unpckg`
 
 ## via source
@@ -24,7 +25,10 @@ The library uses the [Lottie Web-Player](https://www.lottiefiles.com/web-player)
 # Getting started
 
 Add a Lottie to html dom with an id set to the div
-`<lottie-player id="firstLottie" src="https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json" style="width:400px; height: 400px;"> </lottie-player>`
+
+```
+<lottie-player id="firstLottie" src="https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json" style="width:400px; height: 400px;"> </lottie-player>
+```
 
 Initialize interactivity library
 
