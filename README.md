@@ -25,7 +25,13 @@ npm install --save @lottiefiles/lottie-player && npm install (package here)
 
 ## via source
 
-`download and include interactivity.min.js or interactivity.js in to your html page`
+download and include interactivity.min.js or interactivity.js in to your html page. Lottie webplayer as mentioned in requirements is necessary for this library to work.
+
+# Demo
+
+Demo is available at https://fyffj.codesandbox.io/
+
+The javascript code for the demo is available at https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
 
 # Getting started
 
@@ -147,10 +153,60 @@ const animActions = {
 };
 ```
 
-# Play on entering viewport
-
 # Play segments
+
+If you would like to play the animation and loop it only from a certain frame to a certain frame, then you can utilize the loop action and frames variable. The config below shows this example.
+
+```javascript
+const animActions = {
+  firstLottie: {
+    actions: [
+      {
+        start: 0.45,
+        end: 1,
+        type: "loop",
+        frames: [17, 63],
+      },
+    ],
+  },
+};
+```
 
 # Play on hover
 
+The play on hover feature is part of the [Lottie Web-Player](https://www.lottiefiles.com/web-player) library. Simply add the hover prop to the player component as shown below.
+
+```html
+<lottie-player
+  id="firstLottie"
+  hover
+  src="https://assets6.lottiefiles.com/packages/lf20_NQAN9S.json"
+  style="width: 400px; height: 400px;"
+></lottie-player>
+```
+
 # Play segments on hover
+
+To loop certain segments on hover, ensure that the Lottie is already at the frame you want to start the on hover loop from (Check the javascript code to find out how). Once thats done you can use the library's "hover" action to loop the segment.
+
+```javascript
+const MyLottie = document.getElementById("firstLottie");
+MyLottie.getLottie().goToAndStop(45, true);
+```
+
+The next step is to add a "hover" action along with the frames you would like to loop from and to.
+
+```javascript
+const animActions = {
+  firstLottie: {
+    actions: [
+      {
+        start: 0,
+        end: 1,
+        type: "hover",
+        frames: [45, 60],
+      },
+    ],
+  },
+};
+```

@@ -4,7 +4,6 @@
  * @author Jawish Hameed <jawish@lottiefiles.com>
  *
  */
-
 class LottieInteractivity {
   lottieScroll(config) {
     window.addEventListener("scroll", function () {
@@ -92,42 +91,3 @@ class LottieInteractivity {
     });
   }
 }
-// Animation configuration
-const Ilottie = new LottieInteractivity();
-
-const animActions = {
-  firstLottie: {
-    actions: [
-      {
-        start: 0,
-        end: 1,
-        type: "seek",
-        frames: [0, 150],
-      },
-    ],
-  },
-  secondLottie: {
-    actions: [
-      {
-        start: 0,
-        end: 0.3,
-        type: "stop",
-        frames: [0],
-      },
-      {
-        start: 0.3,
-        end: 0.45,
-        type: "seek",
-        frames: [0, 150],
-      },
-      {
-        start: 0.45,
-        end: 1.0,
-        type: "loop",
-        frames: [150, 250],
-      },
-    ],
-  },
-};
-
-Ilottie.lottieScroll(animActions);

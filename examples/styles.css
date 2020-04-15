@@ -1,0 +1,26 @@
+body {
+  font-family: sans-serif;
+}
+
+.card {
+  padding: 200px;
+  text-align: center;
+  align-items: center;
+}
+
+.card .content {
+  width: 300px;
+  text-align: center;
+  align-items: center;
+}
+
+.content {
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+}
+
+lottie-player {
+  margin-right: auto;
+  margin-left: auto;
+}
