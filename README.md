@@ -48,7 +48,7 @@ const Ilottie = new LottieInteractivity();
 ```
 
 Setup configuration
-The name of the object ie: <span style="color: red;">'firstLottie'</span> in this example is the ID set to the lottie web component on the html page.This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this array and therefore multiple actions such as <span style="color: red;">"seek"</span>, <span style="color: red;">"stop"</span> and <span style="color: red;">"play"</span>, can be set. Each object has a start and end which is essentially a percentage for the height of the lottie container.
+The name of the object ie: <span style="color: red;">'firstLottie'</span> in this example is the ID set to the lottie web component on the html page.This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this array and therefore multiple actions such as <span style="color: #d73a49;">"seek"</span>, <span style="color: #d73a49">"stop"</span> and <span style="color: #d73a49">"play"</span>, can be set. Each object has a start and end which is essentially a percentage for the height of the lottie container.
 
 ```javascript
 const animActions = {
