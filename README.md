@@ -9,13 +9,13 @@ The library uses the [Lottie Web-Player](https://www.lottiefiles.com/web-player)
 
 ## via npm
 
-```javascript
+```
 npm install --save @lottiefiles/lottie-player && npm install (package here)
 ```
 
 ## via cdn
 
-```javascript
+```html
 <script src="https://unpkg.com/@lottiefiles/lottie-player@0.2.0/dist/lottie-player.js"></script>
 ```
 
@@ -31,7 +31,7 @@ npm install --save @lottiefiles/lottie-player && npm install (package here)
 
 Add a Lottie to html dom with an ID set to the div
 
-```javascript
+```html
 <lottie-player
   id="firstLottie"
   src="https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json"
@@ -48,7 +48,7 @@ const Ilottie = new LottieInteractivity();
 ```
 
 Setup configuration
-The name of the object ie: <span style="color: red;">'firstLottie'</span> in this example is the ID set to the lottie web component on the html page.This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this array and therefore multiple actions such as <span style="color: #d73a49;">"seek"</span>, <span style="color: #d73a49">"stop"</span> and <span style="color: #d73a49">"play"</span>, can be set. Each object has a start and end which is essentially a percentage for the height of the lottie container.
+The name of the object ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this array and therefore multiple actions such as "seek", "stop" and "loop", can be set. Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value between 0 and 1.
 
 ```javascript
 const animActions = {
@@ -58,22 +58,94 @@ const animActions = {
         start: 0,
         end: 1,
         type: "seek",
-        frames: [0, 150],
+        frames: [0, 300],
       },
     ],
   },
 };
 ```
 
+Call the lottiescroll method and pass the configuration object as a parameter
+
 ```javascript
 Ilottie.lottieScroll(animActions);
 ```
 
-# Scroll effect
+# Scroll effect relative to container
+
+There may be situations where you would like to wrap the lottie player inside a container or just in general sync the lottie scroll with a div on your page. In which case you may pass a container variable with the container id into the action object as shown below.
+
+```javascript
+const animActions = {
+  firstLottie: {
+    container: "myContainerId",
+    actions: [
+      {
+        start: 0,
+        end: 1,
+        type: "seek",
+        frames: [0, 300],
+      },
+    ],
+  },
+};
+```
 
 # Scroll effect with offset
 
+If you would like to add an offset to the top of the container or player you may add an extra action object to the array. As per the example config below, from 0 to 30% of the container, the lottie will be stopped and from 30% to 100% of the container the lottie will be synced with the scroll.
+
+```javascript
+const animActions = {
+  firstLottie: {
+    actions: [
+      {
+        start: 0,
+        end: 0.3,
+        type: "stop",
+        frames: [0],
+      },
+      {
+        start: 0.3,
+        end: 1,
+        type: "seek",
+        frames: [0, 300],
+      },
+    ],
+  },
+};
+```
+
 # Scroll effect with offset and segment looping
+
+In cases where you would like the animation to loop from a specific frame to a specific frame, you can add an additional object to actions in which you can specifify the frames. In the example below, the lottie loops frame 150 to 300 once 45% of the container is reached.
+
+```javascript
+const animActions = {
+  firstLottie: {
+    actions: [
+      {
+        start: 0,
+        end: 0.3,
+        type: "stop",
+        frames: [0],
+      },
+      {
+        start: 0.3,
+        end: 0.45,
+        type: "seek",
+        frames: [0, 150],
+      },
+      {
+        start: 0.45,
+        end: 1,
+        type: "loop",
+        frames: [150, 300],
+      },
+    ],
+  },
+};
+```
 
 # Play on entering viewport
 

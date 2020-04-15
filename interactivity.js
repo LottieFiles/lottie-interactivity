@@ -2,7 +2,9 @@
  * LottieFiles interactive scroll for Lottie
  *
  * @author Jawish Hameed <jawish@lottiefiles.com>
+ *
  */
+
 class LottieInteractivity {
   lottieScroll(config) {
     window.addEventListener("scroll", function () {
