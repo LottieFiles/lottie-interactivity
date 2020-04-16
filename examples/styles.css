@@ -55,7 +55,6 @@ lottie-player {
   }
 
   .card .content {
-    width: 100%;
     text-align: center;
     align-items: center;
   }
@@ -64,15 +63,25 @@ lottie-player {
     margin-right: auto;
     margin-left: auto;
     padding-top: 20px;
+    width: auto;
   }
-
+}
+@media screen and (max-width: 768px) {
+  .mobile-collapse {
+    display: block;
+  }
   .container {
     height: 300px;
     width: 300px;
     margin-right: auto;
     margin-left: auto;
   }
-  .mobile-collapse {
-    display: block;
+  .content {
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 20px;
+  }
+  .card {
+    padding: 10px;
   }
 }
