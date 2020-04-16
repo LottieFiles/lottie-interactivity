@@ -8,19 +8,71 @@ body {
   align-items: center;
 }
 
-.card .content {
-  width: 300px;
-  text-align: center;
-  align-items: center;
-}
-
 .content {
   margin-right: auto;
   margin-left: auto;
   padding-top: 20px;
+  width: 370px;
+  text-align: justify;
+  text-justify: auto;
+  font-size: 18px;
+  border: black;
+  border-style: dashed;
+  padding: 20px;
 }
-
+.mobile-collapse {
+  display: flex;
+  flex-wrap: wrap;
+}
+.container {
+  height: 500px;
+  width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 40px;
+}
+.howto-content {
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+  text-align: justify;
+  text-justify: auto;
+  font-size: 18px;
+  border: black;
+  border-style: dashed;
+  padding: 20px;
+}
 lottie-player {
   margin-right: auto;
   margin-left: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    padding: 50px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .card .content {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .content {
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 20px;
+  }
+
+  .container {
+    height: 300px;
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .mobile-collapse {
+    display: block;
+  }
 }

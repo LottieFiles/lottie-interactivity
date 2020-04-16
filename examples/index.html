@@ -7,8 +7,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"
     />
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="../interactivity.js"></script>
+    <script src="../build/interactivity.min.js"></script>
     <script src="./index.js"></script>
     <link href="./styles.css" rel="stylesheet" type="text/css" />
   </head>
@@ -16,24 +18,84 @@
     <div class="card" style="background: #0fccce; color: white;">
       <h1 class="page-title">Lottie player interactivity guide</h1>
       <div class="content">
-        <h4 class="page-secondary-title">
+        <h4 class="page-secondary-title" style="color: black;">
           This is a quick demo for using the
           <a
             href="https://www.lottiefiles.com/web-player"
-            style="color: #607d8b;"
+            style="color: white; text-decoration: none;"
             >Lottie web player
           </a>
-          &nbsp;to add interactivity to your applications
+          to add interactivity to your applications
         </h4>
+      </div>
+    </div>
+    <div class="card" style="background: #ffffff;">
+      <h1 class="page-title">Getting started</h1>
+      <div class="howto-content">
+        <div style="font-weight: bold; margin-bottom: 10px;">
+          Requirements
+        </div>
+        <div style="margin-bottom: 20px;">
+          The Lottie Web Player wrapper is required to use the interactivity
+          library.
+          <a href="https://github.com/LottieFiles/lottie-player">Click here</a>
+          to view the repository for the player. For this example installation
+          will include both the Lottie Web Player and the interactivity library.
+        </div>
+        <div style="font-weight: bold; margin-bottom: 5px;">
+          Installation
+        </div>
+        <div>
+          via npm
+        </div>
+        <pre class="prettyprint" style="overflow: scroll;">
+npm install --save @lottiefiles/lottie-player && npm install (package here)</pre
+        >
+        <div>
+          via cdn
+        </div>
+        <pre class="prettyprint" style="overflow: scroll;">
+&#x3C;script src=&#x22;https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js&#x22;&#x3E;&#x3C;/script&#x3E;</pre
+        >
+        <div>
+          Add Lottie component to your html dom.
+        </div>
+        <pre class="prettyprint" style="overflow: scroll;">
+&#x3C;lottie-player id=&#x22;firstLottie&#x22; src=&#x22;https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json&#x22; style=&#x22;width:400px; height: 400px;&#x22;&#x3E;&#x22;&#x3E;&#x3C;/lottie-player&#x3E;</pre
+        >
+        <div>
+          Initialize library
+        </div>
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+const Ilottie = new LottieInteractivity();</pre
+        >
+        <div>
+          Configure library
+        </div>
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+const animActions = {
+          firstLottie: {
+            actions: [
+              {
+                start: 0,
+                end: 1,
+                type: "seek",
+                frames: [0, 300],
+              },
+            ],
+          },
+        };</pre
+        >
       </div>
     </div>
     <div class="card" style="background: #ffa69e;" id="first">
       <h1>Sync Lottie with scroll</h1>
-      <lottie-player
-        id="firstLottie"
-        src="https://assets5.lottiefiles.com/packages/lf20_fGseie.json"
-        style="width: 400px; height: 400px;"
-      ></lottie-player>
+      <div class="container">
+        <lottie-player
+          id="firstLottie"
+          src="https://assets5.lottiefiles.com/packages/lf20_fGseie.json"
+        ></lottie-player>
+      </div>
       <div class="content">
         This section shows an example of a lottie that is synced with the scroll
         bar. The scrolling effect is activated as soon as the animation enters
@@ -42,11 +104,12 @@
     </div>
     <div class="card" style="background: #03a9f4;" id="second">
       <h1>Lottie scroll relative to container</h1>
-      <lottie-player
-        id="secondLottie"
-        src="https://assets6.lottiefiles.com/private_files/lf30_YWyaYi.json"
-        style="width: 400px; height: 400px;"
-      ></lottie-player>
+      <div class="container">
+        <lottie-player
+          id="secondLottie"
+          src="https://assets6.lottiefiles.com/private_files/lf30_YWyaYi.json"
+        ></lottie-player>
+      </div>
       <div id="MyContainerId" class="content">
         There may be situations where you would like to wrap the lottie player
         inside a container or just in general sync the lottie scroll with a div
@@ -59,11 +122,12 @@
     <div class="card" style="background: #ffb74d;" id="third">
       <h1>Lottie scroll with offset</h1>
       <div style="margin-bottom: 20px;">
-        <lottie-player
-          id="thirdLottie"
-          src="https://assets2.lottiefiles.com/packages/lf20_bHqMJN.json"
-          style="width: 300px; height: 300px;"
-        ></lottie-player>
+        <div class="container">
+          <lottie-player
+            id="thirdLottie"
+            src="https://assets2.lottiefiles.com/packages/lf20_bHqMJN.json"
+          ></lottie-player>
+        </div>
       </div>
       <div class="content">
         If you would like to add an offset to the top of the container or player
@@ -74,14 +138,45 @@
     </div>
     <div class="card" style="background: #7986cb;" id="fourth">
       <h1>Scroll effect with offset and segment looping</h1>
-      <div style="margin-bottom: 20px;">
-        <lottie-player
-          id="fourthLottie"
-          src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json"
-          style="width: 400px; height: 400px;"
-        ></lottie-player>
+      <div class="mobile-collapse" style="margin-bottom: 20px;">
+        <div
+          class="container"
+          style="
+            border: black;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: 5px 10px;
+          "
+        >
+          <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+            Original Lottie
+          </div>
+          <lottie-player
+            id="originalFourthLottie"
+            autoplay
+            loop
+            src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json"
+          ></lottie-player>
+        </div>
+        <div
+          class="container"
+          style="
+            border: black;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: 5px 10px;
+          "
+        >
+          <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+            Configured with interactivity library
+          </div>
+          <lottie-player
+            id="fourthLottie"
+            src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json"
+          ></lottie-player>
+        </div>
       </div>
-      <div class="content">
+      <div class="content" style="margin-top: 40px;">
         In cases where you would like the animation to loop from a specific
         frame to a specific frame, you can add an additional object to actions
         in which you can specify the frames. In the example below, the lottie
@@ -90,14 +185,45 @@
     </div>
     <div class="card" style="background: #4dd0e1;" id="fifth">
       <h1>Play segments</h1>
-      <div style="margin-bottom: 20px;">
-        <lottie-player
-          id="fifthLottie"
-          src="https://assets9.lottiefiles.com/packages/lf20_2DlGwA.json"
-          style="width: 400px; height: 400px;"
-        ></lottie-player>
+      <div class="mobile-collapse" style="margin-bottom: 20px;">
+        <div
+          class="container"
+          style="
+            border: black;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: 5px 10px;
+          "
+        >
+          <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+            Original Lottie
+          </div>
+          <lottie-player
+            id="OriginalFifthLottie"
+            src="https://assets9.lottiefiles.com/packages/lf20_2DlGwA.json"
+            autoplay
+            loop
+          ></lottie-player>
+        </div>
+        <div
+          class="container"
+          style="
+            border: black;
+            border-style: solid;
+            border-width: 1px;
+            box-shadow: 5px 10px;
+          "
+        >
+          <div style="margin-top: 20px; font-size: 18px; font-weight: bold;">
+            Configured with interactivity library
+          </div>
+          <lottie-player
+            id="fifthLottie"
+            src="https://assets9.lottiefiles.com/packages/lf20_2DlGwA.json"
+          ></lottie-player>
+        </div>
       </div>
-      <div class="content">
+      <div class="content" style="margin-top: 40px;">
         If you would like to play the animation and loop it only from a certain
         frame to a certain frame, then you can utilize the loop action and
         frames variable. This example shows an animation looping from frame 17
@@ -107,12 +233,13 @@
     <div class="card" style="background: #ffffff;" id="sixth">
       <h1>Play on hover</h1>
       <div style="margin-bottom: 20px;">
-        <lottie-player
-          id="sixthLottie"
-          hover
-          src="https://assets8.lottiefiles.com/packages/lf20_inDHs8.json"
-          style="width: 300px; height: 300px;"
-        ></lottie-player>
+        <div class="container">
+          <lottie-player
+            id="sixthLottie"
+            hover
+            src="https://assets8.lottiefiles.com/packages/lf20_inDHs8.json"
+          ></lottie-player>
+        </div>
       </div>
       <div class="content">
         The hover function is part of the
@@ -126,11 +253,12 @@
     <div class="card" style="background: #ffd54f;" id="seventh">
       <h1>Play segments on hover</h1>
       <div style="margin-bottom: 20px;">
-        <lottie-player
-          id="seventhLottie"
-          src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json"
-          style="width: 400px; height: 400px;"
-        ></lottie-player>
+        <div class="container">
+          <lottie-player
+            id="seventhLottie"
+            src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json"
+          ></lottie-player>
+        </div>
       </div>
       <div class="content">
         To loop certain segments on hover, ensure that the Lottie is already at

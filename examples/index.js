@@ -1,5 +1,4 @@
 // Animation configuration
-const Ilottie = new LottieInteractivity();
 
 const animActions = {
   firstLottie: {
@@ -84,7 +83,7 @@ const animActions = {
 };
 
 document.addEventListener("DOMContentLoaded", function () {
-  Ilottie.lottieScroll(animActions);
+  lottieInteractivity.lottieScroll(animActions);
   // to setup on hover for segments. make sure the first frame is set as the frame you want to start the segment looping from
   const MyLottie = document.getElementById("seventhLottie");
   MyLottie.getLottie().goToAndStop(45, true);

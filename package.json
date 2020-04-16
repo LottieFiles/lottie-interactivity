@@ -1,3 +1,26 @@
 {
-  "name": "@lottiefiles/interactivity"
+  "name": "@lottiefiles/interactivity",
+  "version": "1.0.0",
+  "main": "./src/interactivity.js",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "rollup": "^2.6.1",
+    "rollup-plugin-babel": "^4.4.0"
+  },
+  "description": "This is a small scroll effect library written to be paired with the Lottie Web Player",
+  "dependencies": {},
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LottieFiles/lottie-interactivity.git"
+  },
+  "author": "Jawish Hameed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LottieFiles/lottie-interactivity/issues"
+  },
+  "homepage": "https://github.com/LottieFiles/lottie-interactivity#readme"
 }
