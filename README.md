@@ -29,9 +29,9 @@ Download and include interactivity.min.js or interactivity.js in to your html pa
 
 # Demo
 
-Demo is available at https://fyffj.codesandbox.io/
+Demos are showcased at https://lottiefiles.com/interactivity
 
-The javascript code for the demo is available at https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
+The javascript code for the demo is available at codesandbox https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
 
 # Getting started
 
@@ -45,12 +45,6 @@ Add a Lottie to html dom with an ID set to the div
 >
   {" "}
 </lottie-player>
-```
-
-Initialize interactivity library
-
-```javascript
-const Ilottie = new LottieInteractivity();
 ```
 
 Setup configuration
@@ -75,7 +69,7 @@ const animActions = {
 Call the lottiescroll method and pass the configuration object as a parameter
 
 ```javascript
-Ilottie.lottieScroll(animActions);
+lottieScroll(animActions);
 ```
 
 # Scroll effect relative to container

@@ -64,12 +64,6 @@ npm install --save @lottiefiles/lottie-player && npm install (package here)</pre
 &#x3C;lottie-player id=&#x22;firstLottie&#x22; src=&#x22;https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json&#x22; style=&#x22;width:400px; height: 400px;&#x22;&#x3E;&#x22;&#x3E;&#x3C;/lottie-player&#x3E;</pre
         >
         <div>
-          Initialize library
-        </div>
-        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-const Ilottie = new LottieInteractivity();</pre
-        >
-        <div>
           Configure library
         </div>
         <pre class="prettyprint lang-javascript" style="overflow: scroll;">
@@ -86,6 +80,13 @@ const animActions = {
           },
         };</pre
         >
+        <div>
+          Call the lottiescroll method and pass the configuration object as a
+          parameter
+        </div>
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+lottieInteractivity.lottieScroll(animActions);</pre
+        >
       </div>
     </div>
     <div class="card" style="background: #ffa69e;" id="first">
@@ -100,6 +101,27 @@ const animActions = {
         This section shows an example of a lottie that is synced with the scroll
         bar. The scrolling effect is activated aas soon as the animation enters
         the viewport.
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+const animActions = {
+  firstLottie: {
+    actions: [
+      {
+        start: 0,
+        end: 1,
+        type: "seek",
+        frames: [0, 300],
+      },
+    ],
+  },
+};</pre
+        >
+        <div>
+          Call the lottiescroll method and pass the configuration object as a
+          parameter
+        </div>
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+lottieInteractivity.lottieScroll(animActions);</pre
+        >
       </div>
     </div>
     <div class="card" style="background: #03a9f4;" id="second">
