@@ -50,8 +50,10 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'hover') {
-      this.container.addEventListener('onmouseenter', this.#hoverStartHandler);
-      this.container.addEventListener('onmouseleave', this.#hoverEndHandler);
+      this.player.goToAndStop(Math.min(...this.actions.frames));
+      this.player.loop = true;
+      this.container.addEventListener('mouseenter', this.#hoverStartHandler);
+      this.container.addEventListener('mouseleave', this.#hoverEndHandler);
     }
   }
 
@@ -61,14 +63,24 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'hover') {
-      this.container.removeEventListener('onmouseenter', this.#hoverStartHandler);
-      this.container.removeEventListener('onmouseleave', this.#hoverEndHandler);
+      this.container.removeEventListener('mouseenter', this.#hoverStartHandler);
+      this.container.removeEventListener('mouseleave', this.#hoverEndHandler);
     }
   }
 
-  #hoverStartHandler = () => {};
+  #hoverStartHandler = () => {
+    if (this.actions.type === 'loop') {
+      if (this.player.isPaused === true) {
+        this.player.playSegments(this.actions.frames, true);
+      }
+    }
+  };
 
-  #hoverEndHandler = () => {};
+  #hoverEndHandler = () => {
+    if (this.actions.type === 'loop') {
+      this.player.stop();
+    }
+  };
 
   #scrollHandler = () => {
     // Get the bounding box for the lottie player or container
@@ -119,17 +131,6 @@ export class LottieInteractivity {
       this.player.goToAndStop(action.frames[0]);
       this.player.stop();
       // TODO: This is not the way to implement this. Refactor needed!
-    } else if (action.type === 'hover') {
-      this.container.addEventListener('mouseenter', () => {
-        if (this.player.isPaused === true) {
-          this.player.playSegments(action.frames, true);
-        }
-      });
-      this.container.addEventListener('mouseleave', () => {
-        if (this.player.isPaused === false) {
-          this.player.pause();
-        }
-      });
     }
   };
 }

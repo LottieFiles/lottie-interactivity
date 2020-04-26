@@ -1,13 +1,13 @@
 // Animation configuration
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   LottieInteractivity.create({
     player: '#firstLottie',
     actions: [
       {
         start: 0,
         end: 1,
-        type: "seek",
+        type: 'seek',
         frames: [0, 300],
       },
     ],
@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   LottieInteractivity.create({
     player: '#secondLottie',
-    container: "MyContainerId",
-    mode: "scroll",
+    container: 'MyContainerId',
+    mode: 'scroll',
     actions: [
       {
         start: 0,
         end: 1,
-        type: "seek",
+        type: 'seek',
         frames: [0, 301],
       },
     ],
@@ -29,18 +29,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   LottieInteractivity.create({
     player: '#thirdLottie',
-    mode: "scroll",
+    mode: 'scroll',
     actions: [
       {
         start: 0,
         end: 0.3,
-        type: "stop",
+        type: 'stop',
         frames: [0],
       },
       {
         start: 0.3,
         end: 1,
-        type: "seek",
+        type: 'seek',
         frames: [0, 301],
       },
     ],
@@ -48,24 +48,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   LottieInteractivity.create({
     player: '#fourthLottie',
-    mode: "scroll",
+    mode: 'scroll',
     actions: [
       {
         start: 0,
         end: 0.2,
-        type: "stop",
+        type: 'stop',
         frames: [0],
       },
       {
         start: 0.2,
         end: 0.45,
-        type: "seek",
+        type: 'seek',
         frames: [0, 45],
       },
       {
         start: 0.45,
         end: 1.0,
-        type: "loop",
+        type: 'loop',
         frames: [45, 60],
       },
     ],
@@ -73,30 +73,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   LottieInteractivity.create({
     player: '#fifthLottie',
-    mode: "scroll",
+    mode: 'scroll',
     actions: [
       {
         start: 0,
         end: 1.0,
-        type: "loop",
+        type: 'loop',
         frames: [17, 60],
       },
     ],
   });
 
   LottieInteractivity.create({
-    player: '#sixthLottie',
-    actions: [
-      {
-        start: 0,
-        end: 1.0,
-        type: "hover",
-        frames: [45, 60],
-      },
-    ],
+    player: '#seventhLottie',
+    container: '#hover-container',
+    mode: 'hover',
+    actions: {
+      type: 'loop',
+      frames: [60, 130],
+    },
   });
-
-  // to setup on hover for segments. make sure the first frame is set as the frame you want to start the segment looping from
-  const sixthLottie = document.getElementById("sixthLottie");
-  sixthLottie.getLottie().goToAndStop(45, true);
 });
