@@ -1,7 +1,8 @@
 // Animation configuration
 
-const animActions = {
-  firstLottie: {
+document.addEventListener("DOMContentLoaded", function () {
+  LottieInteractivity.create({
+    player: '#firstLottie',
     actions: [
       {
         start: 0,
@@ -10,9 +11,12 @@ const animActions = {
         frames: [0, 300],
       },
     ],
-  },
-  secondLottie: {
+  });
+
+  LottieInteractivity.create({
+    player: '#secondLottie',
     container: "MyContainerId",
+    mode: "scroll",
     actions: [
       {
         start: 0,
@@ -21,8 +25,11 @@ const animActions = {
         frames: [0, 301],
       },
     ],
-  },
-  thirdLottie: {
+  });
+
+  LottieInteractivity.create({
+    player: '#thirdLottie',
+    mode: "scroll",
     actions: [
       {
         start: 0,
@@ -37,8 +44,11 @@ const animActions = {
         frames: [0, 301],
       },
     ],
-  },
-  fourthLottie: {
+  });
+
+  LottieInteractivity.create({
+    player: '#fourthLottie',
+    mode: "scroll",
     actions: [
       {
         start: 0,
@@ -59,8 +69,11 @@ const animActions = {
         frames: [45, 60],
       },
     ],
-  },
-  fifthLottie: {
+  });
+
+  LottieInteractivity.create({
+    player: '#fifthLottie',
+    mode: "scroll",
     actions: [
       {
         start: 0,
@@ -69,8 +82,10 @@ const animActions = {
         frames: [17, 60],
       },
     ],
-  },
-  seventhLottie: {
+  });
+
+  LottieInteractivity.create({
+    player: '#sixthLottie',
     actions: [
       {
         start: 0,
@@ -79,12 +94,9 @@ const animActions = {
         frames: [45, 60],
       },
     ],
-  },
-};
+  });
 
-document.addEventListener("DOMContentLoaded", function () {
-  lottieInteractivity.lottieScroll(animActions);
   // to setup on hover for segments. make sure the first frame is set as the frame you want to start the segment looping from
-  const MyLottie = document.getElementById("seventhLottie");
-  MyLottie.getLottie().goToAndStop(45, true);
+  const sixthLottie = document.getElementById("sixthLottie");
+  sixthLottie.getLottie().goToAndStop(45, true);
 });

@@ -1,1 +1,17 @@
-/src/
+# IDE
+.vscode
+.idea
+
+# CI/CD
+.travis.yml
+
+# Source code
+src
+
+# Configs
+jest.config.js
+tsconfig.json
+
+# Docs
+docs/
+examples/

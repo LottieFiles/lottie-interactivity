@@ -1,2 +1,46 @@
-/lib/
-/node_modules/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# node-waf configuration
+.lock-wscript
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+*.env
+
+# IDEs
+**/.idea
+**/.vscode
+**/.history
+
+# Operating system
+.DS_Store
+.tmp
+
+# Dist artifacts
+.build
+
+# Tests
+coverage/

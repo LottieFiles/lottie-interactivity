@@ -1,26 +1,67 @@
 {
-  "name": "@lottiefiles/interactivity",
-  "version": "1.0.0",
-  "main": "./src/interactivity.js",
+  "name": "@lottiefiles/lottie-interactivity",
+  "description": "This is a small effects and interactivity library written to be paired with the Lottie Web Player",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "./dist/lottie-interactivity.min.js",
+  "module": "./dist/lottie-interactivity.es.js",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/plugin-proposal-private-methods": "^7.8.3",
     "@babel/preset-env": "^7.9.5",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-strip": "^1.3.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "prettier": "^2.0.5",
     "rollup": "^2.6.1",
-    "rollup-plugin-babel": "^4.4.0"
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-terser": "^5.3.0"
   },
-  "description": "This is a small scroll effect library written to be paired with the Lottie Web Player",
-  "dependencies": {},
+  "dependencies": {
+    "core-js": "3"
+  },
   "scripts": {
-    "build": "rollup -c"
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LottieFiles/lottie-interactivity.git"
   },
-  "author": "Jawish Hameed",
-  "license": "ISC",
+  "author": "Jawish Hameed <jawish@lottiefiles.com>",
+  "contributors": [
+    "Karam Ali <karam@lottiefiles.com>"
+  ],
   "bugs": {
     "url": "https://github.com/LottieFiles/lottie-interactivity/issues"
   },
-  "homepage": "https://github.com/LottieFiles/lottie-interactivity#readme"
+  "homepage": "https://github.com/LottieFiles/lottie-interactivity#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{css,scss,md}": [
+      "prettier --write"
+    ],
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "eslint . --ext .ts,.tsx,.js --fix"
+    ]
+  }
 }
