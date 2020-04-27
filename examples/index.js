@@ -106,15 +106,9 @@ document.addEventListener('DOMContentLoaded', function () {
     actions: [
       {
         start: 0,
-        end: 0.5,
-        type: 'play',
-        frames: [0, 139],
-      },
-      {
-        start: 0.5,
         end: 1.0,
-        type: 'play',
-        frames: [139, 0],
+        type: 'seek',
+        frames: [0, 139],
       },
     ],
   });
@@ -126,12 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
     actions: [
       {
         start: 0,
-        end: 0.5,
-        type: 'play',
-        frames: [0, 139],
-      },
-      {
-        start: 0.5,
         end: 1.0,
         type: 'play',
         frames: [139, 0],

@@ -56,6 +56,7 @@ which is essentially a percentage for the height of the lottie container and is 
 
 ```javascript
 const animActions = {
+  mode: 'scroll',
   firstLottie: {
     actions: [
       {
@@ -69,10 +70,10 @@ const animActions = {
 };
 ```
 
-#### 3. Call the lottiescroll method and pass the configuration object as a parameter
+#### 3. Call the LottieInteractivity.create method and pass the configuration object as a parameter
 
 ```javascript
-lottieScroll(animActions);
+LottieInteractivity.create(animActions);
 ```
 
 # Scroll effect relative to container
@@ -83,6 +84,7 @@ action object as shown below.
 
 ```javascript
 const animActions = {
+  mode: 'scroll',
   firstLottie: {
     container: 'myContainerId',
     actions: [
@@ -105,6 +107,7 @@ of the container the lottie will be synced with the scroll.
 
 ```javascript
 const animActions = {
+  mode: 'scroll',
   firstLottie: {
     actions: [
       {
@@ -132,6 +135,7 @@ object to actions in which you can specifify the frames. In the example below, t
 
 ```javascript
 const animActions = {
+  mode: 'scroll',
   firstLottie: {
     actions: [
       {
@@ -164,6 +168,7 @@ the loop action and frames variable. The config below shows this example.
 
 ```javascript
 const animActions = {
+  mode: 'scroll',
   firstLottie: {
     actions: [
       {
@@ -198,20 +203,32 @@ from (Check the javascript code to find out how). Once thats done you can use th
 segment.
 
 ```javascript
-const MyLottie = document.getElementById('firstLottie');
-MyLottie.getLottie().goToAndStop(45, true);
+const animActions = {
+  mode: 'hover',
+  firstLottie: {
+    actions: [
+      {
+        start: 0,
+        end: 1,
+        type: 'seek',
+        frames: [0, 139],
+      },
+    ],
+  },
+};
 ```
 
 The next step is to add a "hover" action along with the frames you would like to loop from and to.
 
 ```javascript
 const animActions = {
+  mode: 'hover',
   firstLottie: {
     actions: [
       {
         start: 0,
         end: 1,
-        type: 'hover',
+        type: 'seek',
         frames: [45, 60],
       },
     ],
