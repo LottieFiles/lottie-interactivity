@@ -70,7 +70,7 @@ div will be taken as a container.
 ```javascript
 LottieInteractivity.create({
   mode: 'scroll',
-  player:'firstLottie',
+  player:'#firstLottie',
   actions: [
       {
         visibility[0,1],
@@ -110,20 +110,20 @@ array. As per the example config below, from 0 to 30% visibility of the containe
 
 ```javascript
 LottieInteractivity.create({
+  player: '#firstLottie',
   mode: 'scroll',
-  player:'firstLottie'
   actions: [
-      {
-        visibility: [0, 0.3],
-        type: 'stop',
-        frames: [0],
-      },
-      {
-        visibility: [0.3, 1],
-        type: 'seek',
-        frames: [0, 100],
-      },
-    ]
+    {
+      visibility: [0, 0.3],
+      type: 'stop',
+      frames: [0],
+    },
+    {
+      visibility: [0.3, 1],
+      type: 'seek',
+      frames: [0, 100],
+    },
+  ],
 });
 ```
 
@@ -135,8 +135,8 @@ object to actions in which you can specifify the frames. In the example below, t
 
 ```javascript
 LottieInteractivity.create({
+  player: '#firstLottie',
   mode: 'scroll',
-  player: 'firstLottie',
   actions: [
     {
       visibility: [0, 0.3],
@@ -164,8 +164,8 @@ you can utilize the loop action and frames variable. The config below shows this
 
 ```javascript
 LottieInteractivity.create({
+  player: '#firstLottie',
   mode: 'scroll',
-  player: 'firstLottie',
   actions: [
     {
       visibility: [0.45, 1],
@@ -199,8 +199,8 @@ animation on hover via the "stop" type action instead of "play". Available curso
 
 ```javascript
 LottieInteractivity.create({
+  player: '#firstLottie',
   mode: 'cursor',
-  player: 'firstLottie',
   actions: [
     {
       position: { x: [0, 1], y: [0, 1] },
@@ -220,8 +220,8 @@ the container) the frames will move according to the cursors position.
 
 ```javascript
 LottieInteractivity.create({
-  mode: 'cursor',
   player: '#firstLottie',
+  mode: 'cursor',
   actions: [
     {
       position: { x: [0, 1], y: [0, 1] },
