@@ -49,9 +49,10 @@ the Lotties have been implemented.
 
 #### 2. Setup configuration
 
-The name of the object ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
-This object takes an array named actions which consists of an array of objects. Multiple objects can be added into this
-array and therefore multiple actions such as "seek","play", "stop" and "loop", can be set.
+The name of the player ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
+Configration will contain an actions object. This object takes an array named actions which consists of an array of
+objects. Multiple objects can be added into this array and therefore multiple actions such as "seek","play", "stop" and
+"loop", can be set.
 
 Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value
 between 0 and 1. The visibility arrays first value is the start and the second value is the end. This refers to the
@@ -69,15 +70,14 @@ div will be taken as a container.
 ```javascript
 LottieInteractivity.create({
   mode: 'scroll',
-  firstLottie: {
-    actions: [
+  player:'firstLottie',
+  actions: [
       {
         visibility[0,1],
         type: 'seek',
         frames: [0, 100],
       },
-    ],
-  },
+    ]
 });
 ```
 
@@ -111,8 +111,8 @@ array. As per the example config below, from 0 to 30% visibility of the containe
 ```javascript
 LottieInteractivity.create({
   mode: 'scroll',
-  firstLottie: {
-    actions: [
+  player:'firstLottie'
+  actions: [
       {
         visibility: [0, 0.3],
         type: 'stop',
@@ -123,8 +123,7 @@ LottieInteractivity.create({
         type: 'seek',
         frames: [0, 100],
       },
-    ],
-  },
+    ]
 });
 ```
 
@@ -137,25 +136,24 @@ object to actions in which you can specifify the frames. In the example below, t
 ```javascript
 LottieInteractivity.create({
   mode: 'scroll',
-  firstLottie: {
-    actions: [
-      {
-        visibility: [0, 0.3],
-        type: 'stop',
-        frames: [0],
-      },
-      {
-        visibility: [0.3, 0.45],
-        type: 'seek',
-        frames: [0, 150],
-      },
-      {
-        visibility: [0.45, 1],
-        type: 'loop',
-        frames: [150, 300],
-      },
-    ],
-  },
+  player: 'firstLottie',
+  actions: [
+    {
+      visibility: [0, 0.3],
+      type: 'stop',
+      frames: [0],
+    },
+    {
+      visibility: [0.3, 0.45],
+      type: 'seek',
+      frames: [0, 150],
+    },
+    {
+      visibility: [0.45, 1],
+      type: 'loop',
+      frames: [150, 300],
+    },
+  ],
 });
 ```
 
@@ -167,15 +165,14 @@ you can utilize the loop action and frames variable. The config below shows this
 ```javascript
 LottieInteractivity.create({
   mode: 'scroll',
-  firstLottie: {
-    actions: [
-      {
-        visibility: [0.45, 1],
-        type: 'loop',
-        frames: [17, 63],
-      },
-    ],
-  },
+  player: 'firstLottie',
+  actions: [
+    {
+      visibility: [0.45, 1],
+      type: 'loop',
+      frames: [17, 63],
+    },
+  ],
 });
 ```
 
@@ -203,15 +200,14 @@ animation on hover via the "stop" type action instead of "play". Available curso
 ```javascript
 LottieInteractivity.create({
   mode: 'cursor',
-  firstLottie: {
-    actions: [
-      {
-        position: { x: [0, 1], y: [0, 1] },
-        type: 'loop',
-        frames: [50, 139],
-      },
-    ],
-  },
+  player: 'firstLottie',
+  actions: [
+    {
+      position: { x: [0, 1], y: [0, 1] },
+      type: 'loop',
+      frames: [50, 139],
+    },
+  ],
 });
 ```
 
@@ -225,14 +221,13 @@ the container) the frames will move according to the cursors position.
 ```javascript
 LottieInteractivity.create({
   mode: 'cursor',
-  firstLottie: {
-    actions: [
-      {
-        position: { x: [0, 1], y: [0, 1] },
-        type: 'seek',
-        frames: [0, 100],
-      },
-    ],
-  },
+  player: '#firstLottie',
+  actions: [
+    {
+      position: { x: [0, 1], y: [0, 1] },
+      type: 'seek',
+      frames: [0, 100],
+    },
+  ],
 });
 ```
