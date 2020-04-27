@@ -44,14 +44,27 @@ export class LottieInteractivity {
     this.options = options;
   }
 
+  boundingBoxUtils() {
+    // Get the bounding box for the lottie player or container
+    const { top, height } = this.container.getBoundingClientRect();
+
+    // Calculate current view percentage
+    const current = window.innerHeight - top;
+    const max = window.innerHeight + height;
+    const currentPercent = current / max;
+
+    // Find the first action that satisfies the current position conditions
+    const action = this.actions.find(({ start, end }) => currentPercent >= start && currentPercent <= end);
+
+    return { currentPercent, action };
+  }
+
   start() {
     if (this.mode === 'scroll') {
       window.addEventListener('scroll', this.#scrollHandler);
     }
 
     if (this.mode === 'hover') {
-      this.player.goToAndStop(Math.min(...this.actions.frames));
-      this.player.loop = true;
       this.container.addEventListener('mouseenter', this.#hoverStartHandler);
       this.container.addEventListener('mouseleave', this.#hoverEndHandler);
     }
@@ -69,36 +82,62 @@ export class LottieInteractivity {
   }
 
   #hoverStartHandler = () => {
-    if (this.actions.type === 'loop') {
-      if (this.player.isPaused === true) {
-        this.player.playSegments(this.actions.frames, true);
-      }
-    }
-  };
+    // Skip if no matching action was found!
+    const { currentPercent, action } = this.boundingBoxUtils();
 
-  #hoverEndHandler = () => {
-    if (this.actions.type === 'loop') {
+    // Skip if out of viewport
+    if (currentPercent < 0 || currentPercent > 1) {
+      return;
+    }
+    // Skip if no matching action was found!
+    if (!action) {
+      return;
+    }
+    if (action.type === 'loop') {
+      if (this.player.isPaused === true) {
+        this.player.playSegments(action.frames, true);
+      }
+    } else if (action.type === 'play') {
+      // Play: Reset segments and continue playing full animation from current position
+      if (this.player.isPaused === true) {
+        this.player.resetSegments();
+      }
+      this.player.playSegments(action.frames);
+    } else if (action.type === 'stop') {
+      // Stop: Stop playback
+      this.player.goToAndStop(action.frames[0]);
       this.player.stop();
     }
   };
 
-  #scrollHandler = () => {
-    // Get the bounding box for the lottie player or container
-    const { top, height } = this.container.getBoundingClientRect();
+  #hoverEndHandler = () => {
+    // Skip if no matching action was found!
+    const { currentPercent, action } = this.boundingBoxUtils();
 
-    // Calculate current view percentage
-    const current = window.innerHeight - top;
-    const max = window.innerHeight + height;
-    const currentPercent = current / max;
-
-    // // Skip if out of viewport
+    // Skip if out of viewport
     if (currentPercent < 0 || currentPercent > 1) {
       return;
     }
+    // Skip if no matching action was found!
+    if (!action) {
+      return;
+    }
+    if (action.type === 'loop') {
+      this.player.stop();
+    } else if (action.type === 'play') {
+      this.player.stop();
+    } else if (action.type === 'stop') {
+      this.player.playSegments(action.frames, true);
+    }
+  };
 
-    // Find the first action that satisfies the current position conditions
-    const action = this.actions.find(({ start, end }) => currentPercent >= start && currentPercent <= end);
+  #scrollHandler = () => {
+    const { currentPercent, action } = this.boundingBoxUtils();
 
+    // Skip if out of viewport
+    if (currentPercent < 0 || currentPercent > 1) {
+      return;
+    }
     // Skip if no matching action was found!
     if (!action) {
       return;

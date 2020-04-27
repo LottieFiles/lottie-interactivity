@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   LottieInteractivity.create({
     player: '#firstLottie',
+    mode: 'scroll',
     actions: [
       {
         start: 0,
@@ -88,9 +89,33 @@ document.addEventListener('DOMContentLoaded', function () {
     player: '#seventhLottie',
     container: '#hover-container',
     mode: 'hover',
-    actions: {
-      type: 'loop',
-      frames: [60, 130],
-    },
+    actions: [
+      {
+        start: 0,
+        end: 1.0,
+        type: 'loop',
+        frames: [60, 130],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#eightthLottie',
+    container: '#hover-container2',
+    mode: 'hover',
+    actions: [
+      {
+        start: 0,
+        end: 0.5,
+        type: 'play',
+        frames: [0, 139],
+      },
+      {
+        start: 0.5,
+        end: 1.0,
+        type: 'play',
+        frames: [139, 0],
+      },
+    ],
   });
 });
