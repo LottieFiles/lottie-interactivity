@@ -210,11 +210,12 @@ LottieInteractivity.create({
                           type: "seek",
                           frames: [0, 300],
                         },
-                      ]  
+                      ]
                   });</pre
           >
         </div>
       </div>
+
       <div class="py-10 md:py-32 md:-mx-32 -mx-4 text-white bg-black" id="second">
         <div class="lf-padding">
           <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
@@ -260,11 +261,12 @@ LottieInteractivity.create({
                   frames: [0, 301]
                 }
               ]
-            
+
            });</pre
           >
         </div>
       </div>
+
       <div class="lf-padding py-10 md:py-32" id="third">
         <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
           Lottie scroll with offset
@@ -289,7 +291,7 @@ LottieInteractivity.create({
           <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
               mode:"scroll",
-              player: "#thirdLottie" 
+              player: "#thirdLottie"
               actions: [
                   {
                     visibility:[0,0.3],
@@ -353,6 +355,7 @@ LottieInteractivity.create({
           >
         </div>
       </div>
+
       <div class="lf-padding py-10 md:py-32" id="fifth">
         <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
           Play segments
@@ -389,37 +392,7 @@ LottieInteractivity.create({
           >
         </div>
       </div>
-      <div class="lf-padding py-10 md:py-32" id="sixth">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal">
-          Play on hover
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          The hover function is part of the
-          <a href="https://www.lottiefiles.com/web-player" style="color: #607d8b;">Lottie web player </a>
-          library. Simply add the hover prop to the player component as shown below. Using hover via the component prop
-          however does not allow you to play segments of the animation, this means the animation will always play from
-          frame 0 to the last frame available.
-        </div>
 
-        <div style="margin-bottom: 20px;">
-          <div class="mx-auto mb-8 w-2/3 md:w-1/3">
-            <lottie-player id="sixthLottie" hover src="https://assets4.lottiefiles.com/packages/lf20_FK1hGC.json">
-            </lottie-player>
-
-            <div class="text-sm text-grey-dark text-center">
-              Animation by
-              <a href="https://lottiefiles.com/wandarca" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-                >Wanda Arca</a
-              >
-            </div>
-          </div>
-          <div class="w-full md:w-1/2 mx-auto">
-            <pre class="prettyprint" style="overflow: scroll;">
-&#x3C;lottie-player id=&#x22;sixthLottie&#x22; hover src=&#x22;https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json&#x22;  style=&#x22;width:400px; height: 400px;&#x22;&#x3E;&#x22;&#x3E;&#x3C;/lottie-player&#x3E;</pre
-            >
-          </div>
-        </div>
-      </div>
       <div class="lf-padding py-10 md:py-32" id="seventh">
         <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
           Play segments on hover
@@ -462,9 +435,10 @@ LottieInteractivity.create({
           >
         </div>
       </div>
+
       <div class="lf-padding py-10 md:py-32" id="eightth">
         <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Sync cursor position with animation
+          Sync animation with cursor position
         </h3>
         <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
           To progress the animation as you move the cursor either on the Lottie or on a given container, you may use the
@@ -498,6 +472,52 @@ LottieInteractivity.create({
                     }
                   ]
               });</pre
+          >
+        </div>
+      </div>
+
+      <div class="lf-padding py-10 md:py-32" id="eightth">
+        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+          Sync animation with cursor horizontal movement
+        </h3>
+        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
+          To progress the animation as you move the cursor horizontally either on the Lottie or on a given container,
+          you may use the "cursor" mode. This will make the Lottie interactivity based on the cursors movement. Move
+          your cursor on the animation below.
+        </div>
+        <div class="flex flex-wrap" style="margin-bottom: 20px;">
+          <div class="mx-auto w-2/3 md:w-1/3">
+            <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
+            <lottie-player id="ninthLottie" src="https://assets3.lottiefiles.com/packages/lf20_u41SFE.json">
+            </lottie-player>
+
+            <div class="text-sm text-grey-dark text-center">
+              Animation by
+              <a href="https://lottiefiles.com/MotionJockey" class="lf-link text-grey-dark font-lf-bold" target="_blank"
+                >Motion Jockey</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 mt-12 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+            LottieInteractivity.create({
+              player: '#ninthLottie',
+              mode: 'cursor',
+              actions: [
+                {
+                  position: { x: [0, 1], y: [-1, 2] },
+                  type: 'seek',
+                  frames: [0, 180],
+                },
+                {
+                  position: { x: -1, y: -1 },
+                  type: 'stop',
+                  frames: [0],
+                },
+              ],
+            });
+            </pre
           >
         </div>
       </div>
