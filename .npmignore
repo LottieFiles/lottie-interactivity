@@ -1,6 +1,7 @@
 # IDE
 .vscode
 .idea
+.history
 
 # CI/CD
 .travis.yml
