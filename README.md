@@ -90,7 +90,7 @@ action object as shown below. The scroll effect in this case will be activate on
 ```javascript
 LottieInteractivity.create({
   player: '#secondLottie',
-  container: 'MyContainerId',
+  container: '#MyContainerId',
   mode: 'scroll',
   actions: [
     {
