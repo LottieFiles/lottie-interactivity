@@ -50,7 +50,7 @@ https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
 #### 2. Setup configuration
 
 The name of the object ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
-This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this
+This object takes an array named actions which consists of an array of objects. Multiple objects can be added into this
 array and therefore multiple actions such as "seek", "stop" and "loop", can be set.
 
 Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value
