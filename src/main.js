@@ -72,6 +72,7 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'cursor') {
+      this.player.goToAndStop(this.actions[0].frames[0], true);
       this.container.addEventListener('mousemove', this.#cursorHandler);
     }
   }
@@ -86,11 +87,11 @@ export class LottieInteractivity {
     }
   }
 
-  #cursorHandler = (e) => {
+  #cursorHandler = e => {
     // Get container cursor position
     const { x, y } = this.getContanerCursorPosition(e);
 
-    console.log(x, y);
+    // console.log(x, y);
 
     // Find the first action that satisfies the current position conditions
     const action = this.actions.find(
@@ -102,18 +103,13 @@ export class LottieInteractivity {
       return;
     }
 
-
-
     // Process action types:
     if (action.type === 'seek') {
       // Seek: Go to a frame based on player scroll position action
       const xPercent = (x - action.position.x[0]) / (action.position.x[1] - action.position.x[0]);
       const yPercent = (y - action.position.y[0]) / (action.position.y[1] - action.position.y[0]);
       this.player.playSegments(action.frames, true);
-      this.player.goToAndStop(
-        Math.ceil(((xPercent + yPercent) / 2) * this.player.totalFrames),
-        true,
-      );
+      this.player.goToAndStop(Math.ceil(((xPercent + yPercent) / 2) * this.player.totalFrames), true);
     } else if (action.type === 'loop') {
       if (this.player.isPaused === true) {
         this.player.playSegments(action.frames, true);
@@ -150,7 +146,10 @@ export class LottieInteractivity {
       // Seek: Go to a frame based on player scroll position action
       this.player.playSegments(action.frames, true);
       this.player.goToAndStop(
-        Math.ceil(((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) * this.player.totalFrames),
+        Math.ceil(
+          ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
+            this.player.totalFrames,
+        ),
         true,
       );
     } else if (action.type === 'loop') {
