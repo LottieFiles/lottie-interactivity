@@ -57,11 +57,11 @@ export class LottieInteractivity {
     return current / max;
   }
 
-  getContanerCursorPosition(e) {
+  getContanerCursorPosition(cursorX, cursorY) {
     const { top, left, width, height } = this.container.getBoundingClientRect();
 
-    const x = ((e.clientX - left) / width).toFixed(2);
-    const y = ((e.clientY - top) / height).toFixed(2);
+    const x = ((cursorX - left) / width);
+    const y = ((cursorY - top) / height);
 
     return { x, y };
   }
@@ -73,7 +73,8 @@ export class LottieInteractivity {
 
     if (this.mode === 'cursor') {
       this.player.goToAndStop(this.actions[0].frames[0], true);
-      this.container.addEventListener('mousemove', this.#cursorHandler);
+      this.container.addEventListener('mousemove', this.#mousemoveHandler);
+      this.container.addEventListener('mouseout', this.#mouseoutHandler);
     }
   }
 
@@ -87,15 +88,36 @@ export class LottieInteractivity {
     }
   }
 
-  #cursorHandler = e => {
-    // Get container cursor position
-    const { x, y } = this.getContanerCursorPosition(e);
+  #mousemoveHandler = (e) => {
+    this.#cursorHandler(e.clientX, e.clientY);
+  }
 
-    // console.log(x, y);
+  #mouseoutHandler = () => {
+    this.#cursorHandler(-1, -1);
+  }
+
+  #cursorHandler = (x, y) => {
+    // Resolve cursor position if cursor is inside container
+    if (x !== -1 && y !== -1) {
+      // Get container cursor position
+      const pos = this.getContanerCursorPosition(x, y);
+
+      // Use the resolved position
+      x = pos.x;
+      y = pos.y;
+    }
 
     // Find the first action that satisfies the current position conditions
     const action = this.actions.find(
-      ({ position }) => x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1],
+      ({ position }) => {
+        if (Array.isArray(position.x) && Array.isArray(position.y)) {
+          return x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1];
+        } else if (!Number.isNaN(position.x) && !Number.isNaN(position.y)) {
+          return x === position.x && y === position.y;
+        }
+
+        return true;
+      },
     );
 
     // Skip if no matching action was found!
@@ -108,6 +130,7 @@ export class LottieInteractivity {
       // Seek: Go to a frame based on player scroll position action
       const xPercent = (x - action.position.x[0]) / (action.position.x[1] - action.position.x[0]);
       const yPercent = (y - action.position.y[0]) / (action.position.y[1] - action.position.y[0]);
+
       this.player.playSegments(action.frames, true);
       this.player.goToAndStop(Math.ceil(((xPercent + yPercent) / 2) * this.player.totalFrames), true);
     } else if (action.type === 'loop') {
@@ -166,7 +189,6 @@ export class LottieInteractivity {
     } else if (action.type === 'stop') {
       // Stop: Stop playback
       this.player.goToAndStop(action.frames[0]);
-      this.player.stop();
     }
   };
 }
