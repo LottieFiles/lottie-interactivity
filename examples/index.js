@@ -2,6 +2,18 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   LottieInteractivity.create({
+    player: '#zeroLottie',
+    mode: 'scroll',
+    actions: [
+      {
+        visibility: [0, 1.0],
+        type: 'seek',
+        frames: [0, 360],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
     player: '#firstLottie',
     mode: 'scroll',
     actions: [
@@ -12,16 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ],
   });
-
   LottieInteractivity.create({
     player: '#secondLottie',
-    container: 'MyContainerId',
     mode: 'scroll',
+    container: '#MyContainerId',
     actions: [
       {
         visibility: [0, 1.0],
         type: 'seek',
-        frames: [0, 301],
+        frames: [90, 123],
       },
     ],
   });
@@ -33,12 +44,12 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         visibility: [0, 0.3],
         type: 'stop',
-        frames: [0],
+        frames: [50],
       },
       {
         visibility: [0.3, 1.0],
         type: 'seek',
-        frames: [0, 301],
+        frames: [50, 240],
       },
     ],
   });
@@ -72,27 +83,25 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         visibility: [0, 1.0],
         type: 'loop',
-        frames: [17, 60],
+        frames: [70, 500],
       },
     ],
   });
 
   LottieInteractivity.create({
     player: '#seventhLottie',
-    container: '#hover-container',
     mode: 'cursor',
     actions: [
       {
         position: { x: [0, 1], y: [0, 1] },
-        type: 'seek',
-        frames: [1, 130],
+        type: 'loop',
+        frames: [45, 60],
       },
     ],
   });
 
   LottieInteractivity.create({
     player: '#eightthLottie',
-    container: '#hover-container2',
     mode: 'cursor',
     actions: [
       {
