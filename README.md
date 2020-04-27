@@ -176,21 +176,6 @@ LottieInteractivity.create({
 });
 ```
 
-# Play on hover
-
-The play on hover feature is part of the [Lottie Web-Player](https://www.lottiefiles.com/web-player) library. Simply add
-the hover prop to the player component as shown below. Using hover via the component prop however does not allow you to
-play segments of the animation, this means the animation will always play from frame 0 to the last frame available.
-
-```html
-<lottie-player
-  id="firstLottie"
-  hover
-  src="https://assets6.lottiefiles.com/packages/lf20_NQAN9S.json"
-  style="width: 400px; height: 400px;"
-></lottie-player>
-```
-
 # Play segments on hover
 
 To play the animation on hover you can pair the cursor mode with the play action. You may even utilize this to stop the
@@ -211,7 +196,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Sync cursor movement with animation
+# Sync animation with cursor movement
 
 To sync the position of the cursor with the frames of the animation , you will need to add a position object to the
 action. This tells the liberary which position in the container that the animation should end at. As you move the cursor
@@ -227,6 +212,30 @@ LottieInteractivity.create({
       position: { x: [0, 1], y: [0, 1] },
       type: 'seek',
       frames: [0, 100],
+    },
+  ],
+});
+```
+
+# Sync animation with cursor horizontal movement.
+
+The cursor sync function can be used to either sync with the horizontal movement of the cursor or the vertical movement
+of the cursor. This example shows the horizontal sync.
+
+```javascript
+LottieInteractivity.create({
+  player: '#firstLottie',
+  mode: 'cursor',
+  actions: [
+    {
+      position: { x: [0, 1], y: [-1, 2] },
+      type: 'seek',
+      frames: [0, 179],
+    },
+    {
+      position: { x: -1, y: -1 },
+      type: 'stop',
+      frames: [0],
     },
   ],
 });
