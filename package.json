@@ -1,7 +1,7 @@
 {
   "name": "@lottiefiles/lottie-interactivity",
   "description": "This is a small effects and interactivity library written to be paired with the Lottie Web Player",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "main": "./dist/lottie-interactivity.min.js",
   "module": "./dist/lottie-interactivity.es.js",
@@ -34,7 +34,8 @@
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "lint": "eslint . --ext .ts,.tsx,.js",
-    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx,.js --fix",
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
