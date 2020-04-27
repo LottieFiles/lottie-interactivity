@@ -10,6 +10,7 @@ src
 
 # Configs
 jest.config.js
+rollup.config.js
 tsconfig.json
 
 # Docs
