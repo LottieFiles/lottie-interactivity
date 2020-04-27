@@ -78,7 +78,7 @@ LottieInteractivity.create({
       },
     ],
   },
-};);
+});
 ```
 
 # Scroll effect relative to container
@@ -165,7 +165,7 @@ If you would like to play the animation and loop it only from a certain frame to
 you can utilize the loop action and frames variable. The config below shows this example.
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
   mode: 'scroll',
   firstLottie: {
     actions: [
@@ -176,8 +176,7 @@ const animActions = {
       },
     ],
   },
-};
-LottieInteractivity.create(animActions);
+});
 ```
 
 # Play on hover
