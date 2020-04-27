@@ -60,8 +60,7 @@ const animActions = {
   firstLottie: {
     actions: [
       {
-        start: 0,
-        end: 1,
+        visibility[0,1],
         type: 'seek',
         frames: [0, 300],
       },
@@ -70,7 +69,7 @@ const animActions = {
 };
 ```
 
-#### 3. Call the LottieInteractivity.create method and pass the configuration object as a parameter
+#### 3. Call the LottieInteractivity.create method to instantiate the library and pass the configuration object as a parameter
 
 ```javascript
 LottieInteractivity.create(animActions);
@@ -89,14 +88,14 @@ const animActions = {
     container: 'myContainerId',
     actions: [
       {
-        start: 0,
-        end: 1,
+        visibility: [0, 1],
         type: 'seek',
         frames: [0, 300],
       },
     ],
   },
 };
+LottieInteractivity.create(animActions);
 ```
 
 # Scroll effect with offset
@@ -111,20 +110,19 @@ const animActions = {
   firstLottie: {
     actions: [
       {
-        start: 0,
-        end: 0.3,
+        visibility: [0, 0.3],
         type: 'stop',
         frames: [0],
       },
       {
-        start: 0.3,
-        end: 1,
+        visibility: [0.3, 1],
         type: 'seek',
         frames: [0, 300],
       },
     ],
   },
 };
+LottieInteractivity.create(animActions);
 ```
 
 # Scroll effect with offset and segment looping
@@ -139,26 +137,24 @@ const animActions = {
   firstLottie: {
     actions: [
       {
-        start: 0,
-        end: 0.3,
+        visibility: [0, 0.3],
         type: 'stop',
         frames: [0],
       },
       {
-        start: 0.3,
-        end: 0.45,
+        visibility: [0.3, 0.45],
         type: 'seek',
         frames: [0, 150],
       },
       {
-        start: 0.45,
-        end: 1,
+        visibility: [0.45, 1],
         type: 'loop',
         frames: [150, 300],
       },
     ],
   },
 };
+LottieInteractivity.create(animActions);
 ```
 
 # Play segments
@@ -172,20 +168,21 @@ const animActions = {
   firstLottie: {
     actions: [
       {
-        start: 0.45,
-        end: 1,
+        visibility: [0.45, 1],
         type: 'loop',
         frames: [17, 63],
       },
     ],
   },
 };
+LottieInteractivity.create(animActions);
 ```
 
 # Play on hover
 
 The play on hover feature is part of the [Lottie Web-Player](https://www.lottiefiles.com/web-player) library. Simply add
-the hover prop to the player component as shown below.
+the hover prop to the player component as shown below. Using hover via the component prop however does not allow you to
+play segments of the animation, this means the animation will always play from frame 0 to the last frame available.
 
 ```html
 <lottie-player
@@ -198,40 +195,42 @@ the hover prop to the player component as shown below.
 
 # Play segments on hover
 
-To loop certain segments on hover, ensure that the Lottie is already at the frame you want to start the on hover loop
-from (Check the javascript code to find out how). Once thats done you can use the library's "hover" action to loop the
-segment.
+To play the animation on hover you can pair the cursor mode with the play action. You may even utilize this to stop the
+animation on hover via the "stop" type action instead of "play".
 
 ```javascript
 const animActions = {
-  mode: 'hover',
+  mode: 'cursor',
   firstLottie: {
     actions: [
       {
-        start: 0,
-        end: 1,
+        position: { x: [0, 1], y: [0, 1] },
+        type: 'play',
+        frames: [50, 139],
+      },
+    ],
+  },
+};
+LottieInteractivity.create(animActions);
+```
+
+# Sync cursor movement with animation
+
+To sync the position of the cursor with the frames of the animation , you will need to add a position object to the
+action. This tells the liberary which position in the container that the animation should end at.
+
+```javascript
+const animActions = {
+  mode: 'cursor',
+  firstLottie: {
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
         type: 'seek',
         frames: [0, 139],
       },
     ],
   },
 };
-```
-
-The next step is to add a "hover" action along with the frames you would like to loop from and to.
-
-```javascript
-const animActions = {
-  mode: 'hover',
-  firstLottie: {
-    actions: [
-      {
-        start: 0,
-        end: 1,
-        type: 'seek',
-        frames: [45, 60],
-      },
-    ],
-  },
-};
+LottieInteractivity.create(animActions);
 ```
