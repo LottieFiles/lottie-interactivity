@@ -43,7 +43,6 @@ the Lotties have been implemented.
   src="https://assets2.lottiefiles.com/packages/lf20_i9mxcD.json"
   style="width:400px; height: 400px;"
 >
-  {" "}
 </lottie-player>
 ```
 
