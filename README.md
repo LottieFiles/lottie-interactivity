@@ -51,61 +51,65 @@ https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
 
 The name of the object ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
 This object takes an object named actions which consists of an array of objects. Multiple objects can be added into this
-array and therefore multiple actions such as "seek", "stop" and "loop", can be set. Each object has a start and end
-which is essentially a percentage for the height of the lottie container and is a value between 0 and 1.
+array and therefore multiple actions such as "seek", "stop" and "loop", can be set.
+
+Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value
+between 0 and 1. The visibility arrays first value is the start and the second value is the end. This refers to the
+percentage of the viewport.
+
+Ensure that the ending frame is the frame you want the interactivity to end at. This could be the last frame or a frame
+of your choosing. In this case it is set to 100.
+
+Configuration modes include "scroll" where the animation will be synced to the scrolling of the window and "cursor"
+where the scrolling of the animation will be synced to the cursor position within the container.
+
+The configuration can include a container field as shown in the next example. If a container is not provided the parent
+div will be taken as a container.
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
   mode: 'scroll',
   firstLottie: {
     actions: [
       {
         visibility[0,1],
         type: 'seek',
-        frames: [0, 300],
+        frames: [0, 100],
       },
     ],
   },
-};
-```
-
-#### 3. Call the LottieInteractivity.create method to instantiate the library and pass the configuration object as a parameter
-
-```javascript
-LottieInteractivity.create(animActions);
+};);
 ```
 
 # Scroll effect relative to container
 
 There may be situations where you would like to wrap the lottie player inside a container or just in general sync the
 lottie scroll with a div on your page. In which case you may pass a container variable with the container id into the
-action object as shown below.
+action object as shown below. The scroll effect in this case will be activate once the "MyContainerId" is in viewport.
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
+  player: '#secondLottie',
+  container: 'MyContainerId',
   mode: 'scroll',
-  firstLottie: {
-    container: 'myContainerId',
-    actions: [
-      {
-        visibility: [0, 1],
-        type: 'seek',
-        frames: [0, 300],
-      },
-    ],
-  },
-};
-LottieInteractivity.create(animActions);
+  actions: [
+    {
+      visibility: [0, 1.0],
+      type: 'seek',
+      frames: [0, 100],
+    },
+  ],
+});
 ```
 
 # Scroll effect with offset
 
 If you would like to add an offset to the top of the container or player you may add an extra action object to the
-array. As per the example config below, from 0 to 30% of the container, the lottie will be stopped and from 30% to 100%
-of the container the lottie will be synced with the scroll.
+array. As per the example config below, from 0 to 30% visibility of the container, the lottie will be stopped and from
+30% to 100% visibility of the container the lottie will be synced with the scroll.
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
   mode: 'scroll',
   firstLottie: {
     actions: [
@@ -117,12 +121,11 @@ const animActions = {
       {
         visibility: [0.3, 1],
         type: 'seek',
-        frames: [0, 300],
+        frames: [0, 100],
       },
     ],
   },
-};
-LottieInteractivity.create(animActions);
+});
 ```
 
 # Scroll effect with offset and segment looping
@@ -132,7 +135,7 @@ object to actions in which you can specifify the frames. In the example below, t
 45% of the container is reached.
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
   mode: 'scroll',
   firstLottie: {
     actions: [
@@ -153,14 +156,13 @@ const animActions = {
       },
     ],
   },
-};
-LottieInteractivity.create(animActions);
+});
 ```
 
 # Play segments
 
-If you would like to play the animation and loop it only from a certain frame to a certain frame, then you can utilize
-the loop action and frames variable. The config below shows this example.
+If you would like to play the animation and loop it only from a certain frame to a certain frame of your choosing, then
+you can utilize the loop action and frames variable. The config below shows this example.
 
 ```javascript
 const animActions = {
@@ -196,41 +198,42 @@ play segments of the animation, this means the animation will always play from f
 # Play segments on hover
 
 To play the animation on hover you can pair the cursor mode with the play action. You may even utilize this to stop the
-animation on hover via the "stop" type action instead of "play".
+animation on hover via the "stop" type action instead of "play". Available cursor actions are "loop","seek","play" and
+"stop".
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
   mode: 'cursor',
   firstLottie: {
     actions: [
       {
         position: { x: [0, 1], y: [0, 1] },
-        type: 'play',
+        type: 'loop',
         frames: [50, 139],
       },
     ],
   },
-};
-LottieInteractivity.create(animActions);
+});
 ```
 
 # Sync cursor movement with animation
 
 To sync the position of the cursor with the frames of the animation , you will need to add a position object to the
-action. This tells the liberary which position in the container that the animation should end at.
+action. This tells the liberary which position in the container that the animation should end at. As you move the cursor
+along the given container (No container provided in this example and the library takes the wrapper div for the Lottie as
+the container) the frames will move according to the cursors position.
 
 ```javascript
-const animActions = {
+LottieInteractivity.create({
   mode: 'cursor',
   firstLottie: {
     actions: [
       {
         position: { x: [0, 1], y: [0, 1] },
         type: 'seek',
-        frames: [0, 139],
+        frames: [0, 100],
       },
     ],
   },
-};
-LottieInteractivity.create(animActions);
+});
 ```
