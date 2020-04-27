@@ -42,30 +42,28 @@ export class LottieInteractivity {
     this.mode = mode;
     this.actions = actions;
     this.options = options;
+
+    this.player.loop = true;
+    this.player.stop();
   }
 
-  boundingBoxUtils() {
+  getContainerVisibility() {
     // Get the bounding box for the lottie player or container
     const { top, height } = this.container.getBoundingClientRect();
 
     // Calculate current view percentage
     const current = window.innerHeight - top;
     const max = window.innerHeight + height;
-    const currentPercent = current / max;
+    return current / max;
+  }
 
-    // Skip if out of viewport
-    if (currentPercent < 0 || currentPercent > 1) {
-      return;
-    }
-    // Find the first action that satisfies the current position conditions
-    const action = this.actions.find(({ start, end }) => currentPercent >= start && currentPercent <= end);
+  getContanerCursorPosition(e) {
+    const { top, left, width, height } = this.container.getBoundingClientRect();
 
-    // Skip if no matching action was found!
-    if (!action) {
-      return;
-    }
+    const x = ((e.clientX - left) / width).toFixed(2);
+    const y = ((e.clientY - top) / height).toFixed(2);
 
-    return { currentPercent, action };
+    return { x, y };
   }
 
   start() {
@@ -73,9 +71,8 @@ export class LottieInteractivity {
       window.addEventListener('scroll', this.#scrollHandler);
     }
 
-    if (this.mode === 'hover') {
-      this.container.addEventListener('mouseenter', this.#hoverStartHandler);
-      this.container.addEventListener('mouseleave', this.#hoverEndHandler);
+    if (this.mode === 'cursor') {
+      this.container.addEventListener('mousemove', this.#cursorHandler);
     }
   }
 
@@ -84,87 +81,93 @@ export class LottieInteractivity {
       window.removeEventListener('scroll', this.#scrollHandler);
     }
 
-    if (this.mode === 'hover') {
-      this.container.removeEventListener('mouseenter', this.#hoverStartHandler);
-      this.container.removeEventListener('mouseleave', this.#hoverEndHandler);
+    if (this.mode === 'cursor') {
+      this.container.removeEventListener('mousemove', this.#cursorHandler);
     }
   }
 
-  #hoverStartHandler = () => {
-    try {
-      const { action } = this.boundingBoxUtils();
+  #cursorHandler = (e) => {
+    // Get container cursor position
+    const { x, y } = this.getContanerCursorPosition(e);
 
-      if (action.type === 'loop') {
-        if (this.player.isPaused === true) {
-          this.player.playSegments(action.frames, true);
-        }
-      } else if (action.type === 'play') {
-        // Play: Reset segments and continue playing full animation from current position
-        if (this.player.isPaused === true) {
-          this.player.resetSegments();
-        }
-        this.player.playSegments(action.frames);
-      } else if (action.type === 'stop') {
-        // Stop: Stop playback
-        this.player.goToAndStop(action.frames[0]);
-        this.player.stop();
-      }
-    } catch (e) {
-      // console.log('no action within this viewport');
-    }
-  };
+    console.log(x, y);
 
-  #hoverEndHandler = () => {
+    // Find the first action that satisfies the current position conditions
+    const action = this.actions.find(
+      ({ position }) => x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1],
+    );
+
     // Skip if no matching action was found!
-    try {
-      const { action } = this.boundingBoxUtils();
+    if (!action) {
+      return;
+    }
 
-      if (action.type === 'loop') {
-        this.player.stop();
-      } else if (action.type === 'play') {
-        this.player.stop();
-      } else if (action.type === 'stop') {
+
+
+    // Process action types:
+    if (action.type === 'seek') {
+      // Seek: Go to a frame based on player scroll position action
+      const xPercent = (x - action.position.x[0]) / (action.position.x[1] - action.position.x[0]);
+      const yPercent = (y - action.position.y[0]) / (action.position.y[1] - action.position.y[0]);
+      this.player.playSegments(action.frames, true);
+      this.player.goToAndStop(
+        Math.ceil(((xPercent + yPercent) / 2) * this.player.totalFrames),
+        true,
+      );
+    } else if (action.type === 'loop') {
+      if (this.player.isPaused === true) {
         this.player.playSegments(action.frames, true);
       }
-    } catch (e) {
-      // no action within this viewport
+    } else if (action.type === 'play') {
+      // Play: Reset segments and continue playing full animation from current position
+      if (this.player.isPaused === true) {
+        this.player.resetSegments();
+      }
+      this.player.playSegments(action.frames);
+    } else if (action.type === 'stop') {
+      // Stop: Stop playback
+      this.player.goToAndStop(action.frames[0]);
+      this.player.stop();
     }
   };
 
   #scrollHandler = () => {
-    try {
-      const { currentPercent, action } = this.boundingBoxUtils();
+    // Get container visibility percentage
+    const currentPercent = this.getContainerVisibility();
 
-      // Get lottie instance
-      this.player.loop = true;
+    // Find the first action that satisfies the current position conditions
+    const action = this.actions.find(
+      ({ visibility }) => currentPercent >= visibility[0] && currentPercent <= visibility[1],
+    );
 
-      // Process action types:
-      if (action.type === 'seek') {
-        // Seek: Go to a frame based on player scroll position action
+    // Skip if no matching action was found!
+    if (!action) {
+      return;
+    }
+
+    // Process action types:
+    if (action.type === 'seek') {
+      // Seek: Go to a frame based on player scroll position action
+      this.player.playSegments(action.frames, true);
+      this.player.goToAndStop(
+        Math.ceil(((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) * this.player.totalFrames),
+        true,
+      );
+    } else if (action.type === 'loop') {
+      // Loop: Loop a given frames
+      if (this.player.isPaused === true) {
         this.player.playSegments(action.frames, true);
-        this.player.goToAndStop(
-          Math.ceil(((currentPercent - action.start) / (action.end - action.start)) * this.player.totalFrames),
-          true,
-        );
-      } else if (action.type === 'loop') {
-        // Loop: Loop a given frames
-        if (this.player.isPaused === true) {
-          this.player.playSegments(action.frames, true);
-        }
-      } else if (action.type === 'play') {
-        // Play: Reset segments and continue playing full animation from current position
-        if (this.player.isPaused === true) {
-          this.player.resetSegments();
-        }
-        this.player.play();
-      } else if (action.type === 'stop') {
-        // Stop: Stop playback
-        this.player.goToAndStop(action.frames[0]);
-        this.player.stop();
-        // TODO: This is not the way to implement this. Refactor needed!
       }
-    } catch (e) {
-      // no action within this viewport
+    } else if (action.type === 'play') {
+      // Play: Reset segments and continue playing full animation from current position
+      if (this.player.isPaused === true) {
+        this.player.resetSegments();
+        this.player.play();
+      }
+    } else if (action.type === 'stop') {
+      // Stop: Stop playback
+      this.player.goToAndStop(action.frames[0]);
+      this.player.stop();
     }
   };
 }
