@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     actions: [
       {
         position: { x: [0, 1], y: [0, 1] },
-        type: 'loop',
-        frames: [0, 139],
+        type: 'seek',
+        frames: [0, 180],
       },
     ],
   });

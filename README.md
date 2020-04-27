@@ -23,15 +23,15 @@ npm install --save @lottiefiles/lottie-interactivity
 ## via cdn
 
 ```html
-<script src="https://unpkg.com/@lottiefiles/lottie-interactivity@0.1.0/dist/lottie-interactivity.min.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
 ```
 
 # Demo
 
 Demos are showcased at https://lottiefiles.com/interactivity
 
-The javascript code for the demo can be forked from codesandbox
-https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
+If you would like to take a look at some examples, feel free to have a look in the examples folder to see how each of
+the Lotties have been implemented.
 
 # Getting started
 
