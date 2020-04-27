@@ -2,7 +2,7 @@
 
 # Requirements
 
-This is a small library to add scrolling interactivity to your Lottie Animations. This can be used with the
+This is a small library to add scrolling and cursor interactivity to your Lottie Animations. This can be used with the
 [Lottie Web-Player Component](https://www.lottiefiles.com/web-player) or the
 [Lottie Player](https://github.com/airbnb/lottie-web).
 
@@ -30,7 +30,7 @@ npm install --save @lottiefiles/lottie-interactivity
 
 Demos are showcased at https://lottiefiles.com/interactivity
 
-The javascript code for the demo is available at codesandbox
+The javascript code for the demo can be forked from codesandbox
 https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
 
 # Getting started
@@ -51,7 +51,7 @@ https://codesandbox.io/s/lottie-interactivity-fyffj?file=/src/index.js
 
 The name of the object ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
 This object takes an array named actions which consists of an array of objects. Multiple objects can be added into this
-array and therefore multiple actions such as "seek", "stop" and "loop", can be set.
+array and therefore multiple actions such as "seek","play", "stop" and "loop", can be set.
 
 Each object has a start and end which is essentially a percentage for the height of the lottie container and is a value
 between 0 and 1. The visibility arrays first value is the start and the second value is the end. This refers to the
