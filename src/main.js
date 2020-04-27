@@ -68,11 +68,14 @@ export class LottieInteractivity {
 
   start() {
     if (this.mode === 'scroll') {
+      this.#scrollHandler();
+
       window.addEventListener('scroll', this.#scrollHandler);
     }
 
     if (this.mode === 'cursor') {
-      this.player.goToAndStop(this.actions[0].frames[0], true);
+      this.#cursorHandler(-1, -1);
+
       this.container.addEventListener('mousemove', this.#mousemoveHandler);
       this.container.addEventListener('mouseout', this.#mouseoutHandler);
     }
@@ -84,7 +87,8 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'cursor') {
-      this.container.removeEventListener('mousemove', this.#cursorHandler);
+      this.container.addEventListener('mousemove', this.#mousemoveHandler);
+      this.container.addEventListener('mouseout', this.#mouseoutHandler);
     }
   }
 
@@ -116,7 +120,7 @@ export class LottieInteractivity {
           return x === position.x && y === position.y;
         }
 
-        return true;
+        return false;
       },
     );
 
@@ -145,8 +149,7 @@ export class LottieInteractivity {
       this.player.playSegments(action.frames);
     } else if (action.type === 'stop') {
       // Stop: Stop playback
-      this.player.goToAndStop(action.frames[0]);
-      this.player.stop();
+      this.player.goToAndStop(action.frames[0], true);
     }
   };
 
@@ -188,7 +191,7 @@ export class LottieInteractivity {
       }
     } else if (action.type === 'stop') {
       // Stop: Stop playback
-      this.player.goToAndStop(action.frames[0]);
+      this.player.goToAndStop(action.frames[0], true);
     }
   };
 }
