@@ -1,41 +1,47 @@
 # Lottie Interactivity
 
-# Requirements
+### Requirements
 
 This is a small library to add scrolling and cursor interactivity to your Lottie Animations. This can be used with the
 [Lottie Web-Player Component](https://www.lottiefiles.com/web-player) or the
 [Lottie Player](https://github.com/airbnb/lottie-web).
 
-# Installation
+---
 
-## via yarn
+### Installation
+
+##### via yarn
 
 ```
 yarn add @lottiefiles/lottie-interactivity
 ```
 
-## via npm
+##### via npm
 
 ```
 npm install --save @lottiefiles/lottie-interactivity
 ```
 
-## via cdn
+##### via cdn
 
 ```html
 <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
 ```
 
-# Demo
+---
+
+### Demo
 
 Demos are showcased at https://lottiefiles.com/interactivity
 
 If you would like to take a look at some examples, feel free to have a look in the examples folder to see how each of
 the Lotties have been implemented.
 
-# Getting started
+---
 
-#### 1. Add a Lottie to html dom with an ID set to the div
+### Getting started
+
+##### 1. Add a Lottie to html dom with an ID set to the div
 
 ```html
 <lottie-player
@@ -46,7 +52,7 @@ the Lotties have been implemented.
 </lottie-player>
 ```
 
-#### 2. Setup configuration
+##### 2. Setup configuration
 
 The name of the player ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
 Configration will contain an actions object. This object takes an array named actions which consists of an array of
@@ -80,7 +86,11 @@ LottieInteractivity.create({
 });
 ```
 
-# Scroll effect relative to container
+---
+
+### Examples
+
+#### Scroll effect relative to container
 
 There may be situations where you would like to wrap the lottie player inside a container or just in general sync the
 lottie scroll with a div on your page. In which case you may pass a container variable with the container id into the
@@ -101,7 +111,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Scroll effect with offset
+#### Scroll effect with offset
 
 If you would like to add an offset to the top of the container or player you may add an extra action object to the
 array. As per the example config below, from 0 to 30% visibility of the container, the lottie will be stopped and from
@@ -126,7 +136,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Scroll effect with offset and segment looping
+#### Scroll effect with offset and segment looping
 
 In cases where you would like the animation to loop from a specific frame to a specific frame, you can add an additional
 object to actions in which you can specifify the frames. In the example below, the lottie loops frame 150 to 300 once
@@ -156,7 +166,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Play segments
+#### Play segments
 
 If you would like to play the animation and loop it only from a certain frame to a certain frame of your choosing, then
 you can utilize the loop action and frames variable. The config below shows this example.
@@ -175,7 +185,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Play segments on hover
+#### Play segments on hover
 
 To play the animation on hover you can pair the cursor mode with the play action. You may even utilize this to stop the
 animation on hover via the "stop" type action instead of "play". Available cursor actions are "loop","seek","play" and
@@ -195,7 +205,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Sync animation with cursor movement
+#### Sync animation with cursor movement
 
 To sync the position of the cursor with the frames of the animation , you will need to add a position object to the
 action. This tells the liberary which position in the container that the animation should end at. As you move the cursor
@@ -216,7 +226,7 @@ LottieInteractivity.create({
 });
 ```
 
-# Sync animation with cursor horizontal movement.
+#### Sync animation with cursor horizontal movement.
 
 The cursor sync function can be used to either sync with the horizontal movement of the cursor or the vertical movement
 of the cursor. This example shows the horizontal sync.
