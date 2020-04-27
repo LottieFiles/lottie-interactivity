@@ -40,7 +40,7 @@ node_modules/
 .tmp
 
 # Dist artifacts
-.build
+dist/
 
 # Tests
 coverage/
