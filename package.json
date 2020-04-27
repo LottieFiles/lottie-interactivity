@@ -1,7 +1,7 @@
 {
   "name": "@lottiefiles/lottie-interactivity",
   "description": "This is a small effects and interactivity library written to be paired with the Lottie Web Player",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "main": "./dist/lottie-interactivity.min.js",
   "module": "./dist/lottie-interactivity.es.js",
