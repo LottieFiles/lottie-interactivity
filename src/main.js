@@ -177,9 +177,7 @@ export class LottieInteractivity {
       );
     } else if (action.type === 'loop') {
       // Loop: Loop a given frames
-      if (this.player.isPaused === true) {
-        this.player.playSegments(action.frames, true);
-      }
+      this.player.playSegments(action.frames, true);
     } else if (action.type === 'play') {
       // Play: Reset segments and continue playing full animation from current position
       if (this.player.isPaused === true) {
