@@ -57,8 +57,8 @@ export class LottieInteractivity {
   getContainerCursorPosition(cursorX, cursorY) {
     const { top, left, width, height } = this.container.getBoundingClientRect();
 
-    const x = ((cursorX - left) / width);
-    const y = ((cursorY - top) / height);
+    const x = (cursorX - left) / width;
+    const y = (cursorY - top) / height;
 
     return { x, y };
   }
@@ -93,13 +93,13 @@ export class LottieInteractivity {
     }
   }
 
-  #mousemoveHandler = (e) => {
+  #mousemoveHandler = e => {
     this.#cursorHandler(e.clientX, e.clientY);
-  }
+  };
 
   #mouseoutHandler = () => {
     this.#cursorHandler(-1, -1);
-  }
+  };
 
   #cursorHandler = (x, y) => {
     // Resolve cursor position if cursor is inside container
@@ -113,17 +113,15 @@ export class LottieInteractivity {
     }
 
     // Find the first action that satisfies the current position conditions
-    const action = this.actions.find(
-      ({ position }) => {
-        if (Array.isArray(position.x) && Array.isArray(position.y)) {
-          return x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1];
-        } else if (!Number.isNaN(position.x) && !Number.isNaN(position.y)) {
-          return x === position.x && y === position.y;
-        }
+    const action = this.actions.find(({ position }) => {
+      if (Array.isArray(position.x) && Array.isArray(position.y)) {
+        return x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1];
+      } else if (!Number.isNaN(position.x) && !Number.isNaN(position.y)) {
+        return x === position.x && y === position.y;
+      }
 
-        return false;
-      },
-    );
+      return false;
+    });
 
     // Skip if no matching action was found!
     if (!action) {
@@ -179,7 +177,9 @@ export class LottieInteractivity {
       );
     } else if (action.type === 'loop') {
       // Loop: Loop a given frames
-      this.player.playSegments(action.frames, true);
+      if (this.player.isPaused === true) {
+        this.player.playSegments(action.frames, true);
+      }
     } else if (action.type === 'play') {
       // Play: Reset segments and continue playing full animation from current position
       if (this.player.isPaused === true) {
