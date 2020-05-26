@@ -38,7 +38,13 @@ the Lotties have been implemented.
 
 ## Getting started
 
-#### 1. Add a Lottie to html dom with an ID set to the div
+#### 1. Import lottie player script to DOM
+
+```javascript
+<script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js"></script> // place this in your body element
+```
+
+#### 2. Add a Lottie to html dom with an ID set to the div
 
 ```html
 <lottie-player
@@ -49,7 +55,7 @@ the Lotties have been implemented.
 </lottie-player>
 ```
 
-#### 2. Setup configuration
+#### 3. Setup configuration
 
 The name of the player ie: 'firstLottie' in this example is the ID set to the lottie web component on the html page.
 Configration will contain an actions object. This object takes an array named actions which consists of an array of
@@ -69,18 +75,74 @@ where the scrolling of the animation will be synced to the cursor position withi
 The configuration can include a container field as shown in the next example. If a container is not provided the parent
 div will be taken as a container.
 
+ensure that the interactivity library is imported to the body of your html DOM
+
 ```javascript
 LottieInteractivity.create({
   mode: 'scroll',
-  player:'#firstLottie',
+  player: '#firstLottie',
   actions: [
-      {
-        visibility[0,1],
-        type: 'seek',
-        frames: [0, 100],
-      },
-    ]
+    {
+      visibility: [0, 1],
+      type: 'seek',
+      frames: [0, 100],
+    },
+  ],
 });
+```
+
+##### 3.1 React config
+
+The configuration for the library remains the same for react apps. However usage and initialization is as follows.
+Import the create function from the lottie interactivity library and call the create function. With frameworks like
+react it is ideal to add an event listener that waits for the lottie player to load before calling the interactivity
+library. An example is as follows for a very basic react class component.
+
+```javascript
+import React from 'react';
+import '@lottiefiles/lottie-player';
+import { create } from '@lottiefiles/lottie-interactivity';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef(); // 1. create a reference for the lottie player
+  }
+  componentDidMount() {
+    // 3. listen for player load. see lottie player repo for other events
+    this.myRef.current.addEventListener('load', function (e) {
+      // 4. configure the interactivity library
+      create({
+        mode: 'scroll',
+        player: '#firstLottie',
+        actions: [
+          {
+            visibility: [0, 1],
+            type: 'seek',
+            frames: [0, 100],
+          },
+        ],
+      });
+    });
+  }
+  render() {
+    return (
+      <div className="App">
+        <div style={{ height: '400px' }}></div>
+        <lottie-player
+          ref={this.myRef} // 2. set the reference for the player
+          id="firstLottie"
+          controls
+          mode="normal"
+          src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
+          style={{ width: '320px' }}
+        ></lottie-player>
+      </div>
+    );
+  }
+}
+
+export default App;
 ```
 
 ## Examples
