@@ -75,7 +75,7 @@ LottieInteractivity.create({
   player:'#firstLottie',
   actions: [
       {
-        visibility[0,1],
+        visibility: [0,1],
         type: 'seek',
         frames: [0, 100],
       },
