@@ -68,7 +68,6 @@ export class LottieInteractivity {
     const scope = this;
     // Configure player for start
     if (this.mode === 'scroll') {
-      console.log(this.player);
       this.player.addEventListener('DOMLoaded', function () {
         window.addEventListener('scroll', scope.#scrollHandler);
       });
