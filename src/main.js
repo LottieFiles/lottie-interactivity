@@ -42,6 +42,7 @@ export class LottieInteractivity {
     this.mode = mode;
     this.actions = actions;
     this.options = options;
+    this.assignedSegment = null;
   }
 
   getContainerVisibility() {
@@ -64,19 +65,16 @@ export class LottieInteractivity {
   }
 
   start() {
+    const scope = this;
     // Configure player for start
-    this.player.loop = true;
-    this.player.stop();
-
     if (this.mode === 'scroll') {
-      // this.#scrollHandler();
-
-      window.addEventListener('scroll', this.#scrollHandler);
+      console.log(this.player);
+      this.player.addEventListener('DOMLoaded', function () {
+        window.addEventListener('scroll', scope.#scrollHandler);
+      });
     }
 
     if (this.mode === 'cursor') {
-      // this.#cursorHandler(-1, -1);
-
       this.container.addEventListener('mousemove', this.#mousemoveHandler);
       this.container.addEventListener('mouseout', this.#mouseoutHandler);
     }
@@ -177,7 +175,15 @@ export class LottieInteractivity {
       );
     } else if (action.type === 'loop') {
       // Loop: Loop a given frames
-      this.player.playSegments(action.frames, true);
+      if (this.assignedSegment === null) {
+        this.player.playSegments(action.frames, true);
+        this.assignedSegment = action.frames;
+      } else {
+        if (this.assignedSegment !== action.frames) {
+          this.player.playSegments(action.frames, true);
+          this.assignedSegment = action.frames;
+        }
+      }
     } else if (action.type === 'play') {
       // Play: Reset segments and continue playing full animation from current position
       if (this.player.isPaused === true) {

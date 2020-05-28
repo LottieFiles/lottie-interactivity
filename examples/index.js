@@ -1,6 +1,14 @@
 // Animation configuration
 
 document.addEventListener('DOMContentLoaded', function () {
+  // const lfcontainer = document.getElementById('fifthLottie');
+  // const fifthLottie = lottie.loadAnimation({
+  //   container: lfcontainer, // the dom element that will contain the animation
+  //   renderer: 'svg',
+  //   autoplay: false,
+  //   path: 'https://assets2.lottiefiles.com/packages/lf20_4fET62.json', // the path to the animation json
+  // });
+
   LottieInteractivity.create({
     player: '#zeroLottie',
     mode: 'scroll',
