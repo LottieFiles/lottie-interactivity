@@ -149,6 +149,7 @@ export class LottieInteractivity {
 
   #scrollHandler = () => {
     // Get container visibility percentage
+
     const currentPercent = this.getContainerVisibility();
 
     // Find the first action that satisfies the current position conditions
@@ -164,7 +165,10 @@ export class LottieInteractivity {
     // Process action types:
     if (action.type === 'seek') {
       // Seek: Go to a frame based on player scroll position action
-      this.player.playSegments(action.frames, true);
+      //   this.player.playSegments(action.frames, true);
+      //   const linear = function(percent,elapsed,start,end,total) {
+      //     return start+(end-start)*percent;
+      //  }
       this.player.goToAndStop(
         Math.ceil(
           ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
