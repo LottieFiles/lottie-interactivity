@@ -65,17 +65,23 @@ export class LottieInteractivity {
   }
 
   start() {
-    const scope = this;
+    const Parentscope = this;
     // Configure player for start
     if (this.mode === 'scroll') {
       this.player.addEventListener('DOMLoaded', function () {
-        window.addEventListener('scroll', scope.#scrollHandler);
+        Parentscope.player.loop = true;
+        Parentscope.player.stop();
+        window.addEventListener('scroll', Parentscope.#scrollHandler);
       });
     }
 
     if (this.mode === 'cursor') {
-      this.container.addEventListener('mousemove', this.#mousemoveHandler);
-      this.container.addEventListener('mouseout', this.#mouseoutHandler);
+      this.player.addEventListener('DOMLoaded', function () {
+        Parentscope.player.loop = true;
+        Parentscope.player.stop();
+        Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
+        Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
+      });
     }
   }
 
@@ -165,10 +171,6 @@ export class LottieInteractivity {
     // Process action types:
     if (action.type === 'seek') {
       // Seek: Go to a frame based on player scroll position action
-      //   this.player.playSegments(action.frames, true);
-      //   const linear = function(percent,elapsed,start,end,total) {
-      //     return start+(end-start)*percent;
-      //  }
       this.player.goToAndStop(
         Math.ceil(
           ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
@@ -179,12 +181,22 @@ export class LottieInteractivity {
     } else if (action.type === 'loop') {
       // Loop: Loop a given frames
       if (this.assignedSegment === null) {
+        // if not playing any segments currently. play those segments and save to state
         this.player.playSegments(action.frames, true);
         this.assignedSegment = action.frames;
       } else {
+        // if playing any segments currently.
+        //check if segments in state are equal to the frames selected by action
         if (this.assignedSegment !== action.frames) {
+          // if they are not equal. new segments are to be loaded
           this.player.playSegments(action.frames, true);
           this.assignedSegment = action.frames;
+        } else {
+          // if they are equal the play method must be called only if lottie is paused
+          if (this.player.isPaused === true) {
+            this.player.playSegments(action.frames, true);
+            this.assignedSegment = action.frames;
+          }
         }
       }
     } else if (action.type === 'play') {
