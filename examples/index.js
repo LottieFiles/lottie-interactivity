@@ -139,11 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
         type: 'seek',
         frames: [0, 180],
       },
-      {
-        position: { x: -1, y: -1 },
-        type: 'stop',
-        frames: [0],
-      },
     ],
   });
 });

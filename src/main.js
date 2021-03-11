@@ -138,7 +138,12 @@ export class LottieInteractivity {
       const yPercent = (y - action.position.y[0]) / (action.position.y[1] - action.position.y[0]);
 
       this.player.playSegments(action.frames, true);
-      this.player.goToAndStop(Math.ceil(((xPercent + yPercent) / 2) * this.player.totalFrames), true);
+
+      if (action.position.y[0] < 0 && action.position.y[1] > 1) {
+        this.player.goToAndStop(Math.floor(xPercent * this.player.totalFrames), true);
+      } else {
+        this.player.goToAndStop(Math.ceil(((xPercent + yPercent) / 2) * this.player.totalFrames), true);
+      }
     } else if (action.type === 'loop') {
       this.player.playSegments(action.frames, true);
     } else if (action.type === 'play') {
