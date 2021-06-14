@@ -177,6 +177,30 @@ export class LottieInteractivity {
     }
   };
 
+  #easeInQuad = (time, startValue, change, duration) => {
+    console.log("time : " + time);
+    console.log("startValue : " + startValue);
+    console.log("change : " + change);
+    console.log("duration : " + duration);
+
+    return change * (time /= duration) * time + startValue;
+  }
+
+  #quadEase = (time, startValue, change, duration) => {
+    console.log("time : " + time);
+    console.log("startValue : " + startValue);
+    console.log("change : " + change);
+    console.log("duration : " + duration);
+
+    time /= duration / 2;
+    if (time < 1)  {
+      return change / 2 * time * time + startValue;
+    }
+
+    time--;
+    return -change / 2 * (time * (time - 2) - 1) + startValue;
+  };
+
   #scrollHandler = () => {
     // Get container visibility percentage
 
@@ -191,15 +215,29 @@ export class LottieInteractivity {
     if (!action) {
       return;
     }
+    // let oldFrameMethod = Math.ceil(
+    //   ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
+    //   this.player.totalFrames,
+    //   );
 
     // Process action types:
     if (action.type === 'seek') {
       // Seek: Go to a frame based on player scroll position action
+      let frame = Math.ceil(
+        ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
+        this.player.totalFrames,
+        );
+
+      let t = this.player.currentFrame / this.player.totalFrames;
+      let newFrame = this.#easeInQuad(t, this.player.currentFrame, frame, 4);
+
+      if (newFrame === 0)
+        newFrame = frame;
+      else if (newFrame >= this.player.totalFrames)
+        newFrame = 0;
+
       this.player.goToAndStop(
-        Math.ceil(
-          ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
-            this.player.totalFrames,
-        ),
+        newFrame,
         true,
       );
     } else if (action.type === 'loop') {

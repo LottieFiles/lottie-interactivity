@@ -86,11 +86,11 @@
           </div>
         </a>
 
-        <lottie-player
-          id="zeroLottie"
-          src="https://assets5.lottiefiles.com/private_files/lf30_hhvn1H.json"
-          class="mb-4"
-        >
+<!--        <lottie-player-->
+<!--          id="zeroLottie"-->
+<!--          src="https://assets5.lottiefiles.com/private_files/lf30_hhvn1H.json"-->
+<!--          class="mb-4"-->
+<!--        >-->
         </lottie-player>
         <div class="font-normal text-sm text-grey-dark">
           Animation by
@@ -268,265 +268,265 @@ LottieInteractivity.create({
         </div>
       </div>
 
-      <div class="lf-padding py-10 md:py-32" id="third">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Lottie scroll with offset
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          If you would like to add an offset to the top of the container or player you may add an extra action object to
-          the array. For this example, from 0 to 30% of the container, the lottie will be stopped and from 30% to 100%
-          of the container the lottie will be synced with the scroll.
-        </div>
-        <div class="mx-auto my-8 w-1/4 md:w-1/3">
-          <lottie-player id="thirdLottie" src="https://assets6.lottiefiles.com/packages/lf20_QpeChC.json">
-          </lottie-player>
+<!--      <div class="lf-padding py-10 md:py-32" id="third">-->
+<!--        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">-->
+<!--          Lottie scroll with offset-->
+<!--        </h3>-->
+<!--        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">-->
+<!--          If you would like to add an offset to the top of the container or player you may add an extra action object to-->
+<!--          the array. For this example, from 0 to 30% of the container, the lottie will be stopped and from 30% to 100%-->
+<!--          of the container the lottie will be synced with the scroll.-->
+<!--        </div>-->
+<!--        <div class="mx-auto my-8 w-1/4 md:w-1/3">-->
+<!--          <lottie-player id="thirdLottie" src="https://assets6.lottiefiles.com/packages/lf20_QpeChC.json">-->
+<!--          </lottie-player>-->
 
-          <div class="text-sm text-grey-dark text-center py-6">
-            Animation by
-            <a href="https://lottiefiles.com/user/116310" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-              >0440 Molly</a
-            >
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-        LottieInteractivity.create({
-              mode:"scroll",
-              player: "#thirdLottie"
-              actions: [
-                  {
-                    visibility:[0,0.3],
-                    type: "stop",
-                    frames: [0]
-                  },
-                  {
-                    visibility: [0.3,1]
-                    type: "seek",
-                    frames: [0, 301]
-                  }
-                ]
-            });</pre
-          >
-        </div>
-      </div>
+<!--          <div class="text-sm text-grey-dark text-center py-6">-->
+<!--            Animation by-->
+<!--            <a href="https://lottiefiles.com/user/116310" class="lf-link text-grey-dark font-lf-bold" target="_blank"-->
+<!--              >0440 Molly</a-->
+<!--            >-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="w-full md:w-1/2 mx-auto">-->
+<!--          <pre class="prettyprint lang-javascript" style="overflow: scroll;">-->
+<!--        LottieInteractivity.create({-->
+<!--              mode:"scroll",-->
+<!--              player: "#thirdLottie"-->
+<!--              actions: [-->
+<!--                  {-->
+<!--                    visibility:[0,0.3],-->
+<!--                    type: "stop",-->
+<!--                    frames: [0]-->
+<!--                  },-->
+<!--                  {-->
+<!--                    visibility: [0.3,1]-->
+<!--                    type: "seek",-->
+<!--                    frames: [0, 301]-->
+<!--                  }-->
+<!--                ]-->
+<!--            });</pre-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="lf-padding py-10 md:py-32 md:-mx-32 -mx-4 bg-black text-white" id="fourth">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Scroll effect with offset and <br />segment looping
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          In cases where you would like the animation to loop from a specific frame to a specific frame, you can add an
-          additional object to actions in which you can specify the frames. In the example below, the lottie loops frame
-          45 to 60 once 45% of the container is reached.
-        </div>
-        <div class="mx-auto my-8 w-2/3 md:w-1/3">
-          <lottie-player id="fourthLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">
-          </lottie-player>
+<!--      <div class="lf-padding py-10 md:py-32 md:-mx-32 -mx-4 bg-black text-white" id="fourth">-->
+<!--        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">-->
+<!--          Scroll effect with offset and <br />segment looping-->
+<!--        </h3>-->
+<!--        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">-->
+<!--          In cases where you would like the animation to loop from a specific frame to a specific frame, you can add an-->
+<!--          additional object to actions in which you can specify the frames. In the example below, the lottie loops frame-->
+<!--          45 to 60 once 45% of the container is reached.-->
+<!--        </div>-->
+<!--        <div class="mx-auto my-8 w-2/3 md:w-1/3">-->
+<!--          <lottie-player id="fourthLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">-->
+<!--          </lottie-player>-->
 
-          <div class="text-sm text-grey-dark text-center py-6">
-            Animation by
-            <a href="https://lottiefiles.com/irizwanasghar" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-              >Rizwan Asghar</a
-            >
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-       LottieInteractivity.create({
-                mode:"scroll",
-                player: "#fourthLottie",
-                  actions: [
-                    {
-                      visibility:[0, 0.2,]
-                      type: "stop",
-                      frames: [0]
-                    },
-                    {
-                      visibility:[0.2,0.45],
-                      type: "seek",
-                      frames: [0, 150]
-                    },
-                    {
-                      visibility:[0.45,1.0],
-                      type: "loop",
-                      frames: [150, 362]
-                    }
-                  ]
-              });</pre
-          >
-        </div>
-      </div>
+<!--          <div class="text-sm text-grey-dark text-center py-6">-->
+<!--            Animation by-->
+<!--            <a href="https://lottiefiles.com/irizwanasghar" class="lf-link text-grey-dark font-lf-bold" target="_blank"-->
+<!--              >Rizwan Asghar</a-->
+<!--            >-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="w-full md:w-1/2 mx-auto">-->
+<!--          <pre class="prettyprint lang-javascript" style="overflow: scroll;">-->
+<!--       LottieInteractivity.create({-->
+<!--                mode:"scroll",-->
+<!--                player: "#fourthLottie",-->
+<!--                  actions: [-->
+<!--                    {-->
+<!--                      visibility:[0, 0.2,]-->
+<!--                      type: "stop",-->
+<!--                      frames: [0]-->
+<!--                    },-->
+<!--                    {-->
+<!--                      visibility:[0.2,0.45],-->
+<!--                      type: "seek",-->
+<!--                      frames: [0, 150]-->
+<!--                    },-->
+<!--                    {-->
+<!--                      visibility:[0.45,1.0],-->
+<!--                      type: "loop",-->
+<!--                      frames: [150, 362]-->
+<!--                    }-->
+<!--                  ]-->
+<!--              });</pre-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="lf-padding py-10 md:py-32" id="fifth">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Play segments
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          If you would like to play the animation and loop it only from a certain frame to a certain frame, then you can
-          utilize the loop action and frames variable. This example shows an animation looping from frame 70 to 500.
-        </div>
-        <div class="flex flex-wrap" style="margin-bottom: 20px;">
-          <div class="mx-auto my-8 w-2/3 md:w-1/3">
-            <lottie-player id="fifthLottie" src="https://assets2.lottiefiles.com/packages/lf20_4fET62.json">
-            </lottie-player>
-            <!-- <div id="fifthLottie" style="height: 500px; width: 500px;"></div> -->
-            <div class="text-sm text-grey-dark text-center">
-              Animation by
-              <a href="https://lottiefiles.com/user265314" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-                >Andy Dao</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-      LottieInteractivity.create({
-            mode:"scroll",
-            player: "#fifthLottie",
-              actions: [
-                {
-                  visibility:[0, 1]
-                  type: "loop",
-                  frames: [70, 500]
-                }
-              ]
-          });</pre
-          >
-        </div>
-      </div>
+<!--      <div class="lf-padding py-10 md:py-32" id="fifth">-->
+<!--        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">-->
+<!--          Play segments-->
+<!--        </h3>-->
+<!--        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">-->
+<!--          If you would like to play the animation and loop it only from a certain frame to a certain frame, then you can-->
+<!--          utilize the loop action and frames variable. This example shows an animation looping from frame 70 to 500.-->
+<!--        </div>-->
+<!--        <div class="flex flex-wrap" style="margin-bottom: 20px;">-->
+<!--          <div class="mx-auto my-8 w-2/3 md:w-1/3">-->
+<!--            <lottie-player id="fifthLottie" src="https://assets2.lottiefiles.com/packages/lf20_4fET62.json">-->
+<!--            </lottie-player>-->
+<!--            &lt;!&ndash; <div id="fifthLottie" style="height: 500px; width: 500px;"></div> &ndash;&gt;-->
+<!--            <div class="text-sm text-grey-dark text-center">-->
+<!--              Animation by-->
+<!--              <a href="https://lottiefiles.com/user265314" class="lf-link text-grey-dark font-lf-bold" target="_blank"-->
+<!--                >Andy Dao</a-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="w-full md:w-1/2 mx-auto">-->
+<!--          <pre class="prettyprint lang-javascript" style="overflow: scroll;">-->
+<!--      LottieInteractivity.create({-->
+<!--            mode:"scroll",-->
+<!--            player: "#fifthLottie",-->
+<!--              actions: [-->
+<!--                {-->
+<!--                  visibility:[0, 1]-->
+<!--                  type: "loop",-->
+<!--                  frames: [70, 500]-->
+<!--                }-->
+<!--              ]-->
+<!--          });</pre-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="lf-padding py-10 md:py-32" id="seventh">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Play segments on hover
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          To loop certain segments on hover, ensure that the Lottie is already at the frame you want to start the on
-          hover loop from (Check the javascript code to find out how). Once thats done you can use the library's "hover"
-          action to loop the segment.
-        </div>
-        <div class="flex flex-wrap" style="margin-bottom: 20px;">
-          <div class="mx-auto w-2/3 md:w-1/3">
-            <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
-            <lottie-player id="seventhLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">
-            </lottie-player>
+<!--      <div class="lf-padding py-10 md:py-32" id="seventh">-->
+<!--        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">-->
+<!--          Play segments on hover-->
+<!--        </h3>-->
+<!--        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">-->
+<!--          To loop certain segments on hover, ensure that the Lottie is already at the frame you want to start the on-->
+<!--          hover loop from (Check the javascript code to find out how). Once thats done you can use the library's "hover"-->
+<!--          action to loop the segment.-->
+<!--        </div>-->
+<!--        <div class="flex flex-wrap" style="margin-bottom: 20px;">-->
+<!--          <div class="mx-auto w-2/3 md:w-1/3">-->
+<!--            &lt;!&ndash;       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> &ndash;&gt;-->
+<!--            <lottie-player id="seventhLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">-->
+<!--            </lottie-player>-->
 
-            <div class="text-sm text-grey-dark text-center">
-              Animation by
-              <a
-                href="https://lottiefiles.com/irizwanasghar"
-                class="lf-link text-grey-dark font-lf-bold"
-                target="_blank"
-                >Rizwan Asghar</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 mt-12 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-        LottieInteractivity.create({
-                  mode:"cursor",
-                  player: "#seventhLottie",
-                  actions: [
-                    {
-                      position: { x: [0, 1], y: [0, 1] },
-                      type: "loop",
-                      frames: [45, 60]
-                    },
-                    {
-                      position: { x: -1, y: -1 },
-                      type: 'stop',
-                      frames: [0],
-                    },
-                  ]
-              });</pre
-          >
-        </div>
-      </div>
+<!--            <div class="text-sm text-grey-dark text-center">-->
+<!--              Animation by-->
+<!--              <a-->
+<!--                href="https://lottiefiles.com/irizwanasghar"-->
+<!--                class="lf-link text-grey-dark font-lf-bold"-->
+<!--                target="_blank"-->
+<!--                >Rizwan Asghar</a-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="w-full md:w-1/2 mt-12 mx-auto">-->
+<!--          <pre class="prettyprint lang-javascript" style="overflow: scroll;">-->
+<!--        LottieInteractivity.create({-->
+<!--                  mode:"cursor",-->
+<!--                  player: "#seventhLottie",-->
+<!--                  actions: [-->
+<!--                    {-->
+<!--                      position: { x: [0, 1], y: [0, 1] },-->
+<!--                      type: "loop",-->
+<!--                      frames: [45, 60]-->
+<!--                    },-->
+<!--                    {-->
+<!--                      position: { x: -1, y: -1 },-->
+<!--                      type: 'stop',-->
+<!--                      frames: [0],-->
+<!--                    },-->
+<!--                  ]-->
+<!--              });</pre-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="lf-padding py-10 md:py-32" id="eightth">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Sync animation with cursor position
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          To progress the animation as you move the cursor either on the Lottie or on a given container, you may use the
-          "cursor" mode. This will make the Lottie interactivity based on the cursors movement. Move your cursor on the
-          animation below.
-        </div>
-        <div class="flex flex-wrap" style="margin-bottom: 20px;">
-          <div class="mx-auto w-2/3 md:w-1/3">
-            <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
-            <lottie-player id="eightthLottie" src="https://assets3.lottiefiles.com/packages/lf20_u41SFE.json">
-            </lottie-player>
+<!--      <div class="lf-padding py-10 md:py-32" id="eightth">-->
+<!--        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">-->
+<!--          Sync animation with cursor position-->
+<!--        </h3>-->
+<!--        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">-->
+<!--          To progress the animation as you move the cursor either on the Lottie or on a given container, you may use the-->
+<!--          "cursor" mode. This will make the Lottie interactivity based on the cursors movement. Move your cursor on the-->
+<!--          animation below.-->
+<!--        </div>-->
+<!--        <div class="flex flex-wrap" style="margin-bottom: 20px;">-->
+<!--          <div class="mx-auto w-2/3 md:w-1/3">-->
+<!--            &lt;!&ndash;       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> &ndash;&gt;-->
+<!--            <lottie-player id="eightthLottie" src="https://assets3.lottiefiles.com/packages/lf20_u41SFE.json">-->
+<!--            </lottie-player>-->
 
-            <div class="text-sm text-grey-dark text-center">
-              Animation by
-              <a href="https://lottiefiles.com/MotionJockey" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-                >Motion Jockey</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 mt-12 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-        LottieInteractivity.create({
-                  mode:"cursor",
-                  player: "#eightthLottie",
-                  actions: [
-                    {
-                      position: { x: [0, 1], y: [0, 1] },
-                      type: "loop",
-                      frames: [45, 60]
-                    }
-                  ]
-              });</pre
-          >
-        </div>
-      </div>
+<!--            <div class="text-sm text-grey-dark text-center">-->
+<!--              Animation by-->
+<!--              <a href="https://lottiefiles.com/MotionJockey" class="lf-link text-grey-dark font-lf-bold" target="_blank"-->
+<!--                >Motion Jockey</a-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="w-full md:w-1/2 mt-12 mx-auto">-->
+<!--          <pre class="prettyprint lang-javascript" style="overflow: scroll;">-->
+<!--        LottieInteractivity.create({-->
+<!--                  mode:"cursor",-->
+<!--                  player: "#eightthLottie",-->
+<!--                  actions: [-->
+<!--                    {-->
+<!--                      position: { x: [0, 1], y: [0, 1] },-->
+<!--                      type: "loop",-->
+<!--                      frames: [45, 60]-->
+<!--                    }-->
+<!--                  ]-->
+<!--              });</pre-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="lf-padding py-10 md:py-32" id="ninth">
-        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-          Sync animation with cursor horizontal movement
-        </h3>
-        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          To progress the animation as you move the cursor horizontally either on the Lottie or on a given container,
-          you may use the "cursor" mode. This will make the Lottie interactivity based on the cursors movement. Move
-          your cursor on the animation below.
-        </div>
-        <div class="flex flex-wrap" style="margin-bottom: 20px;">
-          <div class="mx-auto w-2/3 md:w-1/3">
-            <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
-            <lottie-player
-              controls
-              id="ninthLottie"
-              src="https://assets4.lottiefiles.com/packages/lf20_Lybh7B/data.json"
-            >
-            </lottie-player>
+<!--      <div class="lf-padding py-10 md:py-32" id="ninth">-->
+<!--        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">-->
+<!--          Sync animation with cursor horizontal movement-->
+<!--        </h3>-->
+<!--        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">-->
+<!--          To progress the animation as you move the cursor horizontally either on the Lottie or on a given container,-->
+<!--          you may use the "cursor" mode. This will make the Lottie interactivity based on the cursors movement. Move-->
+<!--          your cursor on the animation below.-->
+<!--        </div>-->
+<!--        <div class="flex flex-wrap" style="margin-bottom: 20px;">-->
+<!--          <div class="mx-auto w-2/3 md:w-1/3">-->
+<!--            &lt;!&ndash;       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> &ndash;&gt;-->
+<!--            <lottie-player-->
+<!--              controls-->
+<!--              id="ninthLottie"-->
+<!--              src="https://assets4.lottiefiles.com/packages/lf20_Lybh7B/data.json"-->
+<!--            >-->
+<!--            </lottie-player>-->
 
-            <div class="text-sm text-grey-dark text-center">
-              Animation by
-              <a href="https://lottiefiles.com/gabeschmitz" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-                >Gabriela Schmitz</a
-              >
-            </div>
-          </div>
-        </div>
-        <div class="w-full md:w-1/2 mt-12 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-            LottieInteractivity.create({
-              player: '#ninthLottie',
-              mode: 'cursor',
-              actions: [
-                {
-                  position: { x: [0, 1], y: [-1, 2] },
-                  type: 'seek',
-                  frames: [0, 179],
-                }
-              ],
-            });
-            </pre
-          >
-        </div>
-      </div>
+<!--            <div class="text-sm text-grey-dark text-center">-->
+<!--              Animation by-->
+<!--              <a href="https://lottiefiles.com/gabeschmitz" class="lf-link text-grey-dark font-lf-bold" target="_blank"-->
+<!--                >Gabriela Schmitz</a-->
+<!--              >-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="w-full md:w-1/2 mt-12 mx-auto">-->
+<!--          <pre class="prettyprint lang-javascript" style="overflow: scroll;">-->
+<!--            LottieInteractivity.create({-->
+<!--              player: '#ninthLottie',-->
+<!--              mode: 'cursor',-->
+<!--              actions: [-->
+<!--                {-->
+<!--                  position: { x: [0, 1], y: [-1, 2] },-->
+<!--                  type: 'seek',-->
+<!--                  frames: [0, 179],-->
+<!--                }-->
+<!--              ],-->
+<!--            });-->
+<!--            </pre-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </body>
 </html>
