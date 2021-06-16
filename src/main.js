@@ -4,6 +4,15 @@ const DEFAULT_OPTIONS = {
 const LOTTIE_PLAYER_NODE = 'LOTTIE-PLAYER';
 const ERROR_PREFIX = '[lottieInteractivity]:';
 
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame    ||
+    function( callback ){
+      window.setTimeout(callback, 1000 / 60);
+    };
+})();
+
 /**
  * LottieFiles interactivity for Lottie
  */
@@ -177,6 +186,15 @@ export class LottieInteractivity {
     }
   };
 
+  #easeLinear = (time, startValue, change, duration) => {
+    // console.log("time : " + time);
+    // console.log("startValue : " + startValue);
+    // console.log("change : " + change);
+    // console.log("duration : " + duration);
+
+   return change * time / duration + startValue;
+  }
+
   #easeInQuad = (time, startValue, change, duration) => {
     console.log("time : " + time);
     console.log("startValue : " + startValue);
@@ -201,9 +219,92 @@ export class LottieInteractivity {
     return -change / 2 * (time * (time - 2) - 1) + startValue;
   };
 
+  #debounce = (callback, wait) => {
+    let timeout;
+    console.log("returning..");
+    return function() {
+      console.log("returned");
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {callback.apply(context, args)}, wait);
+    };
+  }
+
+  // #debounce = (func, timeout = 300) => {
+  //   console.log("IN DEBOUNCE");
+  //   let timer;
+  //   return (...args) => {
+  //     console.log("Clearing timeout");
+  //     clearTimeout(timer);
+  //     timer = setTimeout(() => {
+  //       func.apply(...args);
+  //       }, timeout);
+  //   };
+  // }
+
+  #saveInput = (newFrame) => {
+    console.log("SETTING FRAME");
+
+    this.player.goToAndStop(
+      newFrame,
+      true,
+    );
+  }
+
+  #tick = (currentTime, time, targetFrame) => {
+    console.log("CT : " + currentTime);
+
+    currentTime += 1 / 60;
+
+    let p = currentTime / time;
+    //var t = easingEquations[easing](p);
+    let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 2);
+
+    if (p < 1) {
+      window.requestAnimFrame(this.#tick);
+      this.player.goToAndStop(this.player.currentFrame + ((targetFrame - this.player.currentFrame) * t), true);
+      //window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
+    } else {
+      console.log('scroll done');
+      this.player.goToAndStop(targetFrame, true);
+    }
+    return currentTime;
+  }
+
+  #tweenHandler = (targetFrame, speed) => {
+    let currentTime = 0;
+
+    let time = Math.max(.1, Math.min(Math.abs(this.player.currentFrame - targetFrame) / speed, .8));
+
+    currentTime = this.#tick(currentTime, time, targetFrame);
+
+/*
+    function tick() {
+      currentTime += 1 / 60;
+
+      let p = currentTime / time;
+      //var t = easingEquations[easing](p);
+      let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 2);
+
+      if (p < 1) {
+        window.requestAnimFrame(() => { tick });
+        this.player.goToAndStop(this.player.currentFrame + ((targetFrame - this.player.currentFrame) * t), true);
+        //window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
+      } else {
+        console.log('scroll done');
+        this.player.goToAndStop(targetFrame, true);
+      }
+    }
+*/
+    //this.#tick(currentTime, time, targetFrame);
+  }
+
   #scrollHandler = () => {
+    // this.#callScrollToY();
+    // return ;
     // Get container visibility percentage
 
+    //From scroll event handler
     const currentPercent = this.getContainerVisibility();
 
     // Find the first action that satisfies the current position conditions
@@ -229,17 +330,61 @@ export class LottieInteractivity {
         );
 
       let t = this.player.currentFrame / this.player.totalFrames;
-      let newFrame = this.#easeInQuad(t, this.player.currentFrame, frame, 4);
+      //let newFrame = this.#easeInQuad(t, this.player.currentFrame, frame, 4);
+      //let newFrame = this.#easeLinear(t, this.player.currentFrame, frame - this.player.currentFrame, 2);
+      //let newFrame = this.#easeInQuad(t, this.player.currentFrame, frame - this.player.currentFrame, 2);
 
-      if (newFrame === 0)
+
+      /**
+       * Was trying to use this to reproduce what gsap does
+       */
+      //this.#tweenHandler(frame, 1500);
+
+      // var dx = frame - this.player.currentFrame;
+      // var vx = dx * 0.1;
+      // var newFrame = this.player.currentFrame;
+      // newFrame += vx;
+      //
+      // this.player.goToAndStop(
+      //   newFrame,
+      //   true,
+      // );
+
+/*
+      if (newFrame < 1) {
+        console.log("FRAME < 1");
         newFrame = frame;
-      else if (newFrame >= this.player.totalFrames)
+      }
+      else if (newFrame >= this.player.totalFrames) {
+        console.log("FRAME NUM IS TOO BIG");
         newFrame = 0;
+      }
+*/
 
-      this.player.goToAndStop(
-        newFrame,
-        true,
-      );
+
+      /**
+       * To reproduce
+       * @type {{currentFrame: number | i.player.currentFrame | e.player.currentFrame}}
+       */
+      let timeObj = {currentFrame: this.player.currentFrame}
+      gsap.to(timeObj, {
+        duration: 4,
+        currentFrame: (Math.floor(currentPercent *  (this.player.totalFrames - 1))),
+        onUpdate: () => {
+          this.player.goToAndStop(timeObj.currentFrame, true)
+        },
+        ease: 'expo'
+      });
+
+
+      //this.#debounce(() => {scope.#saveInput(newFrame)}, 500);
+
+
+      // this.player.goToAndStop(
+      //   newFrame,
+      //   true,
+      // );
+
     } else if (action.type === 'loop') {
       // Loop: Loop a given frames
       if (this.assignedSegment === null) {

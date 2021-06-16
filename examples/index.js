@@ -32,6 +32,17 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ],
   });
+  LottieInteractivity.create({
+    player: '#secondLottie',
+    mode: 'scroll',
+    actions: [
+      {
+        visibility: [0, 1.0],
+        type: 'seek',
+        frames: [0, 170],
+      },
+    ],
+  });
   // LottieInteractivity.create({
   //   player: '#secondLottie',
   //   mode: 'scroll',
