@@ -251,52 +251,56 @@ export class LottieInteractivity {
     );
   }
 
-  #tick = (currentTime, time, targetFrame) => {
-    console.log("CT : " + currentTime);
-
+  #tick = (currentFrame, currentTime, time, targetFrame) => {
+    // console.log("CT : " + currentTime);
     currentTime += 1 / 60;
 
     let p = currentTime / time;
+    //EaseinoutSine
+    let easing = (-0.5 * (Math.cos(Math.PI * p) - 1));
+    //console.log("T : " + easing);
     //var t = easingEquations[easing](p);
-    let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 2);
-
+    //let t = this.#easeInQuad(this.player.currentFrame / this.player.totalFrames, this.player.currentFrame, this.player.currentFrame - targetFrame, 5);
+    //let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 5);
     if (p < 1) {
-      window.requestAnimFrame(this.#tick);
-      this.player.goToAndStop(this.player.currentFrame + ((targetFrame - this.player.currentFrame) * t), true);
-      //window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
+      requestAnimFrame(() => this.#tick(currentFrame, currentTime, time, targetFrame));
+      //this.player.goToAndStop(currentFrame + ((targetFrame - currentFrame) * easing), true);
+      let newFrame = this.#easeLinear(p, this.player.currentFrame, targetFrame - this.player.currentFrame, 2);
+      this.player.goToAndStop(newFrame, true);
     } else {
       console.log('scroll done');
-      this.player.goToAndStop(targetFrame, true);
+      //this.player.goToAndStop(targetFrame, true);
     }
     return currentTime;
   }
 
   #tweenHandler = (targetFrame, speed) => {
     let currentTime = 0;
+    const currentPercent = this.getContainerVisibility();
+    //let currentFrame = (Math.floor(currentPercent *  (this.player.totalFrames - 1)));
+    let currentFrame = this.player.currentFrame;
 
-    let time = Math.max(.1, Math.min(Math.abs(this.player.currentFrame - targetFrame) / speed, .8));
+    let time = Math.max(.1, Math.min(Math.abs(currentFrame - targetFrame) / speed, .8));
+    //currentTime = this.#tick(currentTime, time, targetFrame);
 
-    currentTime = this.#tick(currentTime, time, targetFrame);
-
-/*
-    function tick() {
-      currentTime += 1 / 60;
-
-      let p = currentTime / time;
-      //var t = easingEquations[easing](p);
-      let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 2);
-
-      if (p < 1) {
-        window.requestAnimFrame(() => { tick });
-        this.player.goToAndStop(this.player.currentFrame + ((targetFrame - this.player.currentFrame) * t), true);
-        //window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
-      } else {
-        console.log('scroll done');
-        this.player.goToAndStop(targetFrame, true);
-      }
-    }
-*/
-    //this.#tick(currentTime, time, targetFrame);
+    // function tick() {
+    //   currentTime += 1 / 60;
+    //
+    //   let p = currentTime / time;
+    //   //var t = easingEquations[easing](p);
+    //   let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 2);
+    //
+    //   if (p < 1) {
+    //     window.requestAnimFrame(() => { tick });
+    //     this.player.goToAndStop(this.player.currentFrame + ((targetFrame - this.player.currentFrame) * t), true);
+    //     //window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
+    //   } else {
+    //     console.log('scroll done');
+    //     this.player.goToAndStop(targetFrame, true);
+    //   }
+    // }
+    // tick();
+    this.#tick(currentFrame, currentTime, time, targetFrame);
   }
 
   #scrollHandler = () => {
@@ -338,7 +342,7 @@ export class LottieInteractivity {
       /**
        * Was trying to use this to reproduce what gsap does
        */
-      //this.#tweenHandler(frame, 1500);
+      this.#tweenHandler(frame, 1500);
 
       // var dx = frame - this.player.currentFrame;
       // var vx = dx * 0.1;
@@ -364,17 +368,17 @@ export class LottieInteractivity {
 
       /**
        * To reproduce
-       * @type {{currentFrame: number | i.player.currentFrame | e.player.currentFrame}}
+       *
        */
-      let timeObj = {currentFrame: this.player.currentFrame}
-      gsap.to(timeObj, {
-        duration: 4,
-        currentFrame: (Math.floor(currentPercent *  (this.player.totalFrames - 1))),
-        onUpdate: () => {
-          this.player.goToAndStop(timeObj.currentFrame, true)
-        },
-        ease: 'expo'
-      });
+      // let timeObj = {currentFrame: this.player.currentFrame}
+      // gsap.to(timeObj, {
+      //   duration: 4,
+      //   currentFrame: (Math.floor(currentPercent *  (this.player.totalFrames - 1))),
+      //   onUpdate: () => {
+      //     this.player.goToAndStop(timeObj.currentFrame, true)
+      //   },
+      //   ease: 'expo'
+      // });
 
 
       //this.#debounce(() => {scope.#saveInput(newFrame)}, 500);
