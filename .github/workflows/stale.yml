@@ -14,7 +14,7 @@ jobs:
           days-before-stale: 60
           # Idle number of days before closing an stale issue/pr.
           # Set to -1 to never automatically close stale issues.
-          days-before-close: -1
+          days-before-close: 30
           # Message to post on the stale issue.
           stale-issue-message:
             'This issue has been automatically marked as stale because it has not had recent activity. It will be closed
@@ -26,7 +26,7 @@ jobs:
           exempt-issue-labels: 'wip'
           # Message to post on the stale pr.
           stale-pr-message:
-            'This rull request has been automatically marked as stale because it has not had recent activity. It will be
+            'This pull request has been automatically marked as stale because it has not had recent activity. It will be
             closed in 7 days if no further activity occurs.'
           # Label to apply on the stale pr.
           stale-pr-label: 'stale'
