@@ -52,6 +52,9 @@ export class LottieInteractivity {
     this.actions = actions;
     this.options = options;
     this.assignedSegment = null;
+
+    this.currentTime = 0;
+    this.handler = null;
   }
 
   getContainerVisibility() {
@@ -80,6 +83,11 @@ export class LottieInteractivity {
       this.player.addEventListener('DOMLoaded', function () {
         Parentscope.player.loop = true;
         Parentscope.player.stop();
+        //Parentscope.#moveToFrame(0, 2);
+        console.log("starting");
+        Parentscope.#animate();
+        //Parentscope.#tweenHandler(300, 15);
+        //Parentscope.#toAnimate();
         window.addEventListener('scroll', Parentscope.#scrollHandler);
       });
     }
@@ -113,23 +121,56 @@ export class LottieInteractivity {
     this.#cursorHandler(-1, -1);
   };
 
-  animate({ timing, draw, duration }) {
+  bounce(timeFraction) {
+    for (let a = 0, b = 1, result; 1; a += b, b /= 2) {
+      if (timeFraction >= (7 - 4 * a) / 11) {
+        return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+      }
+    }
+  }
+
+  powerOfN(timeFraction, n) {
+    return (Math.pow(timeFraction, n));
+  }
+
+  arc(timeFraction) {
+    return (1 - Math.sin(Math.acos(timeFraction)));
+  }
+
+  /**
+   * Todo: Use this from scrollHandler, add debounce on scroller and cancel the on-going easing
+   * @param start
+   * @param duration
+   * @param handler
+   */
+  #animateLoop = (start, duration, handler) => {
+    let time = performance.now();
+    let progress;
+
+    // timeFraction goes from 0 to 1
+    let timeFraction = (time - start) / duration;
+    if (timeFraction > 1) timeFraction = 1;
+
+  /**
+   * Can swap out for different easing functions here
+   */
+  progress = this.bounce(timeFraction);
+
+    //progress is the progress of the animation --> 5% of totalDuration for ex
+    let targetFrame = this.player.totalFrames * ( progress );
+    this.player.goToAndStop(targetFrame, true);
+
+    if (targetFrame >= this.player.totalFrames)
+      clearInterval(handler);
+    // if (timeFraction < 1) {
+    //   requestAnimationFrame(this.#animateLoop);
+    // }
+  }
+
+  #animate = () => {
     let start = performance.now();
 
-    requestAnimationFrame(function animate(time) {
-      // timeFraction goes from 0 to 1
-      let timeFraction = (time - start) / duration;
-      if (timeFraction > 1) timeFraction = 1;
-
-      // calculate the current animation state
-      let progress = timing(timeFraction);
-
-      draw(progress); // draw it
-
-      if (timeFraction < 1) {
-        requestAnimationFrame(animate);
-      }
-    });
+    let handler = setInterval(() => this.#animateLoop(start, 5000, handler), 1000 / 60);
   }
 
   #cursorHandler = (x, y) => {
@@ -251,24 +292,69 @@ export class LottieInteractivity {
     );
   }
 
-  #tick = (currentFrame, currentTime, time, targetFrame) => {
-    // console.log("CT : " + currentTime);
-    currentTime += 1 / 60;
+  #toAnimate = () => {
+    //let start = Date.now(); // remember start time
+    let start = performance.now();
 
-    let p = currentTime / time;
+    let timer = setInterval(() => {
+      // how much time passed from the start?
+      let timePassed = performance.now() - start;
+
+      //let duration = this.player.getDuration(false);
+      let duration = 5;
+      console.log("DURATION : " + duration);
+
+      let timeFraction = timePassed / duration;
+      if (timeFraction > 1) timeFraction = 1;
+      console.log("time fraction : " + timeFraction);
+      console.log("time passed : " + timePassed);
+
+      //let easing = 1 - Math.cos((timeFraction * Math.PI) / 2);
+      let progress = 1 - Math.sin(Math.acos(timeFraction));
+
+      if (timePassed >= 10000) {
+        clearInterval(timer); // finish the animation after 2 seconds
+        return;
+      }
+
+      // draw the animation at the moment timePassed
+      this.player.goToAndStop(progress, true);
+
+    }, 20);
+  }
+
+  #tick = (currentFrame, currentTime, time, targetFrame) => {
+    console.log("CT : " + this.currentTime);
+    console.log("time : " + time);
+    this.currentTime += 1 / 60;
+
+    let p = this.currentTime / time;
     //EaseinoutSine
+
     let easing = (-0.5 * (Math.cos(Math.PI * p) - 1));
+
+    //let easing =  Math.sin(p * (Math.PI / 2));
+    //let easing = this.#easeInOutQuad(this.currentTime * 100 / 2, this.currentTime, currentFrame, targetFrame, 2);
+
+
+    // if ((p /= 0.5) < 1) {
+    //   easing =  0.5 * Math.pow(p, 5);
+    // } else
+    //   easing = 0.5 * (Math.pow((p - 2), 5) + 2);
+
     //console.log("T : " + easing);
     //var t = easingEquations[easing](p);
     //let t = this.#easeInQuad(this.player.currentFrame / this.player.totalFrames, this.player.currentFrame, this.player.currentFrame - targetFrame, 5);
     //let t = this.#easeLinear(t, this.player.currentFrame, this.player.currentFrame - this.player.currentFrame, 5);
     if (p < 1) {
-      requestAnimFrame(() => this.#tick(currentFrame, currentTime, time, targetFrame));
-      //this.player.goToAndStop(currentFrame + ((targetFrame - currentFrame) * easing), true);
-      let newFrame = this.#easeLinear(p, this.player.currentFrame, targetFrame - this.player.currentFrame, 2);
-      this.player.goToAndStop(newFrame, true);
+      this.player.goToAndStop(currentFrame + ((targetFrame - currentFrame) * easing), true);
+      //requestAnimFrame(() => this.#tick(currentFrame, currentTime, time, targetFrame));
+//      let newFrame = this.#easeLinear(p, this.player.currentFrame, targetFrame - this.player.currentFrame, 2);
+//      this.player.goToAndStop(newFrame, true);
     } else {
       console.log('scroll done');
+      this.currentTime = 0;
+      clearInterval(this.handler);
       //this.player.goToAndStop(targetFrame, true);
     }
     return currentTime;
@@ -300,7 +386,59 @@ export class LottieInteractivity {
     //   }
     // }
     // tick();
-    this.#tick(currentFrame, currentTime, time, targetFrame);
+    // this.#tick(currentFrame, currentTime, time, targetFrame);
+
+    if (this.handler) {
+      this.currentTime = 0;
+      clearInterval(this.handler);
+    }
+    else
+      this.handler = setInterval(() => this.#tick(currentFrame, currentTime, time, targetFrame), 1000 / 60);
+  }
+
+  #easeInOutQuad = (x, t, b, c, d) => {
+    if ((t /= d / 2) < 1) {
+      return c / 2 * t * t + b;
+    } else {
+      return -c / 2 * ((--t) * (t - 2) - 1) + b;
+    }
+  }
+
+  #move = (time, fps, duration, start, finish, position, handler) => {
+    console.log("start: " + start);
+    console.log("finish: " + finish);
+    // console.log("distance: " + distance);
+    // console.log("increment: " + increment);
+
+    //position += increment;
+    time += 1 / fps;
+    position = this.#easeInOutQuad(time * 100 / duration, time, start, finish, duration);
+
+    if (position >= finish) {
+      clearInterval(handler);
+      this.player.goToAndStop(finish, true)
+      //box.style.left = finish + "px";
+      //return;
+    } else {
+      console.log("MOVING : " + position * 100);
+      this.player.goToAndStop(position * 100, true)
+    }
+    //box.style.left = position + "px";
+  }
+
+  #moveToFrame = (targetFrame, speed) => {
+    const currentPercent = this.getContainerVisibility();
+
+    let fps = 60,
+      duration = 2, // seconds
+      start = 0, // pixel
+      //start = 0,
+      finish = 300,
+      distance = finish - start,
+      increment = distance / (duration * fps),
+      position = start,
+      time = 0,
+      handler = setInterval(() => this.#move(time, fps, duration, start, finish, position, handler), 1000 / fps);
   }
 
   #scrollHandler = () => {
@@ -342,7 +480,12 @@ export class LottieInteractivity {
       /**
        * Was trying to use this to reproduce what gsap does
        */
-      this.#tweenHandler(frame, 1500);
+      //this.#tweenHandler(frame, 1500);
+      /**
+       * 2 seconds
+       */
+
+      //this.#moveToFrame(frame, 2);
 
       // var dx = frame - this.player.currentFrame;
       // var vx = dx * 0.1;
@@ -368,7 +511,6 @@ export class LottieInteractivity {
 
       /**
        * To reproduce
-       *
        */
       // let timeObj = {currentFrame: this.player.currentFrame}
       // gsap.to(timeObj, {
