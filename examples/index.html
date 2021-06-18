@@ -496,7 +496,6 @@ LottieInteractivity.create({
           <div class="mx-auto w-2/3 md:w-1/3">
             <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
             <lottie-player
-              controls
               id="ninthLottie"
               src="https://assets4.lottiefiles.com/packages/lf20_Lybh7B/data.json"
             >
@@ -525,6 +524,110 @@ LottieInteractivity.create({
             });
             </pre
           >
+        </div>
+      </div>
+
+      <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="tenth">
+        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+          Play Lottie on click
+        </h3>
+        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
+          This section shows an example of a Lottie that is playing when clicked on. Clicking multiple times won't restart
+          the animation if its already playing.
+        </div>
+        <div class="mx-auto my-8 w-1/4 md:w-1/3">
+          <lottie-player id="tenthLottie"
+                         src="https://assets6.lottiefiles.com/private_files/lf30_iiwznqb8.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/xfnmeutxam" class="lf-link text-grey-dark font-lf-bold" target="_blank"
+            >Priyanshu Rijhwani</a
+            >
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+        LottieInteractivity.create({
+                    mode:"cursor",
+                    player:'#tenthLottie',
+                      actions: [
+                        {
+                          type: "click",
+                        },
+                      ]
+                  });</pre>
+        </div>
+      </div>
+
+      <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="eleventh">
+        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+          Play Lottie on hover
+        </h3>
+        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
+          This section shows an example of a Lottie that is playing when hovered on. Hovering over multiple times won't restart
+          the animation if its already playing.
+        </div>
+        <div class="mx-auto my-8 w-1/4 md:w-1/3">
+          <lottie-player id="eleventhLottie"
+                         src="https://assets8.lottiefiles.com/packages/lf20_zwath9pn.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/vitra" class="lf-link text-grey-dark font-lf-bold" target="_blank"
+            >Vitra</a
+            >
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+        LottieInteractivity.create({
+                    mode:"cursor",
+                    player:'#eleventhLottie',
+                      actions: [
+                        {
+                          type: "hover"
+                        },
+                      ]
+                  });</pre>
+        </div>
+      </div>
+
+      <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="twelfth">
+        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+          Play Lottie when visible
+        </h3>
+        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
+          This section shows an example of a Lottie that is playing when visible. Visibility can be customised to play the
+          animation when a percentage of the container is reached. Here [0.50, 1.0] means the animation will play when 50% of the container is
+          reached, [0, 1.0] will play as soon as the container is visible.
+        </div>
+        <div class="mx-auto my-8 w-1/4 md:w-1/3">
+          <lottie-player id="twelfthLottie"
+                         src="https://assets7.lottiefiles.com/packages/lf20_vowsuuvc.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/chrisgannon" class="lf-link text-grey-dark font-lf-bold" target="_blank"
+            >Chris Gannon</a
+            >
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+        LottieInteractivity.create({
+                    mode:"cursor",
+                    player:'#twelfthLottie',
+                      actions: [
+                        {
+                          visibility: [0.50, 1.0]
+                          type: "visible"
+                        },
+                      ]
+                  });</pre>
         </div>
       </div>
     </div>

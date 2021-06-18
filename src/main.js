@@ -77,10 +77,25 @@ export class LottieInteractivity {
 
     if (this.mode === 'cursor') {
       this.player.addEventListener('DOMLoaded', function () {
-        Parentscope.player.loop = true;
-        Parentscope.player.stop();
-        Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
-        Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
+        // To have click and hover interaction, force to only have that type and single action
+        // If there are multiple actions, click and hover are ignored
+        if (Parentscope.actions &&
+          Parentscope.actions.length === 1 && Object.keys(Parentscope.actions[0]).length === 1) {
+          if (Parentscope.actions[0].type === "click") {
+            Parentscope.player.loop = false;
+            Parentscope.player.stop();
+            Parentscope.container.addEventListener('click', Parentscope.#clickHoverHandler);
+          } else if (Parentscope.actions[0].type === "hover") {
+            Parentscope.player.loop = false;
+            Parentscope.player.stop();
+            Parentscope.container.addEventListener('mouseenter', Parentscope.#clickHoverHandler);
+          }
+        } else {
+          Parentscope.player.loop = true;
+          Parentscope.player.stop();
+          Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
+          Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
+        }
       });
     }
   }
@@ -91,8 +106,16 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'cursor') {
-      this.container.addEventListener('mousemove', this.#mousemoveHandler);
-      this.container.addEventListener('mouseout', this.#mouseoutHandler);
+        this.container.removeEventListener('click', this.#clickHoverHandler);
+        this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+        this.container.removeEventListener('mousemove', this.#mousemoveHandler);
+        this.container.removeEventListener('mouseout', this.#mouseoutHandler);
+    }
+  }
+
+  #clickHoverHandler = e => {
+    if (this.player.isPaused === true) {
+      this.player.goToAndPlay(0, true);
     }
   }
 
@@ -245,6 +268,11 @@ export class LottieInteractivity {
     } else if (action.type === 'stop') {
       // Stop: Stop playback
       this.player.goToAndStop(action.frames[0], true);
+    } else if (action.type === 'visible') {
+      this.player.loop = false;
+       if (this.player.isPaused) {
+          this.player.goToAndPlay(0, true);
+      }
     }
   };
 }

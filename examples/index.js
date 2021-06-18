@@ -141,4 +141,35 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ],
   });
+
+  LottieInteractivity.create({
+    player: '#tenthLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        type: 'click',
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#eleventhLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        type: 'hover',
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#twelfthLottie',
+    mode: 'scroll',
+    actions: [
+      {
+        visibility: [0.50, 1.0],
+        type: 'visible',
+      },
+    ],
+  });
 });
