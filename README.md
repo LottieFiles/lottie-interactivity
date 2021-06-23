@@ -145,6 +145,53 @@ class App extends React.Component {
 export default App;
 ```
 
+##### 3.2 Vue config
+
+The configuration for the library remains the same for vue apps. However usage and initialization is as follows.
+Import the create function from the lottie interactivity library and call the create function. With frameworks like
+vue it is ideal to add an event listener that waits for the lottie player to load before calling the interactivity
+library. An example is as follows for a very basic vue class component.
+
+```javascript
+<template>
+  <!--  1. Create a lottie player with a reference -->
+  <lottie-player id="firstLottie"
+                 ref="lottie"
+                 controls
+                 mode="normal"
+                 src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
+                 style="width: 320px;">
+  </lottie-player>
+</template>
+
+<script>
+  import '@lottiefiles/lottie-player';
+  import { create } from '@lottiefiles/lottie-interactivity';
+
+  export default {
+  name: 'App',
+
+  mounted() {
+    // 2. listen for player load. See lottie player repo for other events
+    this.$refs.lottie.addEventListener('load', function() {
+      // 3. configure the interactivity library
+      create({
+        mode: 'scroll',
+        player: '#firstLottie',
+        actions: [
+          {
+            visibility: [0, 1],
+            type: 'seek',
+            frames: [0, 100],
+          },
+        ],
+      });
+    })
+  }
+}
+</script>
+```
+
 ## Examples
 
 ### Scroll effect relative to container
