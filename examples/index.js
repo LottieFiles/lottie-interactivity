@@ -172,4 +172,125 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ],
   });
+
+  LottieInteractivity.create({
+    player: '#hoverTest',
+    mode: 'chain',
+    actions: [
+      {
+        transition: 'holdAndReverse',
+        frames: [0, 125]
+      },
+      {
+        transition: 'holdAndPause',
+        frames: [125, 249],
+        reset: true
+      }]
+  });
+
+  LottieInteractivity.create({
+    player: '#chainingPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'loop',
+        transition: 'click',
+        frames: [0, 100]
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: [100, 200]
+      },
+      {
+        state: 'loop',
+        loop: 1,
+        transition: 'hover',
+        frames: [200, 300]
+      },
+      {
+        state: 'loop',
+        transition: 'click',
+        click: 4,
+        frames: [300, 400],
+        reset: false
+      },
+      {
+        state: 'autoplay',
+        transition: 'click',
+        frames: [400, 500],
+        reset: false
+      },
+      {
+        state: 'loop',
+        transition: 'repeat',
+        repeat: 1,
+        frames: [500, 600],
+        reset: true
+      }
+    ]
+  })
+
+  LottieInteractivity.create({
+    player: '#birdExploding',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'loop',
+        transition: 'click',
+        frames: 'bird'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: 'explosion'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: 'feathers',
+        reset: true
+      }
+    ]
+  })
+
+  LottieInteractivity.create({
+    player: '#birdExplodingUnmarked',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'loop',
+        transition: 'click',
+        frames: 'bird'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: 'explosion'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: 'feathers',
+        reset: true
+      }
+    ]
+  })
 });
+
+// {
+//   state: 'loop',
+//     transition: 'click',
+//   frames: 'bird'
+// },
+// {
+//   state: 'autoplay',
+//     transition: 'onComplete',
+//   frames: 'explosion'
+// },
+// {
+//   state: 'autoplay',
+//     transition: 'onComplete',
+//   frames: 'feathers',
+//   reset: true
+// }

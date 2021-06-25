@@ -44,6 +44,11 @@ export class LottieInteractivity {
     this.options = options;
     this.assignedSegment = null;
     this.scrolledAndPlayed = false;
+
+    // Interaction chaining
+    this.currInteraction = 0;
+    this.clickCounter = 0;
+    this.playCounter = 0;
   }
 
   getContainerVisibility() {
@@ -73,9 +78,7 @@ export class LottieInteractivity {
         Parentscope.player.stop();
         window.addEventListener('scroll', Parentscope.#scrollHandler);
       });
-    }
-
-    if (this.mode === 'cursor') {
+    } else if (this.mode === 'cursor') {
       this.player.addEventListener('DOMLoaded', function () {
         // To have click and hover interaction, force to only have that type and single action
         // If there are multiple actions, click and hover are ignored
@@ -97,6 +100,12 @@ export class LottieInteractivity {
           Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
         }
       });
+    } else if (this.mode === 'chain') {
+      this.player.addEventListener('DOMLoaded', () => {
+        Parentscope.player.loop = false;
+        Parentscope.player.stop();
+        this.#chainedInteractionHandler();
+      });
     }
   }
 
@@ -114,7 +123,19 @@ export class LottieInteractivity {
   }
 
   #clickHoverHandler = e => {
-    if (this.player.isPaused === true) {
+    if (this.mode === 'chain') {
+      if (this.actions[this.currInteraction].click) {
+        let clickLimit = parseInt(this.actions[this.currInteraction].click);
+        if (this.clickCounter < clickLimit - 1) {
+          this.clickCounter += 1;
+          return ;
+        }
+      }
+      this.clickCounter = 0;
+      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.#nextInteraction();
+    } else if (this.player.isPaused === true) {
       this.player.goToAndPlay(0, true);
     }
   }
@@ -144,6 +165,154 @@ export class LottieInteractivity {
         requestAnimationFrame(animate);
       }
     });
+  }
+
+  #onCompleteHandler = ({interactionStage, handler}) => {
+    if (interactionStage === this.currInteraction) {
+      this.player.removeEventListener('loopComplete', handler);
+      this.player.removeEventListener('complete', handler);
+      this.#nextInteraction();
+    }
+  }
+
+  #repeatTransition = ({handler}) => {
+    let repeatAmount = 1;
+
+    if (this.actions[this.currInteraction].repeat)
+      repeatAmount = this.actions[this.currInteraction].repeat;
+    if (this.playCounter >= repeatAmount - 1) {
+      this.playCounter = 0;
+      this.player.removeEventListener('loopComplete', handler);
+      this.player.loop = false;
+      this.player.autoplay = false;
+      this.#nextInteraction();
+    } else {
+      this.playCounter += 1;
+    }
+  }
+
+   // //TODO: How does this work with markers?
+
+  // With the hold transition we can't use playSegment so have to manually verify if
+  // The user held long enough and check if the current frame is within the segment limits
+  #holdTransitionHandler = () => {
+    if (this.player.currentFrame >= this.actions[this.currInteraction].frames[1]) {
+      this.player.removeEventListener('enterFrame', this.#holdTransitionHandler);
+      this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
+      this.container.removeEventListener('mouseleave', this.#holdTransitionLeave);
+      this.player.pause();
+      this.#nextInteraction();
+    }
+  }
+
+  #holdTransitionEnter = () => {
+    if (this.player.playDirection === -1
+      || this.player.currentFrame === 0
+      || this.actions[this.currInteraction].transition === "holdAndPause") {
+      this.player.setDirection(1);
+      this.player.play();
+    }
+  }
+
+  #holdTransitionLeave = () => {
+    if (this.actions[this.currInteraction].transition === "holdAndReverse") {
+      this.player.setDirection(-1);
+      this.player.play();
+    } else if (this.actions[this.currInteraction].transition === "holdAndPause"){
+      this.player.pause();
+    }
+  }
+
+  #nextInteraction = () => {
+    this.currInteraction++;
+    if (this.currInteraction >= this.actions.length) {
+      console.log(">>> END OF CHAIN");
+      // Go back to the first interaction ?
+      if (this.actions[this.actions.length - 1].reset) {
+        this.currInteraction = 0;
+        this.player.goToAndStop(0, true);
+        console.log("resetting!")
+        this.#chainedInteractionHandler();
+      }
+      else
+        this.currInteraction = this.actions.length - 1;
+    } else {
+      this.#chainedInteractionHandler();
+    }
+  }
+
+  #chainedInteractionHandler = () => {
+    let state = this.actions[this.currInteraction].state;
+    let transition = this.actions[this.currInteraction].transition;
+    let frames = this.actions[this.currInteraction].frames;
+
+    let loopState = () => {
+      if (this.actions[this.currInteraction].loop) {
+        this.player.loop = parseInt(this.actions[this.currInteraction].loop) - 1;
+      } else {
+        this.player.loop = true;
+      }
+      this.player.autoplay = true;
+    }
+    let autoplayState = () => {
+      this.player.loop = false;
+      this.player.autoplay = true;
+    }
+    let clickTransition = () => {
+      this.container.addEventListener('click', this.#clickHoverHandler);
+    }
+    let hoverTransition = () => {
+      this.container.addEventListener('mouseenter', this.#clickHoverHandler);
+    }
+    let holdTransition = () => {
+      this.player.addEventListener('enterFrame', this.#holdTransitionHandler);
+      this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
+      this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
+    }
+    let repeatTransition = () => {
+      this.player.loop = true;
+      this.player.autoplay = true;
+      let handler = () => { this.#repeatTransition({handler}) };
+      this.player.addEventListener('loopComplete', handler);
+    }
+    let onCompleteTransition = () => {
+      let handler = () => { this.#onCompleteHandler({interactionStage: this.currInteraction, handler}) };
+      if (state === 'loop')
+        this.player.addEventListener('loopComplete', handler);
+      else if (state === 'autoplay')
+        this.player.addEventListener('complete', handler);
+    }
+
+    let stateHandler = new Map();
+    let transitionHandler = new Map();
+
+    stateHandler.set('loop', loopState);
+    stateHandler.set('autoplay', autoplayState);
+
+    transitionHandler.set('click', clickTransition);
+    transitionHandler.set('hover', hoverTransition);
+    transitionHandler.set('holdAndReverse', holdTransition);
+    transitionHandler.set('holdAndPause', holdTransition);
+    transitionHandler.set('repeat', repeatTransition);
+    transitionHandler.set('onComplete', onCompleteTransition);
+
+    let stateFunction = stateHandler.get(state);
+    let transitionFunction = transitionHandler.get(transition);
+
+    if (stateFunction)
+      stateFunction.call();
+    if (transitionFunction)
+      transitionFunction.call();
+
+    console.log("[ CURRENT STATE: " + state + " ]");
+    console.log("[ CURRENT TRANSITION: " + transition + " ]");
+    console.log('state : ' + state);
+    if (this.player.autoplay) {
+      if (typeof frames === 'string')
+        this.player.goToAndPlay(frames, true);
+      else
+        this.player.playSegments(frames, true);
+    }
   }
 
   #cursorHandler = (x, y) => {
