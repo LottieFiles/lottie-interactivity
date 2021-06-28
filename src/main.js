@@ -43,6 +43,7 @@ export class LottieInteractivity {
     this.actions = actions;
     this.options = options;
     this.assignedSegment = null;
+    this.scrolledAndPlayed = false;
   }
 
   getContainerVisibility() {
@@ -69,7 +70,6 @@ export class LottieInteractivity {
     // Configure player for start
     if (this.mode === 'scroll') {
       this.player.addEventListener('DOMLoaded', function () {
-        Parentscope.player.loop = true;
         Parentscope.player.stop();
         window.addEventListener('scroll', Parentscope.#scrollHandler);
       });
@@ -203,6 +203,7 @@ export class LottieInteractivity {
         true,
       );
     } else if (action.type === 'loop') {
+      this.player.loop = true;
       // Loop: Loop a given frames
       if (this.assignedSegment === null) {
         // if not playing any segments currently. play those segments and save to state
@@ -225,8 +226,9 @@ export class LottieInteractivity {
       }
     } else if (action.type === 'play') {
       // Play: Reset segments and continue playing full animation from current position
-      if (this.player.isPaused === true) {
-        this.player.resetSegments();
+      if (!this.scrolledAndPlayed) {
+        this.scrolledAndPlayed = true;
+        this.player.resetSegments(true);
         this.player.play();
       }
     } else if (action.type === 'stop') {
