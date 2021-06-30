@@ -49,6 +49,8 @@ export class LottieInteractivity {
     this.currInteraction = 0;
     this.clickCounter = 0;
     this.playCounter = 0;
+    this.stateHandler = new Map();
+    this.transitionHandler = new Map();
   }
 
   getContainerVisibility() {
@@ -101,6 +103,7 @@ export class LottieInteractivity {
         }
       });
     } else if (this.mode === 'chain') {
+      this.#initInteractionMaps();
       this.player.addEventListener('DOMLoaded', () => {
         Parentscope.player.loop = false;
         Parentscope.player.stop();
@@ -120,6 +123,62 @@ export class LottieInteractivity {
         this.container.removeEventListener('mousemove', this.#mousemoveHandler);
         this.container.removeEventListener('mouseout', this.#mouseoutHandler);
     }
+  }
+
+  #initInteractionMaps = () => {
+    let loopState = () => {
+      if (this.actions[this.currInteraction].loop) {
+        this.player.loop = parseInt(this.actions[this.currInteraction].loop) - 1;
+      } else {
+        this.player.loop = true;
+      }
+      this.player.autoplay = true;
+    }
+    let autoplayState = () => {
+      this.player.loop = false;
+      this.player.autoplay = true;
+    }
+    let clickTransition = () => {
+      this.container.addEventListener('click', this.#clickHoverHandler);
+    }
+    let hoverTransition = () => {
+      this.container.addEventListener('mouseenter', this.#clickHoverHandler);
+    }
+    let holdTransition = () => {
+      this.player.addEventListener('enterFrame', this.#holdTransitionHandler);
+      this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
+      this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
+    }
+    let repeatTransition = () => {
+      this.player.loop = true;
+      this.player.autoplay = true;
+      let handler = () => { this.#repeatTransition({handler}) };
+      this.player.addEventListener('loopComplete', handler);
+    }
+    let onCompleteTransition = () => {
+      let state = this.actions[this.currInteraction].state;
+      let handler = () => { this.#onCompleteHandler({interactionStage: this.currInteraction, handler}) };
+      if (state === 'loop')
+        this.player.addEventListener('loopComplete', handler);
+      else if (state === 'autoplay')
+        this.player.addEventListener('complete', handler);
+    }
+    let cursorSyncTransition = () => {
+      this.player.stop();
+      this.player.addEventListener('enterFrame', this.#cursorSyncHandler);
+      this.container.addEventListener('mousemove', this.#mousemoveHandler);
+      this.container.addEventListener('mouseout', this.#mouseoutHandler);
+    }
+    this.stateHandler.set('loop', loopState);
+    this.stateHandler.set('autoplay', autoplayState);
+
+    this.transitionHandler.set('click', clickTransition);
+    this.transitionHandler.set('hover', hoverTransition);
+    this.transitionHandler.set('holdAndReverse', holdTransition);
+    this.transitionHandler.set('holdAndPause', holdTransition);
+    this.transitionHandler.set('repeat', repeatTransition);
+    this.transitionHandler.set('onComplete', onCompleteTransition);
+    this.transitionHandler.set('seek', cursorSyncTransition);
   }
 
   #clickHoverHandler = e => {
@@ -256,65 +315,8 @@ export class LottieInteractivity {
     let transition = this.actions[this.currInteraction].transition;
     let frames = this.actions[this.currInteraction].frames;
 
-    let loopState = () => {
-      if (this.actions[this.currInteraction].loop) {
-        this.player.loop = parseInt(this.actions[this.currInteraction].loop) - 1;
-      } else {
-        this.player.loop = true;
-      }
-      this.player.autoplay = true;
-    }
-    let autoplayState = () => {
-      this.player.loop = false;
-      this.player.autoplay = true;
-    }
-    let clickTransition = () => {
-      this.container.addEventListener('click', this.#clickHoverHandler);
-    }
-    let hoverTransition = () => {
-      this.container.addEventListener('mouseenter', this.#clickHoverHandler);
-    }
-    let holdTransition = () => {
-      this.player.addEventListener('enterFrame', this.#holdTransitionHandler);
-      this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
-      this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
-    }
-    let repeatTransition = () => {
-      this.player.loop = true;
-      this.player.autoplay = true;
-      let handler = () => { this.#repeatTransition({handler}) };
-      this.player.addEventListener('loopComplete', handler);
-    }
-    let onCompleteTransition = () => {
-      let handler = () => { this.#onCompleteHandler({interactionStage: this.currInteraction, handler}) };
-      if (state === 'loop')
-        this.player.addEventListener('loopComplete', handler);
-      else if (state === 'autoplay')
-        this.player.addEventListener('complete', handler);
-    }
-    let cursorSyncTransition = () => {
-      this.player.stop();
-      this.player.addEventListener('enterFrame', this.#cursorSyncHandler);
-      this.container.addEventListener('mousemove', this.#mousemoveHandler);
-      this.container.addEventListener('mouseout', this.#mouseoutHandler);
-    }
-
-    let stateHandler = new Map();
-    let transitionHandler = new Map();
-
-    stateHandler.set('loop', loopState);
-    stateHandler.set('autoplay', autoplayState);
-
-    transitionHandler.set('click', clickTransition);
-    transitionHandler.set('hover', hoverTransition);
-    transitionHandler.set('holdAndReverse', holdTransition);
-    transitionHandler.set('holdAndPause', holdTransition);
-    transitionHandler.set('repeat', repeatTransition);
-    transitionHandler.set('onComplete', onCompleteTransition);
-    transitionHandler.set('seek', cursorSyncTransition);
-
-    let stateFunction = stateHandler.get(state);
-    let transitionFunction = transitionHandler.get(transition);
+    let stateFunction = this.stateHandler.get(state);
+    let transitionFunction = this.transitionHandler.get(transition);
 
     if (stateFunction) {
       stateFunction.call();
