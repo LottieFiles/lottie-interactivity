@@ -191,8 +191,18 @@ export class LottieInteractivity {
     }
   }
 
-   // //TODO: How does this work with markers?
+  // Todo: See how to remove timeout
+  #cursorSyncHandler = () => {
+    if (this.player.currentFrame >= parseInt(this.actions[this.currInteraction].frames[1]) - 1) {
+      this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
+      this.container.removeEventListener('mousemove', this.#mousemoveHandler);
+      this.container.removeEventListener('mouseout', this.#mouseoutHandler);
 
+      setTimeout(() => { this.#nextInteraction(); }, 100);
+    }
+  }
+
+  // TODO: How does this work with markers? Get marker duration?
   // With the hold transition we can't use playSegment so have to manually verify if
   // The user held long enough and check if the current frame is within the segment limits
   #holdTransitionHandler = () => {
@@ -282,6 +292,12 @@ export class LottieInteractivity {
       else if (state === 'autoplay')
         this.player.addEventListener('complete', handler);
     }
+    let cursorSyncTransition = () => {
+      this.player.stop();
+      this.player.addEventListener('enterFrame', this.#cursorSyncHandler);
+      this.container.addEventListener('mousemove', this.#mousemoveHandler);
+      this.container.addEventListener('mouseout', this.#mouseoutHandler);
+    }
 
     let stateHandler = new Map();
     let transitionHandler = new Map();
@@ -295,23 +311,29 @@ export class LottieInteractivity {
     transitionHandler.set('holdAndPause', holdTransition);
     transitionHandler.set('repeat', repeatTransition);
     transitionHandler.set('onComplete', onCompleteTransition);
+    transitionHandler.set('seek', cursorSyncTransition);
 
     let stateFunction = stateHandler.get(state);
     let transitionFunction = transitionHandler.get(transition);
 
-    if (stateFunction)
+    if (stateFunction) {
       stateFunction.call();
-    if (transitionFunction)
+    }
+    if (transitionFunction) {
       transitionFunction.call();
+    }
 
     console.log("[ CURRENT STATE: " + state + " ]");
     console.log("[ CURRENT TRANSITION: " + transition + " ]");
-    console.log('state : ' + state);
     if (this.player.autoplay) {
-      if (typeof frames === 'string')
+      this.player.resetSegments(true);
+      // If using named markers
+      if (typeof frames === 'string') {
         this.player.goToAndPlay(frames, true);
-      else
+      }
+      else {
         this.player.playSegments(frames, true);
+      }
     }
   }
 
@@ -328,10 +350,12 @@ export class LottieInteractivity {
 
     // Find the first action that satisfies the current position conditions
     const action = this.actions.find(({ position }) => {
-      if (Array.isArray(position.x) && Array.isArray(position.y)) {
-        return x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1];
-      } else if (!Number.isNaN(position.x) && !Number.isNaN(position.y)) {
-        return x === position.x && y === position.y;
+      if (position) {
+        if (Array.isArray(position.x) && Array.isArray(position.y)) {
+          return x >= position.x[0] && x <= position.x[1] && y >= position.y[0] && y <= position.y[1];
+        } else if (!Number.isNaN(position.x) && !Number.isNaN(position.y)) {
+          return x === position.x && y === position.y;
+        }
       }
 
       return false;
@@ -343,7 +367,8 @@ export class LottieInteractivity {
     }
 
     // Process action types:
-    if (action.type === 'seek') {
+    if (action.type === 'seek' || action.transition === 'seek') {
+      //console.log("cursor synced");
       // Seek: Go to a frame based on player scroll position action
       const xPercent = (x - action.position.x[0]) / (action.position.x[1] - action.position.x[0]);
       const yPercent = (y - action.position.y[0]) / (action.position.y[1] - action.position.y[0]);
