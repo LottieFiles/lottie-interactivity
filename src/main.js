@@ -483,11 +483,6 @@ export class LottieInteractivity {
     } else if (action.type === 'stop') {
       // Stop: Stop playback
       this.player.goToAndStop(action.frames[0], true);
-    } else if (action.type === 'visible') {
-      this.player.loop = false;
-       if (this.player.isPaused) {
-          this.player.goToAndPlay(0, true);
-      }
     }
   };
 }
