@@ -45,22 +45,87 @@ document.addEventListener('DOMContentLoaded', function () {
     ],
   });
 
-  // use the cursor sync and on frame 30 autoplay the rest
-  // of the animation
   LottieInteractivity.create({
-    player: '#unlockIphone',
-    mode: 'chain',
+    player: '#thirdLottie',
+    mode: 'scroll',
     actions: [
       {
-        state: 'none',
-        position: { x: [0, 1], y: [-1, 2] },
-        transition: 'seek',
-        frames: [0, 30],
+        visibility: [0, 0.3],
+        type: 'stop',
+        frames: [50],
       },
       {
-        state: 'autoplay',
-        transition: 'none',
-        frames: [30, 160],
+        visibility: [0.3, 1.0],
+        type: 'seek',
+        frames: [50, 240],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#fourthLottie',
+    mode: 'scroll',
+    actions: [
+      {
+        visibility: [0, 0.2],
+        type: 'stop',
+        frames: [0],
+      },
+      {
+        visibility: [0.2, 0.45],
+        type: 'seek',
+        frames: [0, 45],
+      },
+      {
+        visibility: [0.45, 1.0],
+        type: 'loop',
+        frames: [45, 60],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#fifthLottie',
+    mode: 'scroll',
+    actions: [
+      {
+        visibility: [0, 1.0],
+        type: 'loop',
+        frames: [70, 500],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#seventhLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        type: 'loop',
+        frames: [45, 60],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: 'stop',
+        frames: [0],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#eightthLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        position: { x: [0, 1], y: [0, 1] },
+        type: 'seek',
+        frames: [0, 180],
+      },
+      {
+        position: { x: -1, y: -1 },
+        type: 'stop',
+        frames: [0],
       },
     ],
   });
@@ -98,12 +163,32 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   LottieInteractivity.create({
-    player: '#twelfthLottie',
-    mode: 'scroll',
+    player:'#twelfthLottie',
+    mode:"scroll",
     actions: [
       {
         visibility: [0.50, 1.0],
-        type: 'visible',
+        type: "play"
+      },
+    ]
+  });
+
+  // use the cursor sync and on frame 30 autoplay the rest
+  // of the animation
+  LottieInteractivity.create({
+    player: '#unlockIphone',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'none',
+        position: { x: [0, 1], y: [-1, 2] },
+        transition: 'seek',
+        frames: [0, 30],
+      },
+      {
+        state: 'autoplay',
+        transition: 'none',
+        frames: [30, 160],
       },
     ],
   });
