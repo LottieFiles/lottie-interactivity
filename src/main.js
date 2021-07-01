@@ -46,7 +46,7 @@ export class LottieInteractivity {
     this.scrolledAndPlayed = false;
 
     // Interaction chaining
-    this.currInteraction = 0;
+    this.interactionIdx = 0;
     this.clickCounter = 0;
     this.playCounter = 0;
     this.stateHandler = new Map();
@@ -127,8 +127,8 @@ export class LottieInteractivity {
 
   #initInteractionMaps = () => {
     let loopState = () => {
-      if (this.actions[this.currInteraction].loop) {
-        this.player.loop = parseInt(this.actions[this.currInteraction].loop) - 1;
+      if (this.actions[this.interactionIdx].loop) {
+        this.player.loop = parseInt(this.actions[this.interactionIdx].loop) - 1;
       } else {
         this.player.loop = true;
       }
@@ -156,8 +156,8 @@ export class LottieInteractivity {
       this.player.addEventListener('loopComplete', handler);
     }
     let onCompleteTransition = () => {
-      let state = this.actions[this.currInteraction].state;
-      let handler = () => { this.#onCompleteHandler({interactionStage: this.currInteraction, handler}) };
+      let state = this.actions[this.interactionIdx].state;
+      let handler = () => { this.#onCompleteHandler({interactionStage: this.interactionIdx, handler}) };
       if (state === 'loop')
         this.player.addEventListener('loopComplete', handler);
       else if (state === 'autoplay')
@@ -183,8 +183,8 @@ export class LottieInteractivity {
 
   #clickHoverHandler = e => {
     if (this.mode === 'chain') {
-      if (this.actions[this.currInteraction].click) {
-        let clickLimit = parseInt(this.actions[this.currInteraction].click);
+      if (this.actions[this.interactionIdx].click) {
+        let clickLimit = parseInt(this.actions[this.interactionIdx].click);
         if (this.clickCounter < clickLimit - 1) {
           this.clickCounter += 1;
           return ;
@@ -227,7 +227,7 @@ export class LottieInteractivity {
   }
 
   #onCompleteHandler = ({interactionStage, handler}) => {
-    if (interactionStage === this.currInteraction) {
+    if (interactionStage === this.interactionIdx) {
       this.player.removeEventListener('loopComplete', handler);
       this.player.removeEventListener('complete', handler);
       this.#nextInteraction();
@@ -237,8 +237,8 @@ export class LottieInteractivity {
   #repeatTransition = ({handler}) => {
     let repeatAmount = 1;
 
-    if (this.actions[this.currInteraction].repeat)
-      repeatAmount = this.actions[this.currInteraction].repeat;
+    if (this.actions[this.interactionIdx].repeat)
+      repeatAmount = this.actions[this.interactionIdx].repeat;
     if (this.playCounter >= repeatAmount - 1) {
       this.playCounter = 0;
       this.player.removeEventListener('loopComplete', handler);
@@ -250,14 +250,12 @@ export class LottieInteractivity {
     }
   }
 
-  // Todo: See how to remove timeout
   #cursorSyncHandler = () => {
-    if (this.player.currentFrame >= parseInt(this.actions[this.currInteraction].frames[1]) - 1) {
+    if (this.player.currentFrame >= parseInt(this.actions[this.interactionIdx].frames[1]) - 1) {
       this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
       this.container.removeEventListener('mouseout', this.#mouseoutHandler);
-
-      setTimeout(() => { this.#nextInteraction(); }, 100);
+      setTimeout(this.#nextInteraction, 0);
     }
   }
 
@@ -265,7 +263,7 @@ export class LottieInteractivity {
   // With the hold transition we can't use playSegment so have to manually verify if
   // The user held long enough and check if the current frame is within the segment limits
   #holdTransitionHandler = () => {
-    if (this.player.currentFrame >= this.actions[this.currInteraction].frames[1]) {
+    if (this.player.currentFrame >= this.actions[this.interactionIdx].frames[1]) {
       this.player.removeEventListener('enterFrame', this.#holdTransitionHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
       this.container.removeEventListener('mouseleave', this.#holdTransitionLeave);
@@ -277,43 +275,65 @@ export class LottieInteractivity {
   #holdTransitionEnter = () => {
     if (this.player.playDirection === -1
       || this.player.currentFrame === 0
-      || this.actions[this.currInteraction].transition === "holdAndPause") {
+      || this.actions[this.interactionIdx].transition === "holdAndPause") {
       this.player.setDirection(1);
       this.player.play();
     }
   }
 
   #holdTransitionLeave = () => {
-    if (this.actions[this.currInteraction].transition === "holdAndReverse") {
+    if (this.actions[this.interactionIdx].transition === "holdAndReverse") {
       this.player.setDirection(-1);
       this.player.play();
-    } else if (this.actions[this.currInteraction].transition === "holdAndPause"){
+    } else if (this.actions[this.interactionIdx].transition === "holdAndPause"){
       this.player.pause();
     }
   }
 
   #nextInteraction = () => {
-    this.currInteraction++;
-    if (this.currInteraction >= this.actions.length) {
-      console.log(">>> END OF CHAIN");
-      // Go back to the first interaction ?
-      if (this.actions[this.actions.length - 1].reset) {
-        this.currInteraction = 0;
+    let oldIdx =  this.interactionIdx;
+
+    // Check if theres a jump-to before incrementing
+    let jumpToIndex = this.actions[this.interactionIdx].jumpTo;
+    if (jumpToIndex) {
+      // If jumpToIndex is inside action length jump to it otherwise go to first action
+      if (jumpToIndex >= 0 && jumpToIndex < this.actions.length) {
+        this.interactionIdx = jumpToIndex;
+        this.#chainedInteractionHandler();
+      } else {
+        this.interactionIdx = 0;
         this.player.goToAndStop(0, true);
-        console.log("resetting!")
         this.#chainedInteractionHandler();
       }
-      else
-        this.currInteraction = this.actions.length - 1;
     } else {
-      this.#chainedInteractionHandler();
+      // Go to next interaction
+      this.interactionIdx++;
+      if (this.interactionIdx >= this.actions.length) {
+        // Go back to the first interaction ?
+        if (this.actions[this.actions.length - 1].reset) {
+          this.interactionIdx = 0;
+          this.player.goToAndStop(0, true);
+          this.#chainedInteractionHandler();
+        }
+        else
+          this.interactionIdx = this.actions.length - 1;
+      } else {
+        this.#chainedInteractionHandler();
+      }
     }
+
+    // Emit event from the lottie-player element
+    this.container.dispatchEvent(new CustomEvent("transition", {
+      bubbles: true,
+      composed: true,
+      detail: { oldIndex: oldIdx, newIndex: this.interactionIdx }
+    }));
   }
 
   #chainedInteractionHandler = () => {
-    let state = this.actions[this.currInteraction].state;
-    let transition = this.actions[this.currInteraction].transition;
-    let frames = this.actions[this.currInteraction].frames;
+    let state = this.actions[this.interactionIdx].state;
+    let transition = this.actions[this.interactionIdx].transition;
+    let frames = this.actions[this.interactionIdx].frames;
 
     let stateFunction = this.stateHandler.get(state);
     let transitionFunction = this.transitionHandler.get(transition);
@@ -332,8 +352,7 @@ export class LottieInteractivity {
       // If using named markers
       if (typeof frames === 'string') {
         this.player.goToAndPlay(frames, true);
-      }
-      else {
+      } else {
         this.player.playSegments(frames, true);
       }
     }

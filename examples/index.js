@@ -187,4 +187,54 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     ],
   })
+
+  LottieInteractivity.create({
+    player: '#jumpToTest',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'loop',
+        transition: 'click',
+        frames: [0, 100],
+        jumpTo: 1
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: [100, 200]
+      },
+      {
+        state: 'loop',
+        loop: 1,
+        transition: 'hover',
+        frames: [200, 300]
+      },
+      {
+        state: 'loop',
+        transition: 'click',
+        click: 4,
+        frames: [300, 400],
+        reset: false
+      },
+      {
+        state: 'autoplay',
+        transition: 'click',
+        frames: [400, 500],
+        reset: false
+      },
+      {
+        state: 'loop',
+        transition: 'repeat',
+        repeat: 1,
+        frames: [500, 600],
+        jumpTo: 3
+      }
+    ]
+  })
+
+  let listElem = document.getElementById('jumpToTest');
+  listElem.addEventListener('transition', (e) => {
+    console.log("Event captured: ");
+    console.log(e.detail);
+  });
 });
