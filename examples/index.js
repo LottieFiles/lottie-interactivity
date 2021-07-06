@@ -114,20 +114,15 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   LottieInteractivity.create({
-    player: '#eightthLottie',
+    player: '#eighthLottie',
     mode: 'cursor',
     actions: [
       {
         position: { x: [0, 1], y: [0, 1] },
-        type: 'seek',
-        frames: [0, 180],
-      },
-      {
-        position: { x: -1, y: -1 },
-        type: 'stop',
-        frames: [0],
-      },
-    ],
+        type: "seek",
+        frames: [45, 60]
+      }
+    ]
   });
 
   LottieInteractivity.create({
@@ -148,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
     actions: [
       {
         type: 'click',
+        forceFlag: false
       },
     ],
   });
@@ -158,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     actions: [
       {
         type: 'hover',
+        forceFlag: false
       },
     ],
   });
@@ -171,6 +168,24 @@ document.addEventListener('DOMContentLoaded', function () {
         type: "play"
       },
     ]
+  });
+
+  LottieInteractivity.create({
+    player: '#thirteenthLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        type: 'hold'
+      }]
+  });
+
+  LottieInteractivity.create({
+    player: '#fourteenthLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        type: 'pauseHold'
+      }]
   });
 
   // use the cursor sync and on frame 30 autoplay the rest
@@ -193,63 +208,48 @@ document.addEventListener('DOMContentLoaded', function () {
     ],
   });
 
-  LottieInteractivity.create({
-    player: '#hoverTest',
-    mode: 'chain',
-    actions: [
-      {
-        transition: 'holdAndReverse',
-        frames: [0, 125]
-      },
-      {
-        transition: 'holdAndPause',
-        frames: [125, 249],
-        reset: true
-      }]
-  });
-
-  LottieInteractivity.create({
-    player: '#chainingPlayer',
-    mode: 'chain',
-    actions: [
-      {
-        state: 'loop',
-        transition: 'click',
-        frames: [0, 100]
-      },
-      {
-        state: 'autoplay',
-        transition: 'onComplete',
-        frames: [100, 200]
-      },
-      {
-        state: 'loop',
-        loop: 1,
-        transition: 'hover',
-        frames: [200, 300]
-      },
-      {
-        state: 'loop',
-        transition: 'click',
-        click: 4,
-        frames: [300, 400],
-        reset: false
-      },
-      {
-        state: 'autoplay',
-        transition: 'click',
-        frames: [400, 500],
-        reset: false
-      },
-      {
-        state: 'loop',
-        transition: 'repeat',
-        repeat: 1,
-        frames: [500, 600],
-        reset: true
-      }
-    ]
-  })
+  // LottieInteractivity.create({
+  //   player: '#chainingPlayer',
+  //   mode: 'chain',
+  //   actions: [
+  //     {
+  //       state: 'loop',
+  //       transition: 'click',
+  //       frames: [0, 100]
+  //     },
+  //     {
+  //       state: 'autoplay',
+  //       transition: 'onComplete',
+  //       frames: [100, 200]
+  //     },
+  //     {
+  //       state: 'loop',
+  //       loop: 1,
+  //       transition: 'hover',
+  //       frames: [200, 300]
+  //     },
+  //     {
+  //       state: 'loop',
+  //       transition: 'click',
+  //       click: 4,
+  //       frames: [300, 400],
+  //       reset: false
+  //     },
+  //     {
+  //       state: 'autoplay',
+  //       transition: 'click',
+  //       frames: [400, 500],
+  //       reset: false
+  //     },
+  //     {
+  //       state: 'loop',
+  //       transition: 'repeat',
+  //       repeat: 1,
+  //       frames: [500, 600],
+  //       reset: true
+  //     }
+  //   ]
+  // })
 
   LottieInteractivity.create({
     player: '#birdExploding',
@@ -268,7 +268,8 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         state: 'autoplay',
         frames: 'feathers',
-        reset: false
+        transition: 'onComplete',
+        reset: true
       }
     ],
   })
@@ -281,7 +282,6 @@ document.addEventListener('DOMContentLoaded', function () {
         state: 'loop',
         transition: 'click',
         frames: [0, 100],
-        jumpTo: 1
       },
       {
         state: 'autoplay',
@@ -312,14 +312,35 @@ document.addEventListener('DOMContentLoaded', function () {
         transition: 'repeat',
         repeat: 1,
         frames: [500, 600],
+      },
+      {
+        state: 'click',
+        forceFlag: true,
+        transition: 'repeat',
+        repeat: 10,
+        frames: [600, 700],
         jumpTo: 3
-      }
+       }
     ]
   })
 
-  let listElem = document.getElementById('jumpToTest');
-  listElem.addEventListener('transition', (e) => {
-    console.log("Event captured: ");
-    console.log(e.detail);
+  LottieInteractivity.create({
+    player: '#clickTestPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'click',
+        forceFlag: true,
+        frames: 'star',
+        transition: 'click',
+        click: 5
+      },
+      {
+        frames: 'confetti',
+        state: 'autoplay',
+        reset: false,
+        transition: 'none'
+      }
+    ]
   });
 });
