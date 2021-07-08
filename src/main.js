@@ -9,6 +9,9 @@ const ERROR_PREFIX = '[lottieInteractivity]:';
  */
 export class LottieInteractivity {
   constructor({ actions, container, mode, player, ...options } = DEFAULT_OPTIONS) {
+    // Save the original player entered by user, used for interaction chaining / loading animations on the fly
+    this.enteredPlayer = player;
+
     // Resolve lottie instance specified in player option
     if (!(typeof player === 'object' && player.constructor.name === 'AnimationItem')) {
       if (typeof player === 'string') {
@@ -401,6 +404,12 @@ export class LottieInteractivity {
   #playSegmentHandler = (forceFlag) => {
     let frames = this.actions[this.interactionIdx].frames;
 
+    //If no frame segment is defined, play the whole animation
+    if (!frames) {
+      this.player.resetSegments(true);
+      this.player.goToAndPlay(0, true);
+      return ;
+    }
     // If using named markers
     if (typeof frames === 'string') {
       this.player.goToAndPlay(frames, forceFlag);
@@ -409,13 +418,44 @@ export class LottieInteractivity {
     }
   }
 
+  // Todo: Fix container resizing on switch
+  #loadAnimationInChain = () => {
+    let path = this.actions[this.interactionIdx].path;
+
+    if (!(typeof this.enteredPlayer === 'object' && this.enteredPlayer.constructor.name === 'AnimationItem')) {
+      if (typeof this.enteredPlayer === 'string') {
+        const elem = document.querySelector(this.enteredPlayer);
+
+        if (elem && elem.nodeName === LOTTIE_PLAYER_NODE) {
+          elem.load(path);
+          this.player = elem.getLottie();
+        }
+      } else if (this.enteredPlayer instanceof HTMLElement && this.enteredPlayer.nodeName === LOTTIE_PLAYER_NODE) {
+        this.enteredPlayer.load(path);
+        this.player = this.enteredPlayer.getLottie();
+      }
+
+      // Throw error no player instance has been successfully resolved
+      if (!this.player) {
+        throw new Error(`${ERROR_PREFIX} Specified player is invalid.`, this.enteredPlayer);
+      }
+    }
+    // Interaction chaining
+    this.clickCounter = 0;
+    this.playCounter = 0;
+  }
+
   #chainedInteractionHandler = () => {
     let state = this.actions[this.interactionIdx].state;
     let transition = this.actions[this.interactionIdx].transition;
-    let frames = this.actions[this.interactionIdx].frames;
+    let path = this.actions[this.interactionIdx].path;
 
     let stateFunction = this.stateHandler.get(state);
     let transitionFunction = this.transitionHandler.get(transition);
+
+    if (path && this.interactionIdx > 0) {
+      this.#loadAnimationInChain();
+    }
 
     if (stateFunction) {
       stateFunction.call();
