@@ -223,10 +223,10 @@ export class LottieInteractivity {
     let transition = this.actions[this.interactionIdx].transition;
     let state = this.actions[this.interactionIdx].state;
 
-    // If we're in chain made and the click or hover transition is used, otherwise just play the animation
+    // If we're in chain mode and the click or hover transition is used, otherwise just play the animation
     if (this.mode === 'chain') {
       // If the state is click, then play the animation on click
-      if (state === 'click') {
+      if (state === 'click' && e.type === "click") {
         if (!forceFlag && this.player.isPaused === true) {
           this.#playSegmentHandler(true);
         } else if (forceFlag) {
@@ -235,7 +235,7 @@ export class LottieInteractivity {
       }
 
       // If the transition is click, check if there is a counter or not and make a transition
-      if (transition === 'click' || transition === 'hover') {
+      if ((transition === 'click' && e.type === "click") || transition === 'hover' && e.type === "mouseenter") {
         if (this.actions[this.interactionIdx].count) {
           let clickLimit = parseInt(this.actions[this.interactionIdx].count);
           if (this.clickCounter < clickLimit - 1) {

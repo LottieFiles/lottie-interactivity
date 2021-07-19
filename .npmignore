@@ -17,3 +17,4 @@ tsconfig.json
 # Docs
 docs/
 examples/
+tests/

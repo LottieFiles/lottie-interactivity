@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         position: { x: [0, 1], y: [0, 1] },
         type: "seek",
-        frames: [45, 60]
+        frames: [0, 280]
       }
     ]
   });
