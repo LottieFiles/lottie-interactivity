@@ -188,69 +188,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }]
   });
 
-  // use the cursor sync and on frame 30 autoplay the rest
-  // of the animation
-  LottieInteractivity.create({
-    player: '#unlockIphone',
-    mode: 'chain',
-    actions: [
-      {
-        state: 'none',
-        position: { x: [0, 1], y: [-1, 2] },
-        transition: 'seek',
-        frames: [0, 30],
-      },
-      {
-        state: 'autoplay',
-        transition: 'none',
-        frames: [30, 160],
-      },
-    ],
-  });
-
-  // LottieInteractivity.create({
-  //   player: '#chainingPlayer',
-  //   mode: 'chain',
-  //   actions: [
-  //     {
-  //       state: 'loop',
-  //       transition: 'click',
-  //       frames: [0, 100]
-  //     },
-  //     {
-  //       state: 'autoplay',
-  //       transition: 'onComplete',
-  //       frames: [100, 200]
-  //     },
-  //     {
-  //       state: 'loop',
-  //       loop: 1,
-  //       transition: 'hover',
-  //       frames: [200, 300]
-  //     },
-  //     {
-  //       state: 'loop',
-  //       transition: 'click',
-  //       click: 4,
-  //       frames: [300, 400],
-  //       reset: false
-  //     },
-  //     {
-  //       state: 'autoplay',
-  //       transition: 'click',
-  //       frames: [400, 500],
-  //       reset: false
-  //     },
-  //     {
-  //       state: 'loop',
-  //       transition: 'repeat',
-  //       repeat: 1,
-  //       frames: [500, 600],
-  //       reset: true
-  //     }
-  //   ]
-  // })
-
   LottieInteractivity.create({
     player: '#birdExploding',
     mode: 'chain',
@@ -275,57 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   LottieInteractivity.create({
-    player: '#jumpToTest',
-    mode: 'chain',
-    actions: [
-      {
-        state: 'loop',
-        transition: 'click',
-        frames: [0, 100],
-      },
-      {
-        state: 'autoplay',
-        transition: 'onComplete',
-        frames: [100, 200]
-      },
-      {
-        state: 'loop',
-        loop: 1,
-        transition: 'hover',
-        frames: [200, 300]
-      },
-      {
-        state: 'loop',
-        transition: 'click',
-        click: 4,
-        frames: [300, 400],
-        reset: false
-      },
-      {
-        state: 'autoplay',
-        transition: 'click',
-        frames: [400, 500],
-        reset: false
-      },
-      {
-        state: 'loop',
-        transition: 'repeat',
-        repeat: 1,
-        frames: [500, 600],
-      },
-      {
-        state: 'click',
-        forceFlag: true,
-        transition: 'repeat',
-        repeat: 10,
-        frames: [600, 700],
-        jumpTo: 3
-       }
-    ]
-  })
-
-  LottieInteractivity.create({
-    player: '#clickTestPlayer',
+    player: '#clickPlayer',
     mode: 'chain',
     actions: [
       {
@@ -333,14 +220,161 @@ document.addEventListener('DOMContentLoaded', function () {
         forceFlag: true,
         frames: 'star',
         transition: 'click',
-        click: 5
+        path: 'https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json',
+        count: 5
       },
       {
-        frames: 'confetti',
+        path: 'https://assets1.lottiefiles.com/packages/lf20_ISbOsd.json',
         state: 'autoplay',
-        reset: false,
-        transition: 'none'
+        reset: true,
+        transition: 'onComplete'
       }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#hoverPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'hover',
+        forceFlag: true,
+        frames: 'star',
+        transition: 'hover',
+        path: 'https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json',
+        count: 5
+      },
+      {
+        path: 'https://assets1.lottiefiles.com/packages/lf20_ISbOsd.json',
+        state: 'autoplay',
+        reset: true,
+        transition: 'onComplete'
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#repeatPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'autoplay',
+        transition: 'repeat',
+        repeat: 2
+      },
+      {
+        path: 'https://assets2.lottiefiles.com/packages/lf20_2m1smtya.json',
+        state: 'autoplay',
+        frames: [0, 110],
+        transition: 'onComplete',
+        reset: true,
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#holdPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'none',
+        transition: 'hold',
+        frames: [0, 170]
+      },
+      {
+        path: 'https://assets4.lottiefiles.com/packages/lf20_7zara4iv.json',
+        state: 'autoplay',
+        transition: 'onComplete',
+        reset: true
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#pauseHoldPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'none',
+        transition: 'pauseHold',
+        frames: [0, 170]
+      },
+      {
+        path: 'https://assets4.lottiefiles.com/packages/lf20_7zara4iv.json',
+        state: 'autoplay',
+        transition: 'onComplete',
+        reset: true
+      }
+    ]
+  });
+
+  // use the cursor sync and on frame 30 autoplay the rest
+  // of the animation
+  LottieInteractivity.create({
+    player: '#syncPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'none',
+        position: { x: [0, 1], y: [-1, 2] },
+        transition: 'seek',
+        frames: [0, 30],
+      },
+      {
+        state: 'autoplay',
+        transition: 'none',
+        frames: [30, 160],
+      },
+    ],
+  });
+
+  LottieInteractivity.create({
+    player: '#chainLoadPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'click',
+        transition: 'onComplete'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        path: 'https://assets6.lottiefiles.com/packages/lf20_opn6z1qt.json'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        path: 'https://assets9.lottiefiles.com/packages/lf20_pKiaUR.json',
+        reset: true
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#jumpToPlayer',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'click',
+        frames: 'circle',
+        transition: 'onComplete',
+      },
+      {
+        state: 'autoplay',
+        frames: 'triangle',
+        transition: 'onComplete',
+      },
+      {
+        state: 'autoplay',
+        frames: 'square',
+        transition: 'onComplete',
+      },
+      {
+        state: 'autoplay',
+        frames: 'brocolli',
+        transition: 'onComplete',
+        jumpTo: 1
+      },
     ]
   });
 });
