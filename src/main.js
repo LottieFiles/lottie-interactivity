@@ -195,10 +195,13 @@ export class LottieInteractivity {
     // Process action types:
     if (action.type === 'seek') {
       // Seek: Go to a frame based on player scroll position action
+      const start = action.frames[0];
+      const end = action.frames.length == 2 ? action.frames[1] : (this.player.totalFrames - 1);
+
       this.player.goToAndStop(
-        Math.ceil(
+        start + Math.round(
           ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
-            this.player.totalFrames,
+            (end - start)
         ),
         true,
       );
