@@ -198,6 +198,14 @@ export class LottieInteractivity {
       const start = action.frames[0];
       const end = action.frames.length == 2 ? action.frames[1] : (this.player.totalFrames - 1);
 
+      // Use global frame reference for frames within the seek section.
+      // Without this, if you follow a seek with a loop and then scroll back up,
+      // it will treat frame numbers as relative to the loop.
+      if (this.assignedSegment !== null) {
+        this.player.resetSegments(true);
+        this.assignedSegment = null;
+      }
+
       this.player.goToAndStop(
         start + Math.round(
           ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
