@@ -198,7 +198,7 @@ export class LottieInteractivity {
       this.player.goToAndStop(
         Math.ceil(
           ((currentPercent - action.visibility[0]) / (action.visibility[1] - action.visibility[0])) *
-            this.player.totalFrames,
+            (this.player.totalFrames - 1),
         ),
         true,
       );
