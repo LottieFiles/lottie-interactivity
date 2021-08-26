@@ -94,11 +94,11 @@ export class LottieInteractivity {
           if (Parentscope.actions[0].type === "click") {
             Parentscope.player.loop = false;
             Parentscope.player.stop();
-            Parentscope.container.addEventListener('click', Parentscope.#clickHoverTransitionHandler);
+            Parentscope.container.addEventListener('click', Parentscope.#clickHoverHandler);
           } else if (Parentscope.actions[0].type === "hover") {
             Parentscope.player.loop = false;
             Parentscope.player.stop();
-            Parentscope.container.addEventListener('mouseenter', Parentscope.#clickHoverTransitionHandler);
+            Parentscope.container.addEventListener('mouseenter', Parentscope.#clickHoverHandler);
           } else if (Parentscope.actions[0].type === "hold" || Parentscope.actions[0].type === "pauseHold") {
             Parentscope.container.addEventListener('mouseenter', Parentscope.#holdTransitionEnter);
             Parentscope.container.addEventListener('mouseleave', Parentscope.#holdTransitionLeave);
@@ -116,12 +116,20 @@ export class LottieInteractivity {
         }
       });
     } else if (this.mode === 'chain') {
-      this.player.addEventListener('DOMLoaded', function () {
+      // When passing animation object to LI the player is already loaded
+      if (this.player.isLoaded) {
         Parentscope.#initInteractionMaps();
         Parentscope.player.loop = false;
         Parentscope.player.stop();
         Parentscope.#chainedInteractionHandler({ignorePath: false});
-      });
+      } else {
+        this.player.addEventListener('DOMLoaded', function () {
+          Parentscope.#initInteractionMaps();
+          Parentscope.player.loop = false;
+          Parentscope.player.stop();
+          Parentscope.#chainedInteractionHandler({ignorePath: false});
+        });
+      }
     }
   }
 
@@ -131,13 +139,25 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'cursor') {
-        this.container.removeEventListener('click', this.#clickHoverTransitionHandler);
-        this.container.removeEventListener('mouseenter', this.#clickHoverTransitionHandler);
+        this.container.removeEventListener('click', this.#clickHoverHandler);
+        this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
         this.container.removeEventListener('mousemove', this.#mousemoveHandler);
         this.container.removeEventListener('mouseout', this.#mouseoutHandler);
     }
+
+    if (this.mode === 'chain') {
+      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler());
+      this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
+      this.container.removeEventListener('mouseenter', this.#holdTransitionLeave);
+      this.container.removeEventListener('mousemove', this.#mousemoveHandler);
+      this.container.removeEventListener('mouseout', this.#mouseoutHandler);
+    }
   }
 
+  // [chain mode]
+  // Init the state and transitions maps containing all the state and transition methods used for interaction chaining
   #initInteractionMaps = () => {
     let loopState = () => {
       if (this.actions[this.interactionIdx].loop) {
@@ -154,18 +174,18 @@ export class LottieInteractivity {
     let clickState = () => {
       this.player.loop = false;
       this.player.autoplay = false;
-      this.container.addEventListener('click', this.#clickHoverTransitionHandler);
+      this.container.addEventListener('click', this.#clickHoverStateHandler);
     }
     let hoverState = () => {
       this.player.loop = false;
       this.player.autoplay = false;
-      this.container.addEventListener('mouseenter', this.#hoverStateHandler);
+      this.container.addEventListener('mouseenter', this.#clickHoverStateHandler);
     }
     let clickTransition = () => {
-      this.container.addEventListener('click', this.#clickHoverTransitionHandler);
+      this.container.addEventListener('click', this.#clickHoverHandler);
     }
     let hoverTransition = () => {
-      this.container.addEventListener('mouseenter', this.#clickHoverTransitionHandler);
+      this.container.addEventListener('mouseenter', this.#clickHoverHandler);
     }
     let holdTransition = () => {
       this.player.addEventListener('enterFrame', this.#holdTransitionHandler);
@@ -206,8 +226,9 @@ export class LottieInteractivity {
     this.transitionHandler.set('seek', cursorSyncTransition);
   }
 
-  // Used to manage hover state on chained interactions
-  #hoverStateHandler = () => {
+  // [chain mode]
+  // Handle hover state on chained interactions
+  #clickHoverStateHandler = () => {
     let forceFlag = this.actions[this.interactionIdx].forceFlag;
 
     if (!forceFlag && this.player.isPaused === true) {
@@ -217,40 +238,30 @@ export class LottieInteractivity {
     }
   }
 
-  // Used to manage click and hover transitions
-  #clickHoverTransitionHandler = e => {
+  // [cursor + chain mode]
+  // Handle click and hover in both cursor and chain mode
+  #clickHoverHandler = () => {
     let forceFlag = this.actions[this.interactionIdx].forceFlag;
-    let transition = this.actions[this.interactionIdx].transition;
-    let state = this.actions[this.interactionIdx].state;
 
     // If we're in chain mode and the click or hover transition is used, otherwise just play the animation
     if (this.mode === 'chain') {
-      // If the state is click, then play the animation on click
-      if (state === 'click' && e.type === "click") {
-        if (!forceFlag && this.player.isPaused === true) {
-          this.#playSegmentHandler(true);
-        } else if (forceFlag) {
-          this.#playSegmentHandler(true);
+      // Check if there is a counter or not and make a transition
+      if (this.actions[this.interactionIdx].count) {
+        let clickLimit = parseInt(this.actions[this.interactionIdx].count);
+        if (this.clickCounter < clickLimit - 1) {
+          this.clickCounter += 1;
+          return ;
         }
       }
-
-      // If the transition is click, check if there is a counter or not and make a transition
-      if ((transition === 'click' && e.type === "click") || transition === 'hover' && e.type === "mouseenter") {
-        if (this.actions[this.interactionIdx].count) {
-          let clickLimit = parseInt(this.actions[this.interactionIdx].count);
-          if (this.clickCounter < clickLimit - 1) {
-            this.clickCounter += 1;
-            return ;
-          }
-        }
-        this.clickCounter = 0;
-        this.container.removeEventListener('click', this.#clickHoverTransitionHandler);
-        this.container.removeEventListener('mouseenter', this.#clickHoverTransitionHandler);
-        this.#nextInteraction();
-      }
+      // No click counter, so we remove the listeners and got to next interaction
+      this.clickCounter = 0;
+      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.#nextInteraction();
       return ;
     }
     // Using goToAndPlay rather than this.#playSegmentHandler(forceFlag) because we're in cursor mode
+    // there for we want to play from the beginning
     if (!forceFlag && this.player.isPaused === true) {
       this.player.goToAndPlay(0, true);
     } else if (forceFlag) {
@@ -258,33 +269,19 @@ export class LottieInteractivity {
     }
   }
 
+  // [cursor mode]
   #mousemoveHandler = e => {
     this.#cursorHandler(e.clientX, e.clientY);
   };
 
+  // [cursor mode]
   #mouseoutHandler = () => {
     this.#cursorHandler(-1, -1);
   };
 
-  animate({ timing, draw, duration }) {
-    let start = performance.now();
 
-    requestAnimationFrame(function animate(time) {
-      // timeFraction goes from 0 to 1
-      let timeFraction = (time - start) / duration;
-      if (timeFraction > 1) timeFraction = 1;
-
-      // calculate the current animation state
-      let progress = timing(timeFraction);
-
-      draw(progress); // draw it
-
-      if (timeFraction < 1) {
-        requestAnimationFrame(animate);
-      }
-    });
-  }
-
+  // [chain mode]
+  // Handle when a segment of animation has finished playing
   #onCompleteHandler = ({interactionStage, handler}) => {
     if (interactionStage === this.interactionIdx) {
       this.player.removeEventListener('loopComplete', handler);
@@ -293,6 +290,7 @@ export class LottieInteractivity {
     }
   }
 
+  // [chain mode]
   #repeatTransition = ({handler}) => {
     let repeatAmount = 1;
 
@@ -309,6 +307,8 @@ export class LottieInteractivity {
     }
   }
 
+  // [chain mode]
+  // TODO: How does this work with markers? Get marker duration?
   #cursorSyncHandler = () => {
     let frames = this.actions[this.interactionIdx].frames;
 
@@ -320,8 +320,9 @@ export class LottieInteractivity {
     }
   }
 
+  // [chain mode]
   // TODO: How does this work with markers? Get marker duration?
-  // With the hold transition we can't use playSegment so have to manually verify if
+  // With the hold transition we can't use playSegment so we have to manually verify if
   // The user held long enough and check if the current frame is within the segment limits
   #holdTransitionHandler = () => {
     let frames = this.actions[this.interactionIdx].frames;
@@ -335,6 +336,7 @@ export class LottieInteractivity {
     }
   }
 
+  // [cursor + chain mode]
   #holdTransitionEnter = () => {
     if (this.player.playDirection === -1
       || this.player.currentFrame === 0
@@ -345,6 +347,7 @@ export class LottieInteractivity {
     }
   }
 
+  // [cursor + chain mode]
   #holdTransitionLeave = () => {
     if (this.actions[this.interactionIdx].transition === "hold" || this.actions[0].type === "hold") {
       this.player.setDirection(-1);
@@ -354,15 +357,17 @@ export class LottieInteractivity {
     }
   }
 
+  // [chain mode]
   #clearStateListeners = () => {
     let state = this.actions[this.interactionIdx].state;
 
     if (state === "hover" || state === "click") {
-      this.container.removeEventListener('click', this.#clickHoverTransitionHandler);
-      this.container.removeEventListener('mouseenter', this.#hoverStateHandler);
+      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
     }
   }
 
+  // [chain mode]
   #nextInteraction = () => {
     let oldIdx =  this.interactionIdx;
 
@@ -385,7 +390,7 @@ export class LottieInteractivity {
       // Go to next interaction
       this.interactionIdx++;
       if (this.interactionIdx >= this.actions.length) {
-        // Go back to the first interaction ?
+        // Go back to the first interaction
         if (this.actions[this.actions.length - 1].reset) {
           this.interactionIdx = 0;
           this.player.goToAndStop(0, true);
@@ -406,6 +411,7 @@ export class LottieInteractivity {
     }));
   }
 
+  // [chain mode]
   // Checks if frames are an array or string, and calls appropriate method to play animation
   #playSegmentHandler = (forceFlag) => {
     let frames = this.actions[this.interactionIdx].frames;
@@ -424,16 +430,25 @@ export class LottieInteractivity {
     }
   }
 
+  // [chain mode]
+  // Load a new animation using the path defined in the current interaction
   #loadAnimationInChain = () => {
     let path = this.actions[this.interactionIdx].path;
-    // The animation path declared on the lottie-player was saved in the constructor
+
+    // The animation path declared on the lottie-player was saved in the constructor under 'enteredPlayer'
     // We assume that the path on the lottie-player element is the animation to use in the first action
-    if (!path)
-      path = this.loadedAnimation;
+    if (!path) {
+      // If we passed animationData to Lottie-Interactivity, load the animation data otherwise use the path
+      if ((typeof this.enteredPlayer === 'object' && this.enteredPlayer.constructor.name === 'AnimationItem')) {
+        path = this.enteredPlayer;
+      } else {
+        path = this.loadedAnimation;
+      }
+    }
     let fileName = path.substr(path.lastIndexOf('/') + 1);
     fileName = fileName.substr(0, fileName.lastIndexOf('.json'));
 
-    // Prevents reloading animation when path is defined in first action
+    // Prevents reloading animation the same animation
     if (this.player.fileName === fileName) {
       this.#chainedInteractionHandler({ignorePath: true});
       return ;
@@ -462,6 +477,7 @@ export class LottieInteractivity {
             });
             this.attachedListeners = true;
           }
+          // The LottieFiles player destroys the animation when a new one is Loaded
          elem.load(path);
         }
       } else if (this.enteredPlayer instanceof HTMLElement && this.enteredPlayer.nodeName === LOTTIE_PLAYER_NODE) {
@@ -478,12 +494,35 @@ export class LottieInteractivity {
           });
           this.attachedListeners = true;
         }
+        // The LottieFiles player destroys the animation when a new one is Loaded
         this.enteredPlayer.load(path);
       }
-
       // Throw error no player instance has been successfully resolved
       if (!this.player) {
         throw new Error(`${ERROR_PREFIX} Specified player is invalid.`, this.enteredPlayer);
+      }
+    } else {
+      if (window.lottie) {
+        this.player.destroy();
+        // Removes svg animation contained inside
+        this.container.innerHTML = "";
+
+        this.player = window.lottie.loadAnimation({
+          loop: false,
+          autoplay: false,
+          path,
+          container: this.container
+        });
+        this.player.addEventListener('DOMLoaded', () => {
+          // Remove old listeners
+          this.stop();
+          // Remove the styling that prevents flickering
+          this.container.style.width = '';
+          this.container.style.height = '';
+          this.#chainedInteractionHandler({ignorePath: true});
+        });
+      } else {
+        throw new Error(`${ERROR_PREFIX} A Lottie player is required.`);
       }
     }
     // Reset counters
@@ -491,6 +530,7 @@ export class LottieInteractivity {
     this.playCounter = 0;
   }
 
+  // [chain mode]
   #chainedInteractionHandler = ({ignorePath}) => {
     let state = this.actions[this.interactionIdx].state;
     let transition = this.actions[this.interactionIdx].transition;
@@ -499,6 +539,7 @@ export class LottieInteractivity {
     let transitionFunction = this.transitionHandler.get(transition);
 
     // Check if path is detected or that we are at the beginning again and reset
+    // If we are back at the first action, we need to reload the animation declared on the lottie-player element
     if (!ignorePath && (path || (this.actions[this.actions.length - 1].reset && this.interactionIdx === 0))) {
       this.#loadAnimationInChain();
       return ;
@@ -515,6 +556,7 @@ export class LottieInteractivity {
     }
   }
 
+  // [cursor mode]
   #cursorHandler = (x, y) => {
     // Resolve cursor position if cursor is inside container
     if (x !== -1 && y !== -1) {
@@ -571,9 +613,9 @@ export class LottieInteractivity {
     }
   };
 
+  // [scroll mode]
   #scrollHandler = () => {
     // Get container visibility percentage
-
     const currentPercent = this.getContainerVisibility();
 
     // Find the first action that satisfies the current position conditions
