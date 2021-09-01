@@ -148,7 +148,7 @@ export class LottieInteractivity {
     if (this.mode === 'chain') {
       this.container.removeEventListener('click', this.#clickHoverHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
-      this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler());
+      this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
       this.container.removeEventListener('mouseenter', this.#holdTransitionLeave);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
@@ -362,7 +362,7 @@ export class LottieInteractivity {
     let state = this.actions[this.interactionIdx].state;
 
     if (state === "hover" || state === "click") {
-      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('click', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
     }
   }
