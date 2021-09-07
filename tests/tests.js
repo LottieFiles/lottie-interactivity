@@ -515,6 +515,91 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   });
 
+  LottieInteractivity.create({
+    player: '#dragonSpeedTest',
+    mode: 'chain',
+    actions: [
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        speed: 0.5
+      },
+      {
+        state: 'loop',
+        transition: 'click',
+        path: 'https://assets7.lottiefiles.com/packages/lf20_mrg9xhbm.json',
+        speed: 0.5,
+        delay: 5000
+      },
+      {
+        state: 'autoplay',
+        reset: false,
+        transition: 'onComplete',
+        delay: 1000,
+        speed: 0.5,
+        path: 'https://assets7.lottiefiles.com/packages/lf20_ISbOsd.json'
+      },
+      {
+        state: 'autoplay',
+        reset: false,
+        transition: 'onComplete',
+        speed: 1,
+        path: 'https://assets5.lottiefiles.com/packages/lf20_nc99k6bp.json'
+      },
+      {
+        state: 'autoplay',
+        reset: false,
+        transition: 'onComplete',
+        delay: 1000,
+        speed: 2,
+        path: 'https://assets6.lottiefiles.com/packages/lf20_7ex5ufle.json'
+      },
+      {
+        state: 'autoplay',
+        reset: false,
+        transition: 'onComplete',
+        delay: 1500,
+        speed: 3,
+        path: 'https://assets6.lottiefiles.com/packages/lf20_tnt528ff.json'
+      },
+      {
+        state: 'autoplay',
+        reset: false,
+        transition: 'onComplete',
+        delay: 2000,
+        speed: 5,
+        path: 'https://assets6.lottiefiles.com/packages/lf20_8sn2ymow.json'
+      },
+      {
+        state: 'autoplay',
+        reset: false,
+        transition: 'onComplete',
+        delay: 3000,
+        speed: 10,
+        path: 'https://assets7.lottiefiles.com/packages/lf20_mrg9xhbm.json'
+      },
+      {
+        state: 'loop',
+        reset: true,
+        transition: 'onComplete',
+        delay: 5000,
+        path: 'https://assets7.lottiefiles.com/packages/lf20_sefbiwsx.json'
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        speed: 0.5,
+        reset: true
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        speed: 0.1,
+        reset: true
+      },
+    ]
+  });
+
   let listElem = document.getElementById('jumpToTest');
   listElem.addEventListener('transition', (e) => {
     console.log("Captured event from the 'Multiple interactions test' example: ");

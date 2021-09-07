@@ -537,6 +537,8 @@ export class LottieInteractivity {
     let path = this.actions[this.interactionIdx].path;
     let stateFunction = this.stateHandler.get(state);
     let transitionFunction = this.transitionHandler.get(transition);
+    let speed = this.actions[this.interactionIdx].speed ? this.actions[this.interactionIdx].speed : 1;
+    let delay = this.actions[this.interactionIdx].delay ? this.actions[this.interactionIdx].delay : 0;
 
     // Check if path is detected or that we are at the beginning again and reset
     // If we are back at the first action, we need to reload the animation declared on the lottie-player element
@@ -544,16 +546,19 @@ export class LottieInteractivity {
       this.#loadAnimationInChain();
       return ;
     }
-    if (stateFunction) {
-      stateFunction.call();
-    }
-    if (transitionFunction) {
-      transitionFunction.call();
-    }
-    if (this.player.autoplay) {
-      this.player.resetSegments(true);
-      this.#playSegmentHandler(true);
-    }
+    setTimeout( () => {
+      if (stateFunction) {
+        stateFunction.call();
+      }
+      if (transitionFunction) {
+        transitionFunction.call();
+      }
+      if (this.player.autoplay) {
+        this.player.resetSegments(true);
+        this.#playSegmentHandler(true);
+      }
+      this.player.setSpeed(speed);
+    }, delay);
   }
 
   // [cursor mode]
