@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+# [1.1.0](https://github.com/LottieFiles/lottie-interactivity/compare/v1.0.0...v1.1.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **scroll:** use start/end frames in seeking ([71f2197](https://github.com/LottieFiles/lottie-interactivity/commit/71f21973334f92e71323a1aa837902ce5b7d406a))
+
+
+### Features
+
+* **scroll:** reset frame count from loop to seek ([270b621](https://github.com/LottieFiles/lottie-interactivity/commit/270b6216ffd76ec4bfa2d59457c83748bae8e3d7))
+
 # 1.0.0 (2021-08-10)
 
 
