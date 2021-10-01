@@ -144,6 +144,50 @@ class App extends React.Component {
 
 export default App;
 ```
+Example for a basic functional component,
+```javascript
+import React, { useEffect, useRef } from 'react';
+import '@lottiefiles/lottie-player';
+import { create } from '@lottiefiles/lottie-interactivity';
+
+const App = () => {
+  const myRef = useRef(); // 1. create a reference for the lottie player
+
+  useEffect(()=>{
+    // 3. listen for player load. see lottie player repo for other events
+    myRef.current.addEventListener('load', function (e) {
+      // 4. configure the interactivity library
+      create({
+        mode: 'scroll',
+        player: '#firstLottie',
+        actions: [
+          {
+            visibility: [0, 1],
+            type: 'seek',
+            frames: [0, 100],
+          },
+        ],
+      });
+    });
+  },[])
+
+  return (
+    <div className="App">
+      <div style={{ height: '400px' }}></div>
+      <lottie-player
+        ref={this.myRef} // 2. set the reference for the player
+        id="firstLottie"
+        controls
+        mode="normal"
+        src="https://assets3.lottiefiles.com/packages/lf20_UJNc2t.json"
+        style={{ width: '320px' }}
+      />
+    </div>
+  );
+}
+
+export default App;
+```
 
 ##### 3.2 Vue config
 
