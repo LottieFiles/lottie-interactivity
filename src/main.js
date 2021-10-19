@@ -147,10 +147,13 @@ export class LottieInteractivity {
 
     if (this.mode === 'chain') {
       this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('click', this.#clickHoverStateHandler);
+
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
-      this.container.removeEventListener('mouseenter', this.#holdTransitionLeave);
+
+      this.container.removeEventListener('mouseleave', this.#holdTransitionLeave);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
       this.container.removeEventListener('mouseout', this.#mouseoutHandler);
     }
@@ -159,6 +162,9 @@ export class LottieInteractivity {
   // [chain mode]
   // Init the state and transitions maps containing all the state and transition methods used for interaction chaining
   #initInteractionMaps = () => {
+    if (!this.player)
+      return ;
+
     let loopState = () => {
       if (this.actions[this.interactionIdx].loop) {
         this.player.loop = parseInt(this.actions[this.interactionIdx].loop) - 1;
@@ -396,8 +402,10 @@ export class LottieInteractivity {
           this.player.goToAndStop(0, true);
           this.#chainedInteractionHandler({ignorePath: false});
         }
-        else
+        else {
           this.interactionIdx = this.actions.length - 1;
+          this.#chainedInteractionHandler({ignorePath: false});
+        }
       } else {
         this.#chainedInteractionHandler({ignorePath: false});
       }
@@ -439,20 +447,27 @@ export class LottieInteractivity {
     // We assume that the path on the lottie-player element is the animation to use in the first action
     if (!path) {
       // If we passed animationData to Lottie-Interactivity, load the animation data otherwise use the path
-      if ((typeof this.enteredPlayer === 'object' && this.enteredPlayer.constructor.name === 'AnimationItem')) {
+      if (typeof this.enteredPlayer === 'object' && this.enteredPlayer.constructor.name === 'AnimationItem') {
         path = this.enteredPlayer;
+
+        if (this.player === path) {
+          this.#chainedInteractionHandler({ignorePath: true});
+          return ;
+        }
+
       } else {
         path = this.loadedAnimation;
+        let fileName = path.substr(path.lastIndexOf('/') + 1);
+        fileName = fileName.substr(0, fileName.lastIndexOf('.json'));
+
+        // Prevents reloading animation the same animation
+        if (this.player.fileName === fileName) {
+          this.#chainedInteractionHandler({ignorePath: true});
+          return ;
+        }
       }
     }
-    let fileName = path.substr(path.lastIndexOf('/') + 1);
-    fileName = fileName.substr(0, fileName.lastIndexOf('.json'));
 
-    // Prevents reloading animation the same animation
-    if (this.player.fileName === fileName) {
-      this.#chainedInteractionHandler({ignorePath: true});
-      return ;
-    }
     // Force width and height on the container to retain its size while the next animation is being loaded
     let lottieContainerSize = this.container.getBoundingClientRect();
     let newContainerStyle = "width: " + lottieContainerSize.width + "px !important; height: " +
@@ -507,12 +522,23 @@ export class LottieInteractivity {
         // Removes svg animation contained inside
         this.container.innerHTML = "";
 
-        this.player = window.lottie.loadAnimation({
-          loop: false,
-          autoplay: false,
-          path,
-          container: this.container
-        });
+        if (typeof path === 'object' && path.constructor.name === 'AnimationItem') {
+          this.player = window.lottie.loadAnimation({
+            loop: false,
+            autoplay: false,
+            animationData: path.animationData,
+            container: this.container
+          });
+        }
+        else {
+          this.player = window.lottie.loadAnimation({
+            loop: false,
+            autoplay: false,
+            path,
+            container: this.container
+          });
+        }
+
         this.player.addEventListener('DOMLoaded', () => {
           // Remove old listeners
           this.stop();
