@@ -218,9 +218,8 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         state: 'click',
         forceFlag: true,
-        frames: 'star',
         transition: 'click',
-        path: 'https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json',
+        path: 'https://assets7.lottiefiles.com/packages/lf20_ioxyd2gs.json',
         count: 5
       },
       {
@@ -239,9 +238,8 @@ document.addEventListener('DOMContentLoaded', function () {
       {
         state: 'hover',
         forceFlag: true,
-        frames: 'star',
         transition: 'hover',
-        path: 'https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json',
+        path: 'https://assets7.lottiefiles.com/packages/lf20_ioxyd2gs.json',
         count: 5
       },
       {

@@ -4,8 +4,8 @@
     <link href="https://static.lottiefiles.com/demo/app.demo.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 <!--    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>-->
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.0.6/dist/lottie-player.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.6.10/lottie.js"></script>
+<!--    <script src="https://unpkg.com/@lottiefiles/lottie-player@1.0.6/dist/lottie-player.js"></script>-->
+    <script src="./lottie-player.js"></script>
     <script src="../dist/lottie-interactivity.min.js"></script>
     <script src="./index.js"></script>
 
@@ -520,7 +520,7 @@ LottieInteractivity.create({
                   type: 'seek',
                   frames: [0, 180],
                 }
-              ],
+              ]
             });
             </pre
           >
@@ -557,8 +557,7 @@ LottieInteractivity.create({
                         {
                           type: "click",
                           forceFlag: false
-                        },
-                      ]
+                        }]
                   });</pre>
         </div>
       </div>
@@ -569,7 +568,8 @@ LottieInteractivity.create({
         </h3>
         <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
           This section shows an example of a Lottie that is playing when hovered on. Hovering over multiple times won't restart
-          the animation if its already playing.
+          the animation if its already playing. However if you want the animation to restart as soon as it's hovered on
+          set the 'forceFlag' property to true.
         </div>
         <div class="mx-auto my-8 w-1/4 md:w-1/3">
           <lottie-player id="eleventhLottie"
@@ -592,9 +592,9 @@ LottieInteractivity.create({
                         {
                           type: "hover",
                           forceFlag: false
-                        },
-                      ]
-                  });</pre>
+                        }]
+                  });
+          </pre>
         </div>
       </div>
 
@@ -621,14 +621,16 @@ LottieInteractivity.create({
         </div>
         <div class="w-full md:w-1/2 mx-auto">
           <pre class="prettyprint lang-javascript" style="overflow: scroll;">
-        LottieInteractivity.create({
-          mode:"cursor",
-          player:'#twelfthLottie',
-          actions: [{
-            visibility: [0.50, 1.0],
-            type: "play"
-          }]
-        });</pre>
+            LottieInteractivity.create({
+              mode:"cursor",
+              player:'#twelfthLottie',
+              actions: [
+              {
+                visibility: [0.50, 1.0],
+                type: "play"
+              }]
+            });
+          </pre>
         </div>
       </div>
 
@@ -657,9 +659,11 @@ LottieInteractivity.create({
         LottieInteractivity.create({
           mode:"cursor",
           player:'#thirteenthLottie',
-          actions: [{
-            type: "hold"
-          }]
+          actions: [
+            {
+              type: "hold"
+            }
+           ]
         });</pre>
         </div>
       </div>
@@ -733,7 +737,7 @@ LottieInteractivity.create({
           <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"chain",
-          player:'#birdExploding',
+          player:'#explodingBird',
           actions: [
             {
               state: 'loop',
@@ -760,7 +764,7 @@ LottieInteractivity.create({
           Configure library
         </div>
         <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
-          The name of the player ie: 'explodingBird' in this example is the ID set to the lottie web component on the
+          The name of the player ie: 'explodingBird' in this example is the ID set to the lottie-player component on the
           html page. Interaction chaining can be activated by using the 'chain' mode. An 'actions' array serves to
           configure each segment and how to interact with it.
           Multiple objects can be added into this array and therefore multiple different ways to interact and transit
@@ -768,21 +772,8 @@ LottieInteractivity.create({
           <br />
           <br />
 
-          Each object in the actions array should have a 'state' and 'transition' property:
+          Each object in the actions array should have a 'state' and 'transition' property.
           <br />
-
-          <div class="font-normal text-lg leading-reading font-bold font-lf-bold leading-lf text-xl my-4">
-            Frames
-          </div>
-
-          Each link in the interaction chain can have a defined segment of frames to play. The 'frames' array's first value
-          is the start and the second value is the end. If you don't like defining frame numbers, named markers can also be used.
-          More information about named markers <a href="https://github.com/airbnb/lottie-web/wiki/Markers" class="lf-link text-grey-dark font-lf-bold" target="_blank"> here. </a>
-
-          <br />
-          <br />
-
-          If no frames are provided the entirety of the animation is played.
 
           <div class="font-normal text-lg leading-reading font-bold font-lf-bold leading-lf text-xl my-4">
             State
@@ -794,7 +785,7 @@ LottieInteractivity.create({
           State can have the following values:
           <ul>
             <li>
-              'autoplay': Plays the animation once on load. <a href="#repeatExample">Example.</a>
+              'autoplay': Plays the animation once on load. <a href="#repeatExample" class="lf-link-teal">Example.</a>
             </li>
             <li>
               'loop': Loops the animation.
@@ -805,10 +796,10 @@ LottieInteractivity.create({
               </ul>
             </li>
             <li>
-              'click': Plays the animation on click. <a href="#clickExample">Example.</a>
+              'click': Plays the animation on click. <a href="#clickExample" class="lf-link-teal">Example.</a>
             </li>
             <li>
-              'hover': Plays the animation on hover. <a href="#hoverExample">Example.</a>
+              'hover': Plays the animation on hover. <a href="#hoverExample" class="lf-link-teal">Example.</a>
             </li>
             <li>
               'none': Animation won't play
@@ -824,7 +815,7 @@ LottieInteractivity.create({
           Transition can have the following values:
           <ul>
             <li>
-              'click': Causes a transition when clicking on the animation is detected. <a href="#clickExample">Example.</a>
+              'click': Causes a transition when clicking on the animation is detected. <a href="#clickExample" class="lf-link-teal">Example.</a>
               <ul>
                 <li>
                   Optionally a 'count' property can be defined to transit after x amount of clicks
@@ -832,7 +823,7 @@ LottieInteractivity.create({
               </ul>
             </li>
             <li>
-              'hover': Causes a transition when hovering over the animation is detected. <a href="#hoverExample">Example.</a>
+              'hover': Causes a transition when hovering over the animation is detected. <a href="#hoverExample" class="lf-link-teal">Example.</a>
               <ul>
                 <li>
                   Optionally a 'count' property can be defined to transit after x amount of hovers
@@ -840,7 +831,7 @@ LottieInteractivity.create({
               </ul>
             </li>
             <li>
-              'repeat': Play the animation x amount of times before transiting. <a href="#repeatExample">Example.</a>
+              'repeat': Play the animation x amount of times before transiting. <a href="#repeatExample" class="lf-link-teal">Example.</a>
               <ul>
                 <li>
                   A 'repeat' property containing a number can then be used to define how many times the animation will repeat before transiting
@@ -848,13 +839,13 @@ LottieInteractivity.create({
               </ul>
             </li>
             <li>
-              'hold': Hover over the animation for the length of the 'frames' property to cause a transition. If the cursor leaves the animation, it plays in reverse. <a href="#holdExample">Example.</a>
+              'hold': Hover over the animation for the length of the 'frames' property to cause a transition. If the cursor leaves the animation, it plays in reverse. <a href="#holdExample" class="lf-link-teal">Example.</a>
             </li>
             <li>
-              'pauseHold': Hover over the animation for the length of the 'frames' property to cause a transition. If the cursor leaves the animation, it pauses. <a href="#pauseHoldExample">Example.</a>
+              'pauseHold': Hover over the animation for the length of the 'frames' property to cause a transition. If the cursor leaves the animation, it pauses. <a href="#pauseHoldExample" class="lf-link-teal">Example.</a>
             </li>
             <li>
-              'seek': Sync animation with cursor position. A 'position' object will be needed as well as a 'frames' array. <a href="#syncExample"> Example.</a>
+              'seek': Sync animation with cursor position. A 'position' object will be needed as well as a 'frames' array. <a href="#syncExample" class="lf-link-teal"> Example.</a>
             </li>
             <li>
               'onComplete': When the animation has finished playing the defined segment, a transition will occur.
@@ -863,6 +854,19 @@ LottieInteractivity.create({
               'none': Animation won't transit.
             </li>
           </ul>
+
+          <div class="font-normal text-lg leading-reading font-bold font-lf-bold leading-lf text-xl my-4">
+            Frames
+          </div>
+
+          Each link in the interaction chain can have a defined segment of frames to play. The 'frames' array's first value
+          is the start and the second value is the end. If you don't like defining frame numbers, named markers can also be used.
+          More information about named markers <a href="https://github.com/airbnb/lottie-web/wiki/Markers" class="lf-link-teal lf-link text-grey-dark font-lf-bold" target="_blank"> here. </a>
+
+          <br />
+          <br />
+
+          If no frames are provided the entirety of the animation is played.
 
           <div class="font-normal text-lg leading-reading font-bold font-lf-bold leading-lf text-xl my-4">
             Path

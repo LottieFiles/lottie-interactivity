@@ -554,23 +554,23 @@ A 'path' property can be used to define where to load the animation from.
 
 ### Additional properties
 
-#### jumpTo: [interaction index]:
+#### jumpTo: [interaction index]
 Jumps to the action defined at the submitted index after the necessary interaction is detected.
 
-#### reset: [true/false]:
+#### reset: [true/false]
 Useful for the last action, if true will go back to the first action.
 The 'transition' event is fired from the lottie-player element every time a transition occurs.
 The event contains the following details:
 oldIndex
 newIndex
 
-#### forceFlag: [true/false]:
+#### forceFlag: [true/false]
 If true, click and hover interactions will play straight away. Otherwise, will ignore if animation is already playing.
 
-#### delay: [time in milliseconds]:
+#### delay: [time in milliseconds]
 Will delay all interactions and playback of the animation until the delay is finished.
 
-#### speed: [integer]:
+#### speed: [integer]
 Set the speed of the animation, 1 being the default speed.
 
 ### To see examples of all these features, please visit the [LottieFiles interactivity page.](https://lottiefiles.com/interactivity#LI-chaining)
