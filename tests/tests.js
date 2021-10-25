@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function () {
         frames: [70, 134],
         state: 'autoplay',
         reset: true,
-        transition: 'none'
+        transition: 'onComplete'
       }
     ]
   });
