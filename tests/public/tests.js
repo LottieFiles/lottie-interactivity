@@ -1,14 +1,6 @@
 // Animation configuration
 
 document.addEventListener('DOMContentLoaded', function () {
-  // const lfcontainer = document.getElementById('fifthLottie');
-  // const fifthLottie = lottie.loadAnimation({
-  //   container: lfcontainer, // the dom element that will contain the animation
-  //   renderer: 'svg',
-  //   autoplay: false,
-  //   path: 'https://assets2.lottiefiles.com/packages/lf20_4fET62.json', // the path to the animation json
-  // });
-
   LottieInteractivity.create({
     player: '#firstLottie',
     mode: 'scroll',
@@ -20,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ],
   });
+
   LottieInteractivity.create({
     player: '#secondLottie',
     mode: 'scroll',
@@ -600,9 +593,11 @@ document.addEventListener('DOMContentLoaded', function () {
     ]
   });
 
-  let listElem = document.getElementById('jumpToTest');
+  let listElem = document.getElementById('clickTest');
   listElem.addEventListener('transition', (e) => {
-    console.log("Captured event from the 'Multiple interactions test' example: ");
+    console.log("Captured event from the 'Click test' example: ");
     console.log(e.detail);
+    const evt = new Event("transition");
+    window.dispatchEvent(evt);
   });
 });

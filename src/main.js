@@ -26,7 +26,9 @@ export class LottieInteractivity {
 
       // Throw error no player instance has been successfully resolved
       if (!player) {
-        throw new Error(`${ERROR_PREFIX} Specified player is invalid.`, player);
+        let message = ERROR_PREFIX + "Specified player:" + player + " is invalid.";
+
+        throw new Error(message);
       }
     }
 
@@ -154,7 +156,9 @@ export class LottieInteractivity {
 
       // Throw error no player instance has been successfully resolved
       if (!player) {
-        throw new Error(`${ERROR_PREFIX} Specified player is invalid.`, player);
+        let message = ERROR_PREFIX + "Specified player:" + player + " is invalid.";
+
+        throw new Error(message, player);
       }
     }
 
