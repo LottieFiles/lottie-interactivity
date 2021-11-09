@@ -149,7 +149,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
                   type: 'seek',
                   frames: [0, 300],
                 },
-              ],
+              ]
           });</pre>
           <div class="pb-8 font-normal text-lg leading-reading">
             The name of the player ie: 'firstLottie' in this example is the ID set to the lottie web component on the
@@ -259,7 +259,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
                   type: 'seek',
                   frames: [90, 123],
                 },
-              ],
+              ]
            });</pre
           >
         </div>
@@ -433,7 +433,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
                       position: { x: -1, y: -1 },
                       type: 'stop',
                       frames: [0],
-                    },
+                    }
                   ]
               });</pre
           >
@@ -554,8 +554,9 @@ npm install --save @lottiefiles/lottie-interactivity</pre
             {
               type: "click",
               forceFlag: false
-            }]
-          });</pre>
+            }
+          ]
+        });</pre>
         </div>
       </div>
 
@@ -589,7 +590,8 @@ npm install --save @lottiefiles/lottie-interactivity</pre
             {
               type: "hover",
               forceFlag: false
-            }]
+            }
+          ]
         });
           </pre>
         </div>
@@ -622,10 +624,11 @@ npm install --save @lottiefiles/lottie-interactivity</pre
               player:'#twelfthLottie',
               mode:"scroll",
               actions: [
-              {
-                visibility: [0.50, 1.0],
-                type: "play"
-              }]
+                {
+                  visibility: [0.50, 1.0],
+                  type: "play"
+                }
+              ]
             });
           </pre>
         </div>
@@ -660,7 +663,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
             {
               type: "hold"
             }
-           ]
+          ]
         });</pre>
         </div>
       </div>
@@ -688,14 +691,14 @@ npm install --save @lottiefiles/lottie-interactivity</pre
         <div class="w-full md:w-1/2 mx-auto">
           <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
-                    player:'#fourteenthLottie',
-                    mode:"cursor",
-                    actions: [
-                    {
-                      type: "pauseHold"
-                    }
-                  ]
-            });</pre>
+          player:'#fourteenthLottie',
+          mode:"cursor",
+          actions: [
+            {
+              type: "pauseHold"
+            }
+          ]
+        });</pre>
         </div>
       </div>
 
@@ -752,7 +755,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
               frames: 'feathers',
               reset: true
             }
-          ],
+          ]
         });
           </pre>
         </div>
@@ -950,14 +953,15 @@ npm install --save @lottiefiles/lottie-interactivity</pre
             frames: 'star',
             transition: 'click',
             count: 5
-          },
-          {
-            path: 'https://assets1.lottiefiles.com/packages/lf20_ISbOsd.json',
-            frames: 'confetti',
-            state: 'autoplay',
-            reset: true,
-            transition: 'onComplete'
-          }]
+            },
+            {
+              path: 'https://assets1.lottiefiles.com/packages/lf20_ISbOsd.json',
+              frames: 'confetti',
+              state: 'autoplay',
+              reset: true,
+              transition: 'onComplete'
+            }
+          ]
         });</pre>
         </div>
       </div>
@@ -1196,7 +1200,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
               transition: 'none',
               frames: [30, 160],
             },
-          ],
+          ]
         });</pre>
         </div>
       </div>
@@ -1233,26 +1237,26 @@ npm install --save @lottiefiles/lottie-interactivity</pre
         <div class="w-full md:w-1/2 mx-auto">
           <pre class="prettyprint lang-javascript" style="overflow: scroll;">
           LottieInteractivity.create({
-          player: '#chainLoad',
-          mode: 'chain',
-          actions: [
-            {
-              state: 'click',
-              transition: 'onComplete'
-            },
-            {
-              state: 'autoplay',
-              transition: 'onComplete',
-              path: 'https://assets6.lottiefiles.com/packages/lf20_opn6z1qt.json'
-            },
-            {
-              state: 'autoplay',
-              transition: 'onComplete',
-              path: 'https://assets9.lottiefiles.com/packages/lf20_pKiaUR.json',
-              reset: true
-            }
-          ]}
-          );
+            player: '#chainLoad',
+            mode: 'chain',
+            actions: [
+              {
+                state: 'click',
+                transition: 'onComplete'
+              },
+              {
+                state: 'autoplay',
+                transition: 'onComplete',
+                path: 'https://assets6.lottiefiles.com/packages/lf20_opn6z1qt.json'
+              },
+              {
+                state: 'autoplay',
+                transition: 'onComplete',
+                path: 'https://assets9.lottiefiles.com/packages/lf20_pKiaUR.json',
+                reset: true
+              }
+            ]
+          });
           </pre>
         </div>
       </div>
@@ -1305,7 +1309,7 @@ npm install --save @lottiefiles/lottie-interactivity</pre
                   frames: 'brocolli',
                   transition: 'onComplete',
                   jumpTo: 1
-                },
+                }
               ]
             });
           </pre>
