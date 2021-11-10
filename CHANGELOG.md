@@ -3,6 +3,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+# [1.2.0](https://github.com/LottieFiles/lottie-interactivity/compare/v1.1.0...v1.2.0) (2021-11-10)
+
+
+### Bug Fixes
+
+* **click handler:** fixed faulty call to click handler ([69d5b67](https://github.com/LottieFiles/lottie-interactivity/commit/69d5b67c2e3c62f8921667007cf22b4da9875fc8))
+
+
+### Features
+
+* **additional chain properties:** added speed and delay ([b1f5db3](https://github.com/LottieFiles/lottie-interactivity/commit/b1f5db321afb22c82d7bd46ed0171966c0dadd6c))
+* **animation loading:** added animation loading for when the library is passed an animation object ([e04600d](https://github.com/LottieFiles/lottie-interactivity/commit/e04600d21c753130938587f8ec0b1976b9b4eecb))
+* **global:** first draft of interaction chaining ([672b0e8](https://github.com/LottieFiles/lottie-interactivity/commit/672b0e8a91f1d48584a3bbee7c045604e27cf06b))
+* **interactions:** added ability to load lotties in interaction chaining from 'path' attribute ([db3af11](https://github.com/LottieFiles/lottie-interactivity/commit/db3af11c2cf87dc5374b3fbe5f88599106e82bf9))
+* **interactions:** added click and hover states, updated example page ([853eff2](https://github.com/LottieFiles/lottie-interactivity/commit/853eff283248949be48bf81a5618eba08dcb1806))
+* **interactions:** Added click, hover and visible interactions ([d97fbad](https://github.com/LottieFiles/lottie-interactivity/commit/d97fbad110a7e50ed829c7e3fafe92edbacff648))
+* **interactions:** added jumpTo property to get to a specific interaction index after transition ([b3a82f4](https://github.com/LottieFiles/lottie-interactivity/commit/b3a82f45f80f7cd7a1a87bb5658b28f24a05c1ca))
+* **interactions:** added sync to cursor to interaction chaining ([67331c3](https://github.com/LottieFiles/lottie-interactivity/commit/67331c3ee1f03bb3527d3552aebcc4558ba984e4))
+* **interactions chaining:** added dynamic loading of animations, finished examples page ([60003f4](https://github.com/LottieFiles/lottie-interactivity/commit/60003f4d3951d8e287bcadbe237f39e9e4f183f2))
+
 # [1.1.0](https://github.com/LottieFiles/lottie-interactivity/compare/v1.0.0...v1.1.0) (2021-09-28)
 
 
