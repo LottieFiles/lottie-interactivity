@@ -31,7 +31,8 @@ npm install --save @lottiefiles/lottie-interactivity
 
 ## Demo
 
-Demos are showcased at https://lottiefiles.com/interactivity
+### To see examples of all these features, please visit the [LottieFiles interactivity page.](https://lottiefiles.com/interactivity#LI-chaining)
+
 
 If you would like to take a look at some examples, feel free to have a look in the examples folder to see how each of
 the Lotties have been implemented.
@@ -330,7 +331,7 @@ LottieInteractivity.create({
 });
 ```
 
-### Sync animation with cursor horizontal movement.
+### Sync animation with cursor horizontal movement
 
 The cursor sync function can be used to either sync with the horizontal movement of the cursor or the vertical movement
 of the cursor. This example shows the horizontal sync.
@@ -353,3 +354,223 @@ LottieInteractivity.create({
   ],
 });
 ```
+
+### Play animation on click
+
+Play a Lottie when clicked on. Clicking multiple times won't restart
+the animation if its already playing. However if you want the animation to restart as soon as it's clicked on
+set the 'forceFlag' property to true.
+
+```javascript
+LottieInteractivity.create({
+  player:'#firstLottie',
+  mode:"cursor",
+    actions: [{
+        type: "click",
+        forceFlag: false
+      }]
+});
+```
+
+### Play animation on hover
+
+Play a Lottie when hovered. Hovering multiple times won't restart
+the animation if its already playing. However if you want the animation to restart as soon as it's hovered on
+set the 'forceFlag' property to true.
+
+```javascript
+LottieInteractivity.create({
+  player:'#firstLottie',
+  mode:"cursor",
+  actions: [{
+      type: "hover",
+      forceFlag: false
+    }]
+});
+```
+
+### Play animation when visible
+
+Play a Lottie when it is visible. Visibility can be customised to play the
+animation when a percentage of the container is reached. Here [0.50, 1.0] means the animation will play when 50% of the container is
+reached, [0, 1.0] will play as soon as the container is visible.
+
+```javascript
+LottieInteractivity.create({
+  mode:"cursor",
+  player:'#firstLottie',
+  actions: [{
+    visibility: [0.50, 1.0],
+    type: "play"
+  }]
+});
+```
+
+### Play animation on hold
+
+The animation will play when the cursor is placed over the animation,
+and in reverse if the cursor leaves the animation.
+
+```javascript
+LottieInteractivity.create({
+  mode:"cursor",
+  player:'#firstLottie',
+  actions: [{
+    type: "hold"
+  }]
+});
+```
+
+### Play animation on hold and pause when released
+
+The animation will play when the cursor is placed over the animation,
+and pause if the cursor leaves the animation.
+
+```javascript
+LottieInteractivity.create({
+  mode:"cursor",
+  player:'#fourteenthLottie',
+  actions: [{
+    type: "pauseHold"
+  }]
+});
+```
+
+## Chaining mode
+
+When using this mode you now have the power to chain different segments of animations depending on how
+the user interacts (click x amount of times, hover..) with the segment but also with Lottie events (onComplete).
+By using the 'chain' mode Lottie-interactivity can even load separate animations in succession depending on the interaction.
+
+In this example 3 segments are present. The pigeon running on loop, an explosion when the user clicks and the feathers falling once
+the explosion has finished.
+
+```javascript
+LottieInteractivity.create({
+  mode:"chain",
+  player:'#explodingBird',
+  actions: [
+    {
+      state: 'loop',
+      transition: 'click',
+      frames: 'bird'
+    },
+    {
+      state: 'autoplay',
+      transition: 'onComplete',
+      frames: 'explosion'
+    },
+    {
+      state: 'autoplay',
+      transition: 'onComplete',
+      frames: 'feathers',
+      reset: true
+    }
+  ],
+});
+```
+
+## Getting started
+
+The name of the player ie: 'explodingBird' in this example is the ID set to the lottie-player component on the
+html page. Interaction chaining can be activated by using the 'chain' mode. An 'actions' array serves to
+configure each segment and how to interact with it.
+Multiple objects can be added into this array and therefore multiple different ways to interact and transit
+through different segments of an animation.
+
+Each object in the actions array should have a 'state' and 'transition' property.
+
+### State
+
+State defines how the segment of the animation will be playing when loaded and waiting for an interaction.
+
+State can have the following values:
+
+#### autoplay
+Plays the animation once on load.
+
+#### loop
+Loops the animation.
+
+Optionally a 'loop' property can be defined to loop x amount of times
+
+#### click
+Plays the animation on click.
+
+#### hover
+Plays the animation on hover.
+
+#### none
+Animation won't play
+
+
+### Transition
+
+Transition defines the interaction that will cause Lottie-Interactivity to go to the next interaction link in the chain.
+
+Transition can have the following values:
+
+#### click
+Causes a transition when clicking on the animation is detected.
+
+Optionally a 'count' property can be defined to transit after x amount of clicks
+
+#### hover
+Causes a transition when hovering over the animation is detected.
+
+Optionally a 'count' property can be defined to transit after x amount of hovers
+
+#### repeat
+Play the animation x amount of times before transiting.
+
+A 'repeat' property containing a number can then be used to define how many times the animation will repeat before transiting
+
+#### hold
+Hover over the animation for the length of the 'frames' property to cause a transition. If the cursor leaves the animation, it plays in reverse.
+
+#### pauseHold
+Hover over the animation for the length of the 'frames' property to cause a transition. If the cursor leaves the animation, it pauses.
+
+#### seek
+Sync animation with cursor position. A 'position' object will be needed as well as a 'frames' array.
+
+#### onComplete
+When the animation has finished playing the defined segment, a transition will occur.
+
+#### none
+Animation won't transit.
+
+### Frames
+
+Each link in the interaction chain can have a defined segment of frames to play. The 'frames' array's first value
+is the start and the second value is the end. If you don't like defining frame numbers, named markers can also be used.
+More information about named markers <a href="https://github.com/airbnb/lottie-web/wiki/Markers" class="lf-link text-grey-dark font-lf-bold" target="_blank"> here. </a>
+
+If no frames are provided the entirety of the animation is played.
+
+### Path
+
+A 'path' property can be used to define where to load the animation from.
+
+### Additional properties
+
+#### jumpTo: [interaction index]
+Jumps to the action defined at the submitted index after the necessary interaction is detected.
+
+#### reset: [true/false]
+Useful for the last action, if true will go back to the first action.
+The 'transition' event is fired from the lottie-player element every time a transition occurs.
+The event contains the following details:
+oldIndex
+newIndex
+
+#### forceFlag: [true/false]
+If true, click and hover interactions will play straight away. Otherwise, will ignore if animation is already playing.
+
+#### delay: [time in milliseconds]
+Will delay all interactions and playback of the animation until the delay is finished.
+
+#### speed: [integer]
+Set the speed of the animation, 1 being the default speed.
+
+### To see examples of all these features, please visit the [LottieFiles interactivity page.](https://lottiefiles.com/interactivity#LI-chaining)

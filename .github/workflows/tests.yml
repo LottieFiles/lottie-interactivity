@@ -1,8 +1,9 @@
 name: Run tests
 
 on:
-  pull_request:
-    branches: [main, beta, develop]
+  push:
+    branches:
+      - '**'
 
 jobs:
   tests:
@@ -36,11 +37,23 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install && npx playwright install
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Run linting
         run: yarn lint
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build package
+        run: yarn run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+      - name: Run build tests with latest lottie-player
+        run: |
+          yarn run test
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

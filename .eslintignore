@@ -8,3 +8,4 @@ dist/
 # Testing
 coverage/
 examples/
+tests/
