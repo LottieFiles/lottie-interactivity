@@ -114,7 +114,11 @@ export class LottieInteractivity {
           Parentscope.player.loop = true;
           Parentscope.player.stop();
           Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
-          Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
+          Parentscope.container.addEventListener('mouseleave', Parentscope.#mouseoutHandler);
+
+          // Init the animations that set states when the cursor is outside the container, so that they
+          // are visibly idle at the desired frame before first interaction with them
+          Parentscope.#cursorHandler(-1, -1);
         }
       });
     } else if (this.mode === 'chain') {
@@ -201,7 +205,7 @@ export class LottieInteractivity {
         this.container.removeEventListener('click', this.#clickHoverHandler);
         this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
         this.container.removeEventListener('mousemove', this.#mousemoveHandler);
-        this.container.removeEventListener('mouseout', this.#mouseoutHandler);
+        this.container.removeEventListener('mouseleave', this.#mouseoutHandler);
     }
 
     if (this.mode === 'chain') {
@@ -727,6 +731,7 @@ export class LottieInteractivity {
       }
       this.player.playSegments(action.frames);
     } else if (action.type === 'stop') {
+      this.player.resetSegments(true);
       // Stop: Stop playback
       this.player.goToAndStop(action.frames[0], true);
     }
