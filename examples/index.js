@@ -211,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function () {
         state: 'click',
         forceFlag: true,
         transition: 'click',
-        path: 'https://assets7.lottiefiles.com/packages/lf20_ioxyd2gs.json',
         count: 5
       },
       {
@@ -231,7 +230,6 @@ document.addEventListener('DOMContentLoaded', function () {
         state: 'hover',
         forceFlag: true,
         transition: 'hover',
-        path: 'https://assets7.lottiefiles.com/packages/lf20_ioxyd2gs.json',
         count: 5
       },
       {
