@@ -48,6 +48,12 @@ jobs:
       - name: Build project
         run: yarn build
 
+      - name: Run build tests with latest lottie-player
+        run: |
+          yarn run test
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Release
         run: yarn release
         env:

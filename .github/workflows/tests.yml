@@ -51,7 +51,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-
       - name: Run build tests with latest lottie-player
         run: |
           yarn run test
