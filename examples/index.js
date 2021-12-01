@@ -152,6 +152,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   LottieInteractivity.create({
+    player: '#toggleLottie',
+    mode: 'cursor',
+    actions: [
+      {
+        type: 'toggle'
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
     player:'#twelfthLottie',
     mode:"scroll",
     actions: [

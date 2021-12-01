@@ -101,6 +101,10 @@ export class LottieInteractivity {
             Parentscope.player.loop = false;
             Parentscope.player.stop();
             Parentscope.container.addEventListener('mouseenter', Parentscope.#clickHoverHandler);
+          } else if (Parentscope.actions[0].type === "toggle") {
+            Parentscope.player.loop = false;
+            Parentscope.player.stop();
+            Parentscope.container.addEventListener('click', Parentscope.#toggleHandler);
           } else if (Parentscope.actions[0].type === "hold" || Parentscope.actions[0].type === "pauseHold") {
             Parentscope.container.addEventListener('mouseenter', Parentscope.#holdTransitionEnter);
             Parentscope.container.addEventListener('mouseleave', Parentscope.#holdTransitionLeave);
@@ -202,10 +206,11 @@ export class LottieInteractivity {
     }
 
     if (this.mode === 'cursor') {
-        this.container.removeEventListener('click', this.#clickHoverHandler);
-        this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
-        this.container.removeEventListener('mousemove', this.#mousemoveHandler);
-        this.container.removeEventListener('mouseleave', this.#mouseoutHandler);
+      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('click', this.#toggleHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.container.removeEventListener('mousemove', this.#mousemoveHandler);
+      this.container.removeEventListener('mouseleave', this.#mouseoutHandler);
     }
 
     if (this.mode === 'chain') {
@@ -313,6 +318,18 @@ export class LottieInteractivity {
       this.#playSegmentHandler(true);
     } else if (forceFlag) {
       this.#playSegmentHandler(true);
+    }
+  }
+
+  // [cursor mode]
+  #toggleHandler = () => {
+    if (this.clickCounter === 0) {
+      this.player.play();
+      this.clickCounter++;
+    } else {
+      this.clickCounter++;
+      this.player.setDirection(this.player.playDirection * -1);
+      this.player.play();
     }
   }
 

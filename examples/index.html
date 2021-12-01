@@ -597,6 +597,40 @@ npm install --save @lottiefiles/lottie-interactivity</pre
         </div>
       </div>
 
+      <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="toggle">
+        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+          Toggle animation
+        </h3>
+        <div class="w-full md:w-1/2 mx-auto font-normal text-lg leading-reading">
+          This section shows an example of a Lottie that is toggled when clicked on.
+        </div>
+        <div class="mx-auto my-8 w-1/4 md:w-1/3">
+          <lottie-player id="toggleLottie"
+                         src="https://assets8.lottiefiles.com/private_files/lf30_tnblylie.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/creatopotato" class="lf-link text-grey-dark font-lf-bold" target="_blank"
+            >Christina Bublyk</a
+            >
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+        LottieInteractivity.create({
+          player:'#toggleLottie',
+          mode:"cursor",
+          actions: [
+            {
+              type: "toggle"
+            }
+          ]
+        });
+          </pre>
+        </div>
+      </div>
+
       <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white" id="twelfth">
         <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
           Play animation when visible
