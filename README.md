@@ -383,8 +383,22 @@ LottieInteractivity.create({
   player:'#firstLottie',
   mode:"cursor",
   actions: [{
-      type: "hover",
-      forceFlag: false
+    type: "hover",
+    forceFlag: false
+  }]
+});
+```
+
+### Toggle animations
+
+Toggle a Lottie when clicked on.
+
+```javascript
+LottieInteractivity.create({
+  player:'#toggleLottie',
+  mode: "cursor",
+  actions: [{
+      type: "toggle",
     }]
 });
 ```
