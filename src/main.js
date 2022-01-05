@@ -220,7 +220,7 @@ export class LottieInteractivity {
       this.container.removeEventListener('click', this.#clickHoverStateHandler);
 
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
-      this.container.addEventListener('touchmove', this.#touchmoveHandler);
+      this.container.removeEventListener('touchmove', this.#touchmoveHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
 
