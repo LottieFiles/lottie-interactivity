@@ -112,6 +112,7 @@ export class LottieInteractivity {
             Parentscope.player.loop = true;
             Parentscope.player.stop();
             Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
+            Parentscope.container.addEventListener('touchmove', Parentscope.#touchmoveHandler);
             Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
           }
         } else {
@@ -209,6 +210,7 @@ export class LottieInteractivity {
       this.container.removeEventListener('click', this.#clickHoverHandler);
       this.container.removeEventListener('click', this.#toggleHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.container.addEventListener('touchmove', this.#touchmoveHandler);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
       this.container.removeEventListener('mouseleave', this.#mouseoutHandler);
     }
@@ -218,6 +220,7 @@ export class LottieInteractivity {
       this.container.removeEventListener('click', this.#clickHoverStateHandler);
 
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.container.addEventListener('touchmove', this.#touchmoveHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
 
@@ -291,6 +294,7 @@ export class LottieInteractivity {
       this.player.stop();
       this.player.addEventListener('enterFrame', this.#cursorSyncHandler);
       this.container.addEventListener('mousemove', this.#mousemoveHandler);
+      this.container.addEventListener('touchmove', this.#touchmoveHandler);
       this.container.addEventListener('mouseout', this.#mouseoutHandler);
     }
     this.stateHandler.set('loop', loopState);
@@ -369,6 +373,14 @@ export class LottieInteractivity {
   // [cursor mode]
   #mousemoveHandler = e => {
     this.#cursorHandler(e.clientX, e.clientY);
+  };
+
+  // [cursor mode]
+  #touchmoveHandler = e => {
+    // Allows for syncing on Y axis without scrolling the page
+    if (e.cancelable)
+      e.preventDefault();
+    this.#cursorHandler(e.touches[0].clientX, e.touches[0].clientY);
   };
 
   // [cursor mode]
