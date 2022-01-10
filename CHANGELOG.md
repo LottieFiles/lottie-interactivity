@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+## [1.3.2](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.1...v1.3.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* **interactions:** added additional comments ([5a77a9c](https://github.com/LottieFiles/lottie-interactivity/commit/5a77a9c9169886846acc62ffebde48e0c3ace064))
+* **interactions:** added mobile support for interactions ([b8e3a9e](https://github.com/LottieFiles/lottie-interactivity/commit/b8e3a9e1c87683559b301dd3d364fb49154c4092))
+
 ## [1.3.1](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.0...v1.3.1) (2022-01-05)
 
 
