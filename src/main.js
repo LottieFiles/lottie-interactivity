@@ -101,6 +101,9 @@ export class LottieInteractivity {
             Parentscope.player.loop = false;
             Parentscope.player.stop();
             Parentscope.container.addEventListener('mouseenter', Parentscope.#clickHoverHandler);
+
+            // For mobile
+            Parentscope.container.addEventListener('touchstart', Parentscope.#clickHoverHandler, { passive: true });
           } else if (Parentscope.actions[0].type === "toggle") {
             Parentscope.player.loop = false;
             Parentscope.player.stop();
@@ -108,11 +111,17 @@ export class LottieInteractivity {
           } else if (Parentscope.actions[0].type === "hold" || Parentscope.actions[0].type === "pauseHold") {
             Parentscope.container.addEventListener('mouseenter', Parentscope.#holdTransitionEnter);
             Parentscope.container.addEventListener('mouseleave', Parentscope.#holdTransitionLeave);
+
+            // For mobile
+            Parentscope.container.addEventListener('touchstart', Parentscope.#holdTransitionEnter, { passive: true });
+            Parentscope.container.addEventListener('touchend', Parentscope.#holdTransitionLeave, { passive: true });
+
           } else if (Parentscope.actions[0].type === "seek") {
             Parentscope.player.loop = true;
             Parentscope.player.stop();
             Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
-            Parentscope.container.addEventListener('touchmove', Parentscope.#touchmoveHandler);
+            // For mobile
+            Parentscope.container.addEventListener('touchmove', Parentscope.#touchmoveHandler, { passive: false });
             Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
           }
         } else {
@@ -210,9 +219,12 @@ export class LottieInteractivity {
       this.container.removeEventListener('click', this.#clickHoverHandler);
       this.container.removeEventListener('click', this.#toggleHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
-      this.container.addEventListener('touchmove', this.#touchmoveHandler);
+      this.container.removeEventListener('touchstart', this.#clickHoverHandler);
+      this.container.removeEventListener('touchmove', this.#touchmoveHandler);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
       this.container.removeEventListener('mouseleave', this.#mouseoutHandler);
+      this.container.removeEventListener('touchstart', this.#holdTransitionEnter);
+      this.container.removeEventListener('touchend', this.#holdTransitionLeave);
     }
 
     if (this.mode === 'chain') {
@@ -220,13 +232,17 @@ export class LottieInteractivity {
       this.container.removeEventListener('click', this.#clickHoverStateHandler);
 
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.container.removeEventListener('touchstart', this.#clickHoverHandler);
       this.container.removeEventListener('touchmove', this.#touchmoveHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
+      this.container.removeEventListener('touchstart', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
+      this.container.removeEventListener('touchstart', this.#holdTransitionEnter);
 
       this.container.removeEventListener('mouseleave', this.#holdTransitionLeave);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
       this.container.removeEventListener('mouseout', this.#mouseoutHandler);
+      this.container.removeEventListener('touchend', this.#holdTransitionLeave);
 
       this.player.removeEventListener('loopComplete', this.#onCompleteHandler);
       this.player.removeEventListener('complete', this.#onCompleteHandler);
@@ -264,17 +280,24 @@ export class LottieInteractivity {
       this.player.loop = false;
       this.player.autoplay = false;
       this.container.addEventListener('mouseenter', this.#clickHoverStateHandler);
+      // For mobile
+      this.container.addEventListener('touchstart', this.#clickHoverStateHandler, { passive: true });
     }
     let clickTransition = () => {
       this.container.addEventListener('click', this.#clickHoverHandler);
     }
     let hoverTransition = () => {
       this.container.addEventListener('mouseenter', this.#clickHoverHandler);
+      // For mobile
+      this.container.addEventListener('touchstart', this.#clickHoverHandler, { passive: true });
     }
     let holdTransition = () => {
       this.player.addEventListener('enterFrame', this.#holdTransitionHandler);
       this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
       this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
+      // For mobile
+      this.container.addEventListener('touchstart', this.#holdTransitionEnter, { passive: true });
+      this.container.addEventListener('touchend', this.#holdTransitionLeave, { passive: true });
     }
     let repeatTransition = () => {
       this.player.loop = true;
@@ -294,7 +317,7 @@ export class LottieInteractivity {
       this.player.stop();
       this.player.addEventListener('enterFrame', this.#cursorSyncHandler);
       this.container.addEventListener('mousemove', this.#mousemoveHandler);
-      this.container.addEventListener('touchmove', this.#touchmoveHandler);
+      this.container.addEventListener('touchmove', this.#touchmoveHandler, { passive: false });
       this.container.addEventListener('mouseout', this.#mouseoutHandler);
     }
     this.stateHandler.set('loop', loopState);
