@@ -120,6 +120,7 @@ export class LottieInteractivity {
             Parentscope.player.loop = true;
             Parentscope.player.stop();
             Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
+            // For mobile
             Parentscope.container.addEventListener('touchmove', Parentscope.#touchmoveHandler, { passive: false });
             Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
           }
@@ -279,6 +280,7 @@ export class LottieInteractivity {
       this.player.loop = false;
       this.player.autoplay = false;
       this.container.addEventListener('mouseenter', this.#clickHoverStateHandler);
+      // For mobile
       this.container.addEventListener('touchstart', this.#clickHoverStateHandler, { passive: true });
     }
     let clickTransition = () => {
@@ -286,6 +288,7 @@ export class LottieInteractivity {
     }
     let hoverTransition = () => {
       this.container.addEventListener('mouseenter', this.#clickHoverHandler);
+      // For mobile
       this.container.addEventListener('touchstart', this.#clickHoverHandler, { passive: true });
     }
     let holdTransition = () => {
