@@ -79,75 +79,90 @@ export class LottieInteractivity {
     return { x, y };
   }
 
+  initScrollMode() {
+    this.player.stop();
+    window.addEventListener('scroll', this.#scrollHandler);
+  }
+
+  initCursorMode() {
+    // To have click and hover interaction, force to only have that type and single action
+    // If there are multiple actions, click and hover are ignored
+    if (this.actions &&
+      this.actions.length === 1) {
+      if (this.actions[0].type === "click") {
+        this.player.loop = false;
+        this.player.stop();
+        this.container.addEventListener('click', this.#clickHoverHandler);
+      } else if (this.actions[0].type === "hover") {
+        this.player.loop = false;
+        this.player.stop();
+        this.container.addEventListener('mouseenter', this.#clickHoverHandler);
+
+        // For mobile
+        this.container.addEventListener('touchstart', this.#clickHoverHandler, { passive: true });
+      } else if (this.actions[0].type === "toggle") {
+        this.player.loop = false;
+        this.player.stop();
+        this.container.addEventListener('click', this.#toggleHandler);
+      } else if (this.actions[0].type === "hold" || this.actions[0].type === "pauseHold") {
+        this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
+        this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
+
+        // For mobile
+        this.container.addEventListener('touchstart', this.#holdTransitionEnter, { passive: true });
+        this.container.addEventListener('touchend', this.#holdTransitionLeave, { passive: true });
+
+      } else if (this.actions[0].type === "seek") {
+        this.player.loop = true;
+        this.player.stop();
+        this.container.addEventListener('mousemove', this.#mousemoveHandler);
+        // For mobile
+        this.container.addEventListener('touchmove', this.#touchmoveHandler, { passive: false });
+        this.container.addEventListener('mouseout', this.#mouseoutHandler);
+      }
+    } else {
+      this.player.loop = true;
+      this.player.stop();
+      this.container.addEventListener('mousemove', this.#mousemoveHandler);
+      this.container.addEventListener('mouseleave', this.#mouseoutHandler);
+
+      // Init the animations that set states when the cursor is outside the container, so that they
+      // are visibly idle at the desired frame before first interaction with them
+      this.#cursorHandler(-1, -1);
+    }
+  }
+
+  initChainMode() {
+    this.#initInteractionMaps();
+    this.player.loop = false;
+    this.player.stop();
+    this.#chainedInteractionHandler({ignorePath: false});
+  }
+
   start() {
-    const Parentscope = this;
-    // Configure player for start
     if (this.mode === 'scroll') {
-      this.player.addEventListener('DOMLoaded', function () {
-        Parentscope.player.stop();
-        window.addEventListener('scroll', Parentscope.#scrollHandler);
-      });
+      if (this.player.isLoaded) {
+        this.initScrollMode();
+      } else {
+        this.player.addEventListener('DOMLoaded', () => {
+          this.initScrollMode();
+        });
+      }
     } else if (this.mode === 'cursor') {
-      this.player.addEventListener('DOMLoaded', function () {
-        // To have click and hover interaction, force to only have that type and single action
-        // If there are multiple actions, click and hover are ignored
-        if (Parentscope.actions &&
-          Parentscope.actions.length === 1) {
-          if (Parentscope.actions[0].type === "click") {
-            Parentscope.player.loop = false;
-            Parentscope.player.stop();
-            Parentscope.container.addEventListener('click', Parentscope.#clickHoverHandler);
-          } else if (Parentscope.actions[0].type === "hover") {
-            Parentscope.player.loop = false;
-            Parentscope.player.stop();
-            Parentscope.container.addEventListener('mouseenter', Parentscope.#clickHoverHandler);
-
-            // For mobile
-            Parentscope.container.addEventListener('touchstart', Parentscope.#clickHoverHandler, { passive: true });
-          } else if (Parentscope.actions[0].type === "toggle") {
-            Parentscope.player.loop = false;
-            Parentscope.player.stop();
-            Parentscope.container.addEventListener('click', Parentscope.#toggleHandler);
-          } else if (Parentscope.actions[0].type === "hold" || Parentscope.actions[0].type === "pauseHold") {
-            Parentscope.container.addEventListener('mouseenter', Parentscope.#holdTransitionEnter);
-            Parentscope.container.addEventListener('mouseleave', Parentscope.#holdTransitionLeave);
-
-            // For mobile
-            Parentscope.container.addEventListener('touchstart', Parentscope.#holdTransitionEnter, { passive: true });
-            Parentscope.container.addEventListener('touchend', Parentscope.#holdTransitionLeave, { passive: true });
-
-          } else if (Parentscope.actions[0].type === "seek") {
-            Parentscope.player.loop = true;
-            Parentscope.player.stop();
-            Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
-            // For mobile
-            Parentscope.container.addEventListener('touchmove', Parentscope.#touchmoveHandler, { passive: false });
-            Parentscope.container.addEventListener('mouseout', Parentscope.#mouseoutHandler);
-          }
+        if (this.player.isLoaded) {
+          this.initCursorMode();
         } else {
-          Parentscope.player.loop = true;
-          Parentscope.player.stop();
-          Parentscope.container.addEventListener('mousemove', Parentscope.#mousemoveHandler);
-          Parentscope.container.addEventListener('mouseleave', Parentscope.#mouseoutHandler);
-
-          // Init the animations that set states when the cursor is outside the container, so that they
-          // are visibly idle at the desired frame before first interaction with them
-          Parentscope.#cursorHandler(-1, -1);
+          this.player.addEventListener('DOMLoaded', () => {
+            this.initCursorMode();
+          });
         }
-      });
     } else if (this.mode === 'chain') {
       // When passing animation object to LI the player is already loaded
       if (this.player.isLoaded) {
-        Parentscope.#initInteractionMaps();
-        Parentscope.player.loop = false;
-        Parentscope.player.stop();
-        Parentscope.#chainedInteractionHandler({ignorePath: false});
+        this.initChainMode();
       } else {
-        this.player.addEventListener('DOMLoaded', function () {
-          Parentscope.#initInteractionMaps();
-          Parentscope.player.loop = false;
-          Parentscope.player.stop();
-          Parentscope.#chainedInteractionHandler({ignorePath: false});
+        this.player.addEventListener('DOMLoaded', () => {
+          this.initChainMode();
         });
       }
     }
