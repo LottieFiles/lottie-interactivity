@@ -867,7 +867,11 @@ export class LottieInteractivity {
       if (!this.scrolledAndPlayed) {
         this.scrolledAndPlayed = true;
         this.player.resetSegments(true);
-        this.player.play();
+        if (action.frames) {
+          this.player.playSegments(action.frames, true);
+        } else {
+          this.player.play();
+        }
       }
     } else if (action.type === 'stop') {
       // Stop: Stop playback
