@@ -8,14 +8,10 @@ This is a small library to add scrolling and cursor interactivity to your Lottie
 [Lottie Web-Player Component](https://www.lottiefiles.com/web-player) or the
 [Lottie Player](https://github.com/airbnb/lottie-web).
 
----
-
 ## Documentation
 
 For full documentation, visit [docs.lottiefiles.com/lottie-player](https://docs.lottiefiles.com/lottie-interactivity/)
 
-
----
 
 ## Installation
 
@@ -199,7 +195,7 @@ library. An example is as follows for a very basic vue class component.
 </script>
 ```
 
-###### Lottie-Interactivity has a wide variety of interactions and modes possible, allowing you to easily add interactions to your Lottie animations. For the full documentation on what's possible and how to use this library, [click here](https://docs.lottiefiles.com/lottie-interactivity/).
+Lottie-Interactivity has a wide variety of interactions and modes possible, allowing you to easily add interactions to your Lottie animations. For the full documentation on what's possible and how to use this library [click here](https://docs.lottiefiles.com/lottie-interactivity/).
 
 
 
