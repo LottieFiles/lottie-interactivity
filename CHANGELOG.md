@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+## [1.3.5](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.4...v1.3.5) (2022-02-17)
+
+
+### Bug Fixes
+
+* added usecapture to scroll listener ([763cc37](https://github.com/LottieFiles/lottie-interactivity/commit/763cc37d471c13792a86a57aedd271f137f9d836))
+* changed way window is used ([9a6e7b9](https://github.com/LottieFiles/lottie-interactivity/commit/9a6e7b9a5efcb0dd3cb7fe23b89d2cfbe110e5ac))
+
 ## [1.3.4](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.3...v1.3.4) (2022-02-01)
 
 
