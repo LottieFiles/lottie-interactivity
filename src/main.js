@@ -84,7 +84,7 @@ export class LottieInteractivity {
 
   initScrollMode() {
     this.player.stop();
-    this.window.addEventListener('scroll', this.#scrollHandler);
+    this.window.addEventListener('scroll', this.#scrollHandler, true);
   }
 
   initCursorMode() {
@@ -230,7 +230,7 @@ export class LottieInteractivity {
 
   stop() {
     if (this.mode === 'scroll') {
-      this.window.removeEventListener('scroll', this.#scrollHandler);
+      this.window.removeEventListener('scroll', this.#scrollHandler, true);
     }
 
     if (this.mode === 'cursor') {
