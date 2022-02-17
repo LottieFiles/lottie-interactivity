@@ -58,6 +58,9 @@ export class LottieInteractivity {
     this.playCounter = 0;
     this.stateHandler = new Map();
     this.transitionHandler = new Map();
+
+    //globals
+    this.window = this.container.ownerDocument.defaultView;
   }
 
   getContainerVisibility() {
@@ -65,8 +68,8 @@ export class LottieInteractivity {
     const { top, height } = this.container.getBoundingClientRect();
 
     // Calculate current view percentage
-    const current = window.innerHeight - top;
-    const max = window.innerHeight + height;
+    const current = this.window.innerHeight - top;
+    const max = this.window.innerHeight + height;
     return current / max;
   }
 
@@ -81,7 +84,7 @@ export class LottieInteractivity {
 
   initScrollMode() {
     this.player.stop();
-    window.addEventListener('scroll', this.#scrollHandler);
+    this.window.addEventListener('scroll', this.#scrollHandler);
   }
 
   initCursorMode() {
@@ -227,7 +230,7 @@ export class LottieInteractivity {
 
   stop() {
     if (this.mode === 'scroll') {
-      window.removeEventListener('scroll', this.#scrollHandler);
+      this.window.removeEventListener('scroll', this.#scrollHandler);
     }
 
     if (this.mode === 'cursor') {
@@ -670,14 +673,14 @@ export class LottieInteractivity {
         throw new Error(`${ERROR_PREFIX} Specified player is invalid.`, this.enteredPlayer);
       }
     } else {
-      if (window.lottie) {
+      if (this.window.lottie) {
         this.stop();
         this.player.destroy();
         // Removes svg animation contained inside
         this.container.innerHTML = "";
 
         if (typeof path === 'object' && path.constructor.name === 'AnimationItem') {
-          this.player = window.lottie.loadAnimation({
+          this.player = this.window.lottie.loadAnimation({
             loop: false,
             autoplay: false,
             animationData: path.animationData,
@@ -685,7 +688,7 @@ export class LottieInteractivity {
           });
         }
         else {
-          this.player = window.lottie.loadAnimation({
+          this.player = this.window.lottie.loadAnimation({
             loop: false,
             autoplay: false,
             path,
