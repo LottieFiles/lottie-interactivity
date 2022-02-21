@@ -173,7 +173,6 @@ export class LottieInteractivity {
 
   redefineOptions({actions, container, mode, player, ...options}) {
     this.stop();
-    this.player.stop();
 
     // Save the original player entered by user, used for interaction chaining / loading animations on the fly
     this.enteredPlayer = player;
@@ -262,11 +261,19 @@ export class LottieInteractivity {
       this.container.removeEventListener('mouseout', this.#mouseoutHandler);
       this.container.removeEventListener('touchend', this.#holdTransitionLeave);
 
-      this.player.removeEventListener('loopComplete', this.#onCompleteHandler);
-      this.player.removeEventListener('complete', this.#onCompleteHandler);
-      this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
-      this.player.removeEventListener('enterFrame', this.#holdTransitionHandler);
+      if (this.player) {
+        try {
+          this.player.removeEventListener('loopComplete', this.#onCompleteHandler);
+          this.player.removeEventListener('complete', this.#onCompleteHandler);
+          this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
+          this.player.removeEventListener('enterFrame', this.#holdTransitionHandler);    
+        } catch(e) {
+          // User deleted the player before calling stop()
+          // Ignore
+        }
+      }
     }
+    this.player = null;
   }
 
   /**
