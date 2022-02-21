@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+## [1.3.6](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.5...v1.3.6) (2022-02-21)
+
+
+### Bug Fixes
+
+* fixed error when player is destroyed and redefineOptions is called ([7d2c4e3](https://github.com/LottieFiles/lottie-interactivity/commit/7d2c4e31db3bca7fde206c9c77debaaeebcd6b3c))
+
 ## [1.3.5](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.4...v1.3.5) (2022-02-17)
 
 
