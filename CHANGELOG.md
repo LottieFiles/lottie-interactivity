@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+## [1.3.7](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.6...v1.3.7) (2022-03-07)
+
+
+### Bug Fixes
+
+* fixed container null issue on wordpress ([fa0e5e7](https://github.com/LottieFiles/lottie-interactivity/commit/fa0e5e7b2128cf1c59cd7aa3385d43d535f72a8b))
+
 ## [1.3.6](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.5...v1.3.6) (2022-02-21)
 
 
