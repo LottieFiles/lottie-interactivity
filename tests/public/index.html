@@ -1407,6 +1407,150 @@
           </pre>
     </div>
   </div>
+
+  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+      Lottie-interactivity chaining - Hold then click
+    </h3>
+    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+      Expected result:
+    </div>
+    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+      <ol>
+        <li class="text-green">
+          Animation needs holding to transition (hold for at least 3 seconds)<input type="checkbox" />
+        </li>
+        <li class="text-green">
+          Animation needs clicking to transition and repeats <input type="checkbox" />
+        </li>
+      </ol>
+    </div>
+    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+      <lottie-player id="burgerMenuTest"
+                     src="https://assets.lottiefiles.com/packages/lf20_v4yd7sef.json">
+      </lottie-player>
+
+    </div>
+    <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+            LottieInteractivity.create({
+              player: '#burgerMenuTest',
+              mode: "chain",
+              actions: [
+                {
+                  state: 'none',
+                  transition: 'hold',
+                  forceFlag: false,
+                  frames: [0, 120],
+                },
+                {
+                  state: 'click',
+                  forceFlag: false,
+                  frames: [120, 240],
+                  transition: 'onComplete',
+                  reset: true
+                }
+              ]
+            });
+          </pre>
+    </div>
+  </div>
+
+  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+      Lottie-interactivity chaining - Click and click finish playing before transit
+    </h3>
+    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+      Expected result:
+    </div>
+    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+      <ol>
+        <li class="text-green">
+          Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
+        </li>
+        <li class="text-green">
+          Animation needs clicking and finished playing before transitioning<input type="checkbox" />
+        </li>
+      </ol>
+    </div>
+    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+      <lottie-player id="checkboxTest"
+                     src="https://assets10.lottiefiles.com/packages/lf20_qj6ywemr.json">
+      </lottie-player>
+
+    </div>
+    <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+            LottieInteractivity.create({
+              player: '#checkboxTest',
+              mode: "chain",
+              actions: [
+                {
+                  state: 'click',
+                  transition: 'click',
+                  forceFlag: 'true',
+                  frames: [0, 30]
+                },
+                {
+                  state: 'click',
+                  transition: 'click',
+                  forceFlag: 'true',
+                  frames: [30, 45],
+                  reset: true
+                }
+              ]
+            });
+          </pre>
+    </div>
+  </div>
+
+  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+      Lottie-interactivity chaining - Click + hover state and click finish playing before transit
+    </h3>
+    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+      Expected result:
+    </div>
+    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+      <ol>
+        <li class="text-green">
+          Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
+        </li>
+        <li class="text-green">
+          Animation plays on hover + needs clicking to transition<input type="checkbox" />
+        </li>
+      </ol>
+    </div>
+    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+      <lottie-player id="checkboxHoverTest"
+                     src="https://assets10.lottiefiles.com/packages/lf20_qj6ywemr.json">
+      </lottie-player>
+
+    </div>
+    <div class="w-full md:w-1/2 mx-auto">
+          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+            LottieInteractivity.create({
+              player: '#checkboxHoverTest',
+              mode: "chain",
+              actions: [
+                {
+                  state: 'click',
+                  transition: 'click',
+                  forceFlag: 'true',
+                  frames: [0, 30]
+                },
+                {
+                  state: 'hover',
+                  transition: 'click',
+                  forceFlag: 'true',
+                  frames: [30, 45],
+                  reset: true
+                }
+              ]
+            });
+          </pre>
+    </div>
+  </div>
 </div>
 </body>
 </html>
