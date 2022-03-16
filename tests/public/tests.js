@@ -592,7 +592,62 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ]
   });
+  
+  LottieInteractivity.create({
+    player: '#burgerMenuTest',
+    mode: "chain",
+    actions: [
+      {
+        state: 'none',
+        transition: 'hold',
+        forceFlag: false,
+        frames: [0, 120],
+      },
+      {
+        state: 'click',
+        forceFlag: false,
+        frames: [120, 240],
+        transition: 'onComplete',
+        reset: true
+      }
+    ]
+  });
 
+  LottieInteractivity.create({
+    player: '#checkboxTest',
+    mode: "chain",
+    actions: [
+      {
+        state: 'click',
+        transition: 'click',
+        frames: [0, 30]
+      },
+      {
+        state: 'click',
+        transition: 'click',
+        frames: [30, 45],
+        reset: true
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#checkboxHoverTest',
+    mode: "chain",
+    actions: [
+      {
+        state: 'click',
+        transition: 'click',
+        frames: [0, 30]
+      },
+      {
+        state: 'hover',
+        transition: 'click',
+        frames: [30, 45],
+        reset: true
+      }
+    ]
+  });
   let listElem = document.getElementById('clickTest');
   listElem.addEventListener('transition', (e) => {
     console.log("Captured event from the 'Click test' example: ");
