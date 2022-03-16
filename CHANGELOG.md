@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+## [1.3.8](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.7...v1.3.8) (2022-03-16)
+
+
+### Bug Fixes
+
+* added fixes to click and hold transitions ([43eb8c5](https://github.com/LottieFiles/lottie-interactivity/commit/43eb8c514e29369535b4c2906976717399d86e51))
+
 ## [1.3.7](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.6...v1.3.7) (2022-03-07)
 
 
