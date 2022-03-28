@@ -10,7 +10,7 @@ This is a small library to add scrolling and cursor interactivity to your Lottie
 
 ## Documentation
 
-For full documentation, visit [docs.lottiefiles.com/lottie-player](https://docs.lottiefiles.com/lottie-interactivity/)
+For full documentation, visit [docs.lottiefiles.com/lottie-interactivity](https://docs.lottiefiles.com/lottie-interactivity/)
 
 
 ## Installation
@@ -44,7 +44,7 @@ npm install --save @lottiefiles/lottie-interactivity
 #### 1. Import lottie player script to DOM
 
 ```javascript
-<script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js"></script> // place this in your body element
+<script src="https://unpkg.com/@lottiefiles/lottie-player@1/dist/lottie-player.js"></script> // place this in your body element
 ```
 
 #### 2. Add a Lottie to html dom with an ID set to the div
