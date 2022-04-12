@@ -409,7 +409,7 @@ export class LottieInteractivity {
       if ((transition === "click" && state === "click") || (transition === "hover" && state === "hover"))
         this.transitionHandler.get("onComplete").call();
       else
-        this.#nextInteraction();
+        this.nextInteraction();
       this.container.removeEventListener('click', this.#clickHoverHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
       return;
@@ -452,7 +452,7 @@ export class LottieInteractivity {
     } else {
       this.player.removeEventListener('complete', this.#onCompleteHandler);
     }
-    this.#nextInteraction();
+    this.nextInteraction();
   }
 
   // [chain mode]
@@ -466,7 +466,7 @@ export class LottieInteractivity {
       this.player.removeEventListener('loopComplete', handler);
       this.player.loop = false;
       this.player.autoplay = false;
-      this.#nextInteraction();
+      this.nextInteraction();
     } else {
       this.playCounter += 1;
     }
@@ -483,7 +483,7 @@ export class LottieInteractivity {
       this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
       this.container.removeEventListener('mousemove', this.#mousemoveHandler);
       this.container.removeEventListener('mouseout', this.#mouseoutHandler);
-      setTimeout(this.#nextInteraction, 0);
+      setTimeout(this.nextInteraction, 0);
     }
   }
 
@@ -508,7 +508,7 @@ export class LottieInteractivity {
       this.player.pause();
 
       this.holdStatus = false;
-      this.#nextInteraction();
+      this.nextInteraction();
     }
   }
 
@@ -544,7 +544,7 @@ export class LottieInteractivity {
   }
 
   // [chain mode]
-  #nextInteraction = () => {
+  nextInteraction = () => {
     this.oldInterctionIdx = this.interactionIdx;
     // If state is hover or click we need to remove listeners
     this.#clearStateListeners();
