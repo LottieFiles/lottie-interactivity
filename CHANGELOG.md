@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html), enforced with [semantic-release](https://github.com/semantic-release/semantic-release).
 
 
+# [1.4.0](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.8...v1.4.0) (2022-04-12)
+
+
+### Features
+
+* made nextInteraction method public ([642a64d](https://github.com/LottieFiles/lottie-interactivity/commit/642a64dc97c8a1eda969f3d7c3cf2e30bc0b9451))
+
 ## [1.3.8](https://github.com/LottieFiles/lottie-interactivity/compare/v1.3.7...v1.3.8) (2022-03-16)
 
 
