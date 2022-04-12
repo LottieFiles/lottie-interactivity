@@ -536,15 +536,28 @@ export class LottieInteractivity {
   // [chain mode]
   #clearStateListeners = () => {
     let state = this.actions[this.interactionIdx].state;
+    let transition = this.actions[this.interactionIdx].transition;
 
     if (state === "hover" || state === "click") {
       this.container.removeEventListener('click', this.#clickHoverStateHandler);
       this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
     }
+    if (transition === "hover" || transition === "click") {
+      this.container.removeEventListener('click', this.#clickHoverHandler);
+      this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+      this.container.removeEventListener('touchstart', this.#clickHoverHandler, { passive: true });
+    }
+  }
+
+  jumpToInteraction = (index) => {
+    this.#clearStateListeners();
+    this.interactionIdx = index;
+    this.interactionIdx < 0 ? this.interactionIdx = 0 : this.interactionIdx;
+    this.nextInteraction(false);
   }
 
   // [chain mode]
-  nextInteraction = () => {
+  nextInteraction = (incrementIndex = true) => {
     this.oldInterctionIdx = this.interactionIdx;
     // If state is hover or click we need to remove listeners
     this.#clearStateListeners();
@@ -563,7 +576,8 @@ export class LottieInteractivity {
       }
     } else {
       // Go to next interaction
-      this.interactionIdx++;
+      if (incrementIndex)
+        this.interactionIdx++;
       if (this.interactionIdx >= this.actions.length) {
         // Go back to the first interaction
         if (this.actions[this.actions.length - 1].reset) {
