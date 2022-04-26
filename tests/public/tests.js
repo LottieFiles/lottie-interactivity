@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   LottieInteractivity.create({
-    player:'#twelfthLottie',
-    mode:"scroll",
+    player: '#twelfthLottie',
+    mode: "scroll",
     actions: [
       {
         visibility: [0.50, 1.0],
@@ -172,8 +172,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   LottieInteractivity.create({
-    player:'#visibleAndPlayAgain',
-    mode:"scroll",
+    player: '#visibleAndPlayAgain',
+    mode: "scroll",
     actions: [
       {
         visibility: [0.50, 1.0],
@@ -592,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     ]
   });
-  
+
   LottieInteractivity.create({
     player: '#burgerMenuTest',
     mode: "chain",
@@ -644,6 +644,42 @@ document.addEventListener('DOMContentLoaded', function () {
         state: 'hover',
         transition: 'click',
         frames: [30, 45],
+        reset: true
+      }
+    ]
+  });
+
+  LottieInteractivity.create({
+    player: '#circusRide',
+    mode: "chain",
+    actions: [
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: [0, 35],
+      },
+      {
+        state: 'hold',
+        transition: 'hold',
+        frames: [35, 130],
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: [130, 491],
+      }, {
+        state: 'hold',
+        transition: 'pauseHold',
+        frames: [491, 612]
+      },
+      {
+        state: 'autoplay',
+        transition: 'onComplete',
+        frames: [612, 1074],
+      },
+      {
+        state: 'none',
+        transition: 'click',
         reset: true
       }
     ]

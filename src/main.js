@@ -406,7 +406,7 @@ export class LottieInteractivity {
       // No click counter, so we remove the listeners and got to next interaction
       this.clickCounter = 0;
       // Transition when the animation has finished playing
-      if ((transition === "click" && state === "click") || (transition === "hover" && state === "hover"))
+      if (!forceFlag && (transition === "click" && state === "click") || (transition === "hover" && state === "hover"))
         this.transitionHandler.get("onComplete").call();
       else
         this.nextInteraction();
@@ -751,6 +751,7 @@ export class LottieInteractivity {
    * as any extra options
    */
   #chainedInteractionHandler = ({ ignorePath }) => {
+    let frames = this.actions[this.interactionIdx].frames;
     let state = this.actions[this.interactionIdx].state;
     let transition = this.actions[this.interactionIdx].transition;
     let path = this.actions[this.interactionIdx].path;
@@ -766,6 +767,11 @@ export class LottieInteractivity {
       return;
     }
     setTimeout(() => {
+      if (frames) {
+        this.player.autoplay = false;
+        this.player.resetSegments(true);
+        this.player.goToAndStop(frames[0], true);
+      }
       if (stateFunction) {
         stateFunction.call();
       } else if (state === "none") {
