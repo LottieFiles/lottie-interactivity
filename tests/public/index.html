@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
   <link href="https://static.lottiefiles.com/demo/app.demo.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
@@ -28,25 +29,25 @@
     }
   </style>
 </head>
-<body>
-<div class="p-4 md:px-32" style="background: #ffffff;">
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="first">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Sync Lottie with scroll
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="firstLottie" src="https://assets5.lottiefiles.com/packages/lf20_FISfBK.json">
-      </lottie-player>
 
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/MiLushin" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Ilya Pavlov</a
-        >
+<body>
+  <div class="p-4 md:px-32" style="background: #ffffff;">
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="first">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Sync Lottie with scroll
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="firstLottie" src="https://assets5.lottiefiles.com/packages/lf20_FISfBK.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/MiLushin" class="lf-link text-grey-dark font-lf-bold" target="_blank">Ilya
+            Pavlov</a>
+        </div>
       </div>
-    </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                     mode:"scroll",
                     player:'#firstLottie',
@@ -57,40 +58,34 @@
                           frames: [0, 300],
                         },
                       ]
-                  });</pre
-          >
-    </div>
-  </div>
-
-  <div class="py-10 md:py-32 md:-mx-32 -mx-4 text-white bg-black" id="second">
-    <div class="lf-padding">
-      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-        Lottie scroll relative to container
-      </h3>
-    </div>
-    <div class="container mx-auto text-center py-5 md:py-24 h-110">
-      <lottie-player id="secondLottie" src="https://assets6.lottiefiles.com/packages/lf20_jicJD5.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark py-6">
-        Animation by
-        <a href="https://lottiefiles.com/user/255762" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Mohammed Alruways</a
-        >
+                  });</pre>
       </div>
     </div>
-    <div
-      id="MyContainerId"
-      class="w-full md:w-1/2 text-center rounded bg-grey-darkest mx-auto font-normal text-lg leading-reading text-white p-4"
-    >
-      This containers ID is "MyContainerId". The scroll activates in this example once the container with
-      "MyContainerId" is in the viewport.
-    </div>
-    <div class="w-full md:w-1/2 bg-white mx-auto my-6">
-          <pre
-            class="prettyprint lang-javascript"
-            style="color: #ffffff !important; overflow: scroll; margin-right: -20px; margin-left: -20px;"
-          >
+
+    <div class="py-10 md:py-32 md:-mx-32 -mx-4 text-white bg-black" id="second">
+      <div class="lf-padding">
+        <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+          Lottie scroll relative to container
+        </h3>
+      </div>
+      <div class="container mx-auto text-center py-5 md:py-24 h-110">
+        <lottie-player id="secondLottie" src="https://assets6.lottiefiles.com/packages/lf20_jicJD5.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark py-6">
+          Animation by
+          <a href="https://lottiefiles.com/user/255762" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Mohammed Alruways</a>
+        </div>
+      </div>
+      <div id="MyContainerId"
+        class="w-full md:w-1/2 text-center rounded bg-grey-darkest mx-auto font-normal text-lg leading-reading text-white p-4">
+        This containers ID is "MyContainerId". The scroll activates in this example once the container with
+        "MyContainerId" is in the viewport.
+      </div>
+      <div class="w-full md:w-1/2 bg-white mx-auto my-6">
+        <pre class="prettyprint lang-javascript"
+          style="color: #ffffff !important; overflow: scroll; margin-right: -20px; margin-left: -20px;">
           LottieInteractivity.create({
               mode:"scroll",
               player: "#secondLottie",
@@ -103,28 +98,26 @@
                 }
               ]
 
-           });</pre
-          >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32" id="third">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie scroll with offset
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="thirdLottie" src="https://assets6.lottiefiles.com/packages/lf20_QpeChC.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center py-6">
-        Animation by
-        <a href="https://lottiefiles.com/user/116310" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >0440 Molly</a
-        >
+           });</pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32" id="third">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie scroll with offset
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="thirdLottie" src="https://assets6.lottiefiles.com/packages/lf20_QpeChC.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center py-6">
+          Animation by
+          <a href="https://lottiefiles.com/user/116310" class="lf-link text-grey-dark font-lf-bold" target="_blank">0440
+            Molly</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
               mode:"scroll",
               player: "#thirdLottie"
@@ -140,28 +133,26 @@
                     frames: [0, 301]
                   }
                 ]
-            });</pre
-          >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 md:-mx-32 -mx-4 bg-black text-white" id="fourth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Scroll effect with offset and <br />segment looping
-    </h3>
-    <div class="mx-auto my-8 w-2/3 md:w-1/3">
-      <lottie-player id="fourthLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center py-6">
-        Animation by
-        <a href="https://lottiefiles.com/irizwanasghar" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Rizwan Asghar</a
-        >
+            });</pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 md:-mx-32 -mx-4 bg-black text-white" id="fourth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Scroll effect with offset and <br />segment looping
+      </h3>
+      <div class="mx-auto my-8 w-2/3 md:w-1/3">
+        <lottie-player id="fourthLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center py-6">
+          Animation by
+          <a href="https://lottiefiles.com/irizwanasghar" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Rizwan Asghar</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
        LottieInteractivity.create({
                 mode:"scroll",
                 player: "#fourthLottie",
@@ -182,30 +173,28 @@
                       frames: [150, 362]
                     }
                   ]
-              });</pre
-          >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32" id="fifth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play segments
-    </h3>
-    <div class="flex flex-wrap" style="margin-bottom: 20px;">
-      <div class="mx-auto my-8 w-2/3 md:w-1/3">
-        <lottie-player id="fifthLottie" src="https://assets2.lottiefiles.com/packages/lf20_4fET62.json">
-        </lottie-player>
-        <!-- <div id="fifthLottie" style="height: 500px; width: 500px;"></div> -->
-        <div class="text-sm text-grey-dark text-center">
-          Animation by
-          <a href="https://lottiefiles.com/user265314" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-          >Andy Dao</a
-          >
-        </div>
+              });</pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32" id="fifth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play segments
+      </h3>
+      <div class="flex flex-wrap" style="margin-bottom: 20px;">
+        <div class="mx-auto my-8 w-2/3 md:w-1/3">
+          <lottie-player id="fifthLottie" src="https://assets2.lottiefiles.com/packages/lf20_4fET62.json">
+          </lottie-player>
+          <!-- <div id="fifthLottie" style="height: 500px; width: 500px;"></div> -->
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/user265314" class="lf-link text-grey-dark font-lf-bold"
+              target="_blank">Andy Dao</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
       LottieInteractivity.create({
             mode:"scroll",
             player: "#fifthLottie",
@@ -216,34 +205,29 @@
                   frames: [70, 500]
                 }
               ]
-          });</pre
-          >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 md:-mx-32 -mx-4 bg-black text-white" id="seventh">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play segments on hover
-    </h3>
-    <div class="flex flex-wrap" style="margin-bottom: 20px;">
-      <div class="mx-auto w-2/3 md:w-1/3">
-        <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
-        <lottie-player id="seventhLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">
-        </lottie-player>
-
-        <div class="text-sm text-grey-dark text-center">
-          Animation by
-          <a
-            href="https://lottiefiles.com/irizwanasghar"
-            class="lf-link text-grey-dark font-lf-bold"
-            target="_blank"
-          >Rizwan Asghar</a
-          >
-        </div>
+          });</pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mt-12 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 md:-mx-32 -mx-4 bg-black text-white" id="seventh">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play segments on hover
+      </h3>
+      <div class="flex flex-wrap" style="margin-bottom: 20px;">
+        <div class="mx-auto w-2/3 md:w-1/3">
+          <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
+          <lottie-player id="seventhLottie" src="https://assets9.lottiefiles.com/packages/lf20_gr2cHM.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/irizwanasghar" class="lf-link text-grey-dark font-lf-bold"
+              target="_blank">Rizwan Asghar</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mt-12 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                   mode:"cursor",
                   player: "#seventhLottie",
@@ -259,31 +243,29 @@
                       frames: [0],
                     },
                   ]
-              });</pre
-          >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32" id="eighth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Sync animation with cursor position
-    </h3>
-    <div class="flex flex-wrap" style="margin-bottom: 20px;">
-      <div class="mx-auto w-2/3 md:w-1/3">
-        <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
-        <lottie-player id="eighthLottie" src="https://assets4.lottiefiles.com/packages/lf20_zPo7NV.json">
-        </lottie-player>
-
-        <div class="text-sm text-grey-dark text-center">
-          Animation by
-          <a href="https://lottiefiles.com/MotionJockey" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-          >Motion Jockey</a
-          >
-        </div>
+              });</pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mt-12 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32" id="eighth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Sync animation with cursor position
+      </h3>
+      <div class="flex flex-wrap" style="margin-bottom: 20px;">
+        <div class="mx-auto w-2/3 md:w-1/3">
+          <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
+          <lottie-player id="eighthLottie" src="https://assets4.lottiefiles.com/packages/lf20_zPo7NV.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/MotionJockey" class="lf-link text-grey-dark font-lf-bold"
+              target="_blank">Motion Jockey</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mt-12 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                   mode:"cursor",
                   player: "#eighthLottie",
@@ -294,34 +276,29 @@
                       frames: [0, 288]
                     }
                   ]
-              });</pre
-          >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 " id="ninth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Sync animation with cursor horizontal movement
-    </h3>
-    <div class="flex flex-wrap" style="margin-bottom: 20px;">
-      <div class="mx-auto w-2/3 md:w-1/3">
-        <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
-        <lottie-player
-          id="ninthLottie"
-          src="https://assets4.lottiefiles.com/packages/lf20_Lybh7B/data.json"
-        >
-        </lottie-player>
-
-        <div class="text-sm text-grey-dark text-center">
-          Animation by
-          <a href="https://lottiefiles.com/gabeschmitz" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-          >Gabriela Schmitz</a
-          >
-        </div>
+              });</pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mt-12 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 " id="ninth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Sync animation with cursor horizontal movement
+      </h3>
+      <div class="flex flex-wrap" style="margin-bottom: 20px;">
+        <div class="mx-auto w-2/3 md:w-1/3">
+          <!--       <div class="font-normal text-lg leading-reading text-center">Move cursor to animation</div> -->
+          <lottie-player id="ninthLottie" src="https://assets4.lottiefiles.com/packages/lf20_Lybh7B/data.json">
+          </lottie-player>
+
+          <div class="text-sm text-grey-dark text-center">
+            Animation by
+            <a href="https://lottiefiles.com/gabeschmitz" class="lf-link text-grey-dark font-lf-bold"
+              target="_blank">Gabriela Schmitz</a>
+          </div>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mt-12 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#ninthLottie',
               mode: 'cursor',
@@ -333,29 +310,27 @@
                 }
               ],
             });
-            </pre
-            >
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white" id="tenth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation on click
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="tenthLottie"
-                     src="https://assets6.lottiefiles.com/private_files/lf30_iiwznqb8.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/xfnmeutxam" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Priyanshu Rijhwani</a
-        >
+            </pre>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white"
+      id="tenth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation on click
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="tenthLottie" src="https://assets6.lottiefiles.com/private_files/lf30_iiwznqb8.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/xfnmeutxam" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Priyanshu Rijhwani</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                     mode:"cursor",
                     player:'#tenthLottie',
@@ -365,27 +340,24 @@
                         },
                       ]
                   });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="eleventh">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation on hover
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="eleventhLottie"
-                     src="https://assets8.lottiefiles.com/packages/lf20_zwath9pn.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/vitra" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Vitra</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="eleventh">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation on hover
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="eleventhLottie" src="https://assets8.lottiefiles.com/packages/lf20_zwath9pn.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/vitra" class="lf-link text-grey-dark font-lf-bold" target="_blank">Vitra</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                     mode:"cursor",
                     player:'#eleventhLottie',
@@ -395,27 +367,26 @@
                         },
                       ]
                   });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white" id="clickForceFlagEx">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation on click + forceFlag
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="clickForceFlag"
-                     src="https://assets6.lottiefiles.com/private_files/lf30_iiwznqb8.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/xfnmeutxam" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Priyanshu Rijhwani</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white"
+      id="clickForceFlagEx">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation on click + forceFlag
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="clickForceFlag" src="https://assets6.lottiefiles.com/private_files/lf30_iiwznqb8.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/xfnmeutxam" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Priyanshu Rijhwani</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                     mode:"cursor",
                     player:'#tenthLottie',
@@ -426,27 +397,24 @@
                         },
                       ]
                   });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="hoverForceFlagEx">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation on hover + forceFlag
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="hoverForceFlag"
-                     src="https://assets8.lottiefiles.com/packages/lf20_zwath9pn.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/vitra" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Vitra</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="hoverForceFlagEx">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation on hover + forceFlag
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="hoverForceFlag" src="https://assets8.lottiefiles.com/packages/lf20_zwath9pn.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/vitra" class="lf-link text-grey-dark font-lf-bold" target="_blank">Vitra</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                     mode:"cursor",
                     player:'#eleventhLottie',
@@ -457,27 +425,26 @@
                         },
                       ]
                   });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white" id="twelfth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation when visible
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="twelfthLottie"
-                     src="https://assets7.lottiefiles.com/packages/lf20_vowsuuvc.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/chrisgannon" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Chris Gannon</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white"
+      id="twelfth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation when visible
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="twelfthLottie" src="https://assets7.lottiefiles.com/packages/lf20_vowsuuvc.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/chrisgannon" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Chris Gannon</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"cursor",
           player:'#twelfthLottie',
@@ -486,27 +453,26 @@
             type: "play"
           }]
         });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white" id="visibleLoop">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation when visible and loop
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="visibleAndPlayAgain"
-                     src="https://assets7.lottiefiles.com/packages/lf20_vowsuuvc.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/chrisgannon" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Chris Gannon</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading md:-mx-32 -mx-4 bg-black text-white"
+      id="visibleLoop">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation when visible and loop
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="visibleAndPlayAgain" src="https://assets7.lottiefiles.com/packages/lf20_vowsuuvc.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/chrisgannon" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Chris Gannon</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"cursor",
           player:'#twelfthLottie',
@@ -516,27 +482,25 @@
             type: "loop"
           }]
         });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="thirteenth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation on hold
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="thirteenthLottie"
-                     src="https://assets10.lottiefiles.com/packages/lf20_dmd1gncl.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/lucarondine" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Luca Rondine</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="thirteenth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation on hold
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="thirteenthLottie" src="https://assets10.lottiefiles.com/packages/lf20_dmd1gncl.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/lucarondine" class="lf-link text-grey-dark font-lf-bold" target="_blank">Luca
+            Rondine</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"cursor",
           player:'#thirteenthLottie',
@@ -544,27 +508,25 @@
             type: "hold"
           }]
         });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading " id="fourteenth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Play animation on hold (and pause when released)
-    </h3>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3">
-      <lottie-player id="fourteenthLottie"
-                     src="https://assets10.lottiefiles.com/packages/lf20_dmd1gncl.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="hhttps://lottiefiles.com/lucarondine" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Luca Rondine</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading " id="fourteenth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Play animation on hold (and pause when released)
+      </h3>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3">
+        <lottie-player id="fourteenthLottie" src="https://assets10.lottiefiles.com/packages/lf20_dmd1gncl.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="hhttps://lottiefiles.com/lucarondine" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Luca Rondine</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
                     mode:"cursor",
                     player:'#fourteenthLottie',
@@ -574,51 +536,50 @@
                     }
                   ]
             });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="seventeenth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Named markers test
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Pigeon loops, transits on click <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Explosion transits on completion <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Feathers resets on completion <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="birdExploding"
-                     src="https://assets4.lottiefiles.com/packages/lf20_zyquagfl.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Running pigeon by
-        <a href="https://lottiefiles.com/creatopotato" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Christina Bublyk</a>,
-        explosion by
-        <a href="https://lottiefiles.com/comovaivoce" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Viktor Anisimov</a>,
-        feathers by
-        <a href="https://lottiefiles.com/DanielTeasdale" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Daniel Teasdale</a>
-
       </div>
     </div>
 
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="seventeenth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Named markers test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Pigeon loops, transits on click <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Explosion transits on completion <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Feathers resets on completion <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="birdExploding" src="https://assets4.lottiefiles.com/packages/lf20_zyquagfl.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Running pigeon by
+          <a href="https://lottiefiles.com/creatopotato" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Christina Bublyk</a>,
+          explosion by
+          <a href="https://lottiefiles.com/comovaivoce" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Viktor Anisimov</a>,
+          feathers by
+          <a href="https://lottiefiles.com/DanielTeasdale" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Daniel Teasdale</a>
+
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"chain",
           player:'#birdExploding',
@@ -642,41 +603,39 @@
           ],
         });
           </pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="eighteenth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Sync and autoplay
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Animation is synced to cursor from frame 0 - 30 (unlock bar goes to the end) <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          The lottie logo autoplays <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="unlockIphone"
-                     src="https://assets1.lottiefiles.com/private_files/lf30_50moqo0w.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Urban Heard Vlogs</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="eighteenth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Sync and autoplay
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Animation is synced to cursor from frame 0 - 30 (unlock bar goes to the end) <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            The lottie logo autoplays <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="unlockIphone" src="https://assets1.lottiefiles.com/private_files/lf30_50moqo0w.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Urban Heard Vlogs</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"chain",
           player:'#unlockIphone',
@@ -694,41 +653,39 @@
             },
           ],
         });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="clickyTest">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Click test
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Clicking plays the animation <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Clicking 5 times causes transition, confetti plays and resets <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="clickTest"
-                     src="https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Urban Heard Vlogs</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="clickyTest">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Click test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Clicking plays the animation <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Clicking 5 times causes transition, confetti plays and resets <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="clickTest" src="https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Urban Heard Vlogs</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#clickTest',
               mode: 'chain',
@@ -749,44 +706,42 @@
               ]
             });
           </pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="hoverTest">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Hover state + Click transition test
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Hover plays the animation <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Clicking doesnt play the animation <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Clicking 5 times causes transition, confetti plays and resets <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="hoverTestPlayer"
-                     src="https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Urban Heard Vlogs</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="hoverTest">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Hover state + Click transition test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Hover plays the animation <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Clicking doesnt play the animation <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Clicking 5 times causes transition, confetti plays and resets <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="hoverTestPlayer" src="https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Urban Heard Vlogs</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#hoverTestPlayer',
               mode: 'chain',
@@ -807,41 +762,39 @@
               ]
             });
           </pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="clickHoverTest">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Click state + hover transition test
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Clicking plays the animation but doesn't cause transition <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Hover over the container 5 times causes transition, confetti plays and resets <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="clickHoverTestPlayer"
-                     src="https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Urban Heard Vlogs</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="clickHoverTest">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Click state + hover transition test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Clicking plays the animation but doesn't cause transition <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Hover over the container 5 times causes transition, confetti plays and resets <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="clickHoverTestPlayer" src="https://assets10.lottiefiles.com/private_files/lf30_rsqq11m6.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Urban Heard Vlogs</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#clickHoverTestPlayer',
               mode: 'chain',
@@ -862,37 +815,36 @@
               ]
             });
           </pre>
+      </div>
     </div>
-  </div>
 
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="loadTest">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Load from URL + local test
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Loads second animation (dinosaur) from local path <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Loads the rest of the animations dynamically from URL <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Resets to first animation (star) after end of the last action <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="loadTestPlayer"
-                     src="https://assets9.lottiefiles.com/packages/lf20_9WL4VQ.json"
-                     background="#e3e3e3">
-      </lottie-player>
-    </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="loadTest">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Load from URL + local test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Loads second animation (dinosaur) from local path <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Loads the rest of the animations dynamically from URL <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Resets to first animation (star) after end of the last action <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="loadTestPlayer" src="https://assets9.lottiefiles.com/packages/lf20_9WL4VQ.json"
+          background="#e3e3e3">
+        </lottie-player>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#loadTestPlayer',
               mode: 'chain',
@@ -952,56 +904,56 @@
               ]
           });
           </pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="nineteenth">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Multiple interactions test
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          0 - 100 loops, transitions on click <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          100 - 200 plays once, transitions on complete <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          200 - 300 loops once, transitions on hover <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          300 - 400 loops animation, transitions after 4 clicks <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          400 - 500 loops animation, transitions after 4 hovers <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          500 - 600 clicking repeatedly will play the animation from the start due to forceFlag, repeats 3 times the transits <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          600 - 700 'repeat' transition ignores click state and automatically plays 4 times, jumps to 3rd action on end <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="jumpToTest"
-                     src="https://assets3.lottiefiles.com/packages/lf20_tn8qikk9.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Sam Osborne</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="nineteenth">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Multiple interactions test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            0 - 100 loops, transitions on click <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            100 - 200 plays once, transitions on complete <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            200 - 300 loops once, transitions on hover <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            300 - 400 loops animation, transitions after 4 clicks <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            400 - 500 loops animation, transitions after 4 hovers <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            500 - 600 clicking repeatedly will play the animation from the start due to forceFlag, repeats 3 times the
+            transits <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            600 - 700 'repeat' transition ignores click state and automatically plays 4 times, jumps to 3rd action on
+            end <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="jumpToTest" src="https://assets3.lottiefiles.com/packages/lf20_tn8qikk9.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank">Sam
+            Osborne</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"chain",
           player:'#twelfthLottie',
@@ -1053,56 +1005,56 @@
             }
           ]
         });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="resetTest">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie Interaction chaining - Reset is ignore when not at end
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          0 - 100 loops, transitions on click <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          100 - 200 plays once, transitions on complete <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          200 - 300 loops once, transitions on hover <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          300 - 400 loops animation, transitions after 4 clicks <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          400 - 500 loops animation, transitions after 4 hovers <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          500 - 600 clicking repeatedly will play the animation from the start due to forceFlag, repeats 3 times the transits <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          600 - 700 'repeat' transition ignores click state and automatically plays 4 times, jumps to 3rd action on end <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="ignoreResetPlayer"
-                     src="https://assets3.lottiefiles.com/packages/lf20_tn8qikk9.json"
-                     background="#e3e3e3">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Animation by
-        <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Sam Osborne</a
-        >
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="resetTest">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie Interaction chaining - Reset is ignore when not at end
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            0 - 100 loops, transitions on click <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            100 - 200 plays once, transitions on complete <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            200 - 300 loops once, transitions on hover <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            300 - 400 loops animation, transitions after 4 clicks <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            400 - 500 loops animation, transitions after 4 hovers <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            500 - 600 clicking repeatedly will play the animation from the start due to forceFlag, repeats 3 times the
+            transits <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            600 - 700 'repeat' transition ignores click state and automatically plays 4 times, jumps to 3rd action on
+            end <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="ignoreResetPlayer" src="https://assets3.lottiefiles.com/packages/lf20_tn8qikk9.json"
+          background="#e3e3e3">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Animation by
+          <a href="https://lottiefiles.com/user/120020" class="lf-link text-grey-dark font-lf-bold" target="_blank">Sam
+            Osborne</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
         LottieInteractivity.create({
           mode:"chain",
           player:'#twelfthLottie',
@@ -1159,41 +1111,41 @@
             }
           ]
         });</pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="holdExample">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie-interactivity chaining - Hold
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Hover over the animations plays it forwards, removing the cursor plays it backwards <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          After hovering for long enough (until frame 170) the transition happens <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="holdPlayer"
-                     src="https://assets6.lottiefiles.com/packages/lf20_lmceydcv.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Tap and hold by
-        <a href="https://lottiefiles.com/LottieFiles" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >LottieFiles</a>, spinner by
-        <a href="https://lottiefiles.com/user/217475" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Jonathon Holden</a>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="holdExample">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - Hold
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Hover over the animations plays it forwards, removing the cursor plays it backwards <input
+              type="checkbox" />
+          </li>
+          <li class="text-green">
+            After hovering for long enough (until frame 170) the transition happens <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="holdPlayer" src="https://assets6.lottiefiles.com/packages/lf20_lmceydcv.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Tap and hold by
+          <a href="https://lottiefiles.com/LottieFiles" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">LottieFiles</a>, spinner by
+          <a href="https://lottiefiles.com/user/217475" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Jonathon Holden</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#holdExample',
               mode: 'chain',
@@ -1212,41 +1164,40 @@
               ]
             });
           </pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldExample">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie-interactivity chaining - pauseHold
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Hover over the animations plays it forwards, removing the cursor pauses it <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          After hovering for long enough (until frame 170) the transition happens <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="pauseHoldPlayer"
-                     src="https://assets6.lottiefiles.com/packages/lf20_lmceydcv.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Tap and hold by
-        <a href="https://lottiefiles.com/LottieFiles" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >LottieFiles</a>, spinner by
-        <a href="https://lottiefiles.com/user/217475" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Jonathon Holden</a>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldExample">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - pauseHold
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Hover over the animations plays it forwards, removing the cursor pauses it <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            After hovering for long enough (until frame 170) the transition happens <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="pauseHoldPlayer" src="https://assets6.lottiefiles.com/packages/lf20_lmceydcv.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Tap and hold by
+          <a href="https://lottiefiles.com/LottieFiles" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">LottieFiles</a>, spinner by
+          <a href="https://lottiefiles.com/user/217475" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Jonathon Holden</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#pauseHoldExample',
               mode: 'chain',
@@ -1265,68 +1216,69 @@
               ]
             });
           </pre>
-    </div>
-  </div>
-
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie-interactivity chaining - speed & delay
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Animation (dragon typing on keyboard) plays at half speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 5 seconds and plays at half the normal speed. Transitions on click, but after the 5 second delay. During 0-5 seconds the animation doesn't play and clicking has no effect. <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 1 second and plays at half the normal speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays at its normal speed (1) <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 1 second at double the speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 1.5 seconds at 3x normal speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 2 seconds at 5x the speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 3 seconds at 10x the speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays after a delay of 5 seconds at normal speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Action plays the previous animation at half the speed <input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Action plays the previous animation at 0.1 the speed <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="dragonSpeedTest"
-                     src="./dragon.json">
-      </lottie-player>
-
-      <div class="text-sm text-grey-dark text-center">
-        Tap and hold by
-        <a href="https://lottiefiles.com/LottieFiles" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >LottieFiles</a>, spinner by
-        <a href="https://lottiefiles.com/user/217475" class="lf-link text-grey-dark font-lf-bold" target="_blank"
-        >Jonathon Holden</a>
       </div>
     </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - speed & delay
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Animation (dragon typing on keyboard) plays at half speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 5 seconds and plays at half the normal speed. Transitions on click, but
+            after the 5 second delay. During 0-5 seconds the animation doesn't play and clicking has no effect. <input
+              type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 1 second and plays at half the normal speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays at its normal speed (1) <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 1 second at double the speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 1.5 seconds at 3x normal speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 2 seconds at 5x the speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 3 seconds at 10x the speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays after a delay of 5 seconds at normal speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Action plays the previous animation at half the speed <input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Action plays the previous animation at 0.1 the speed <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="dragonSpeedTest" src="./dragon.json">
+        </lottie-player>
+
+        <div class="text-sm text-grey-dark text-center">
+          Tap and hold by
+          <a href="https://lottiefiles.com/LottieFiles" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">LottieFiles</a>, spinner by
+          <a href="https://lottiefiles.com/user/217475" class="lf-link text-grey-dark font-lf-bold"
+            target="_blank">Jonathon Holden</a>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#dragonSpeedTest',
               mode: 'chain',
@@ -1405,34 +1357,33 @@
               ]
             });
           </pre>
+      </div>
     </div>
-  </div>
 
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie-interactivity chaining - Hold then click
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Animation needs holding to transition (hold for at least 3 seconds)<input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation needs clicking to transition and repeats <input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="burgerMenuTest"
-                     src="https://assets.lottiefiles.com/packages/lf20_v4yd7sef.json">
-      </lottie-player>
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - Hold then click
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Animation needs holding to transition (hold for at least 3 seconds)<input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation needs clicking to transition and repeats <input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="burgerMenuTest" src="https://assets.lottiefiles.com/packages/lf20_v4yd7sef.json">
+        </lottie-player>
 
-    </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#burgerMenuTest',
               mode: "chain",
@@ -1453,34 +1404,33 @@
               ]
             });
           </pre>
+      </div>
     </div>
-  </div>
 
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie-interactivity chaining - Click and click finish playing before transit
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation needs clicking and finished playing before transitioning<input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="checkboxTest"
-                     src="https://assets10.lottiefiles.com/packages/lf20_qj6ywemr.json">
-      </lottie-player>
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - Click and click finish playing before transit
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation needs clicking and finished playing before transitioning<input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="checkboxTest" src="https://assets10.lottiefiles.com/packages/lf20_qj6ywemr.json">
+        </lottie-player>
 
-    </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#checkboxTest',
               mode: "chain",
@@ -1488,69 +1438,128 @@
                 {
                   state: 'click',
                   transition: 'click',
-                  forceFlag: 'true',
                   frames: [0, 30]
                 },
                 {
                   state: 'click',
                   transition: 'click',
-                  forceFlag: 'true',
                   frames: [30, 45],
                   reset: true
                 }
               ]
             });
           </pre>
+      </div>
     </div>
-  </div>
 
-  <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
-    <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
-      Lottie-interactivity chaining - Click + hover state and click finish playing before transit
-    </h3>
-    <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
-      Expected result:
-    </div>
-    <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
-      <ol>
-        <li class="text-green">
-          Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
-        </li>
-        <li class="text-green">
-          Animation plays on hover + needs clicking to transition<input type="checkbox" />
-        </li>
-      </ol>
-    </div>
-    <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
-      <lottie-player id="checkboxHoverTest"
-                     src="https://assets10.lottiefiles.com/packages/lf20_qj6ywemr.json">
-      </lottie-player>
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - Click + hover state and click finish playing before transit
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays on hover + needs clicking to transition<input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="checkboxHoverTest" src="https://assets10.lottiefiles.com/packages/lf20_qj6ywemr.json">
+        </lottie-player>
 
-    </div>
-    <div class="w-full md:w-1/2 mx-auto">
-          <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
             LottieInteractivity.create({
               player: '#checkboxHoverTest',
               mode: "chain",
               actions: [
-                {
-                  state: 'click',
-                  transition: 'click',
-                  forceFlag: 'true',
-                  frames: [0, 30]
-                },
-                {
-                  state: 'hover',
-                  transition: 'click',
-                  forceFlag: 'true',
-                  frames: [30, 45],
-                  reset: true
-                }
+              {
+                state: 'click',
+                transition: 'click',
+                frames: [0, 30]
+              },
+              {
+                state: 'hover',
+                transition: 'click',
+                frames: [30, 45],
+                reset: true
+              }
               ]
             });
           </pre>
+      </div>
+    </div>
+
+    <div class="lf-padding py-10 md:py-32 font-normal text-lg leading-reading" id="pauseHoldInteraction">
+      <h3 class="font-bold font-lf-bold text-3xl md:text-4xl text-center leading-normal pb-4">
+        Lottie-interactivity chaining - Circus hold test
+      </h3>
+      <div class="text-left text-sm text-grey-dark mx-auto w-1/2 text-red">
+        Expected result:
+      </div>
+      <div class="text-sm text-grey-dark text-left mx-auto w-1/2">
+        <ol>
+          <li class="text-green">
+            Animation needs clicking and finishes playing before transitioning<input type="checkbox" />
+          </li>
+          <li class="text-green">
+            Animation plays on hover + needs clicking to transition<input type="checkbox" />
+          </li>
+        </ol>
+      </div>
+      <div class="mx-auto my-8 w-1/4 md:w-1/3 back">
+        <lottie-player id="circusRide" src="https://assets1.lottiefiles.com/packages/lf20_fwgp2r4s.json">
+        </lottie-player>
+
+      </div>
+      <div class="w-full md:w-1/2 mx-auto">
+        <pre class="prettyprint lang-javascript" style="overflow: scroll;">
+          LottieInteractivity.create({
+            player: '#circusRide',
+            mode: "chain",
+            actions: [
+            {
+                state: 'autoplay',
+                transition: 'onComplete',
+                frames: [0, 35],
+            },
+            {
+                state: 'hold',
+                transition: 'hold',
+                frames: [35, 130],
+            },
+            {
+                state: 'autoplay',
+                transition: 'onComplete',
+                frames: [130, 491],
+            }, {
+                state: 'hold',
+                transition: 'pauseHold',
+                frames: [491, 612]
+            },
+            {
+                state: 'autoplay',
+                transition: 'onComplete',
+                frames: [612, 1074],
+            },
+            {
+                state: 'none',
+                transition: 'click',
+                reset: true
+            }
+        ]
+          });
+          </pre>
+      </div>
     </div>
   </div>
-</div>
 </body>
+
 </html>
