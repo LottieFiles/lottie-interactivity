@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.2
+
+### Patch Changes
+
+- adding changesets and dual deployment to npm and gpr
+
 ## 1.5.1
 
 ### Patch Changes

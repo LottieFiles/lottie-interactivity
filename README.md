@@ -284,7 +284,7 @@ To add a changeset run:
 yarn run changeset
 ```
 
-And select the type of version bump you'd like (major, minor, path).
+And select the type of version bump you'd like (major, minor, patch).
 
 You can document the change in detail and format it properly using Markdown by opening the ".md" file that the "yarn changeset" command created in the ".changeset" folder. Open the file, it should look something like this:
 
