@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function () {
         frames: [70, 134],
         state: 'autoplay',
         reset: true,
-        transition: 'none'
+        transition: 'onComplete'
       }
     ]
   });
@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
         transition: 'onComplete',
         frames: [130, 491],
       }, {
-        state: 'hold',
+        state: 'none',
         transition: 'pauseHold',
         frames: [491, 612]
       },
@@ -691,4 +691,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const evt = new Event("transition");
     window.dispatchEvent(evt);
   });
+
+  LottieInteractivity.create({
+    player: '#bullet',
+    mode: "chain",
+    actions: [
+      {
+        state: 'none',
+        transition: 'click',
+        reset: true,
+        frames: [0]
+      },
+      {
+        state: 'hold',
+        transition: 'none',
+        frames: [0, 11],
+        speed: 0.5,
+      }
+    ]
+  });
+
 });
