@@ -265,7 +265,7 @@ export class LottieInteractivity {
           this.player.removeEventListener('loopComplete', this.#onCompleteHandler);
           this.player.removeEventListener('complete', this.#onCompleteHandler);
           this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
-          this.player.removeEventListener('enterFrame', this.#holdTransitionHandler);
+          this.player.removeEventListener('enterFrame', this.#holdHandler);
         } catch (e) {
           // User deleted the player before calling stop()
           // Ignore
@@ -316,7 +316,14 @@ export class LottieInteractivity {
       this.container.addEventListener('touchstart', this.#clickHoverHandler, { passive: true });
     }
     let holdTransition = () => {
-      this.player.addEventListener('enterFrame', this.#holdTransitionHandler);
+      this.player.addEventListener('enterFrame', this.#holdHandler);
+      this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
+      this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
+      // For mobile
+      this.container.addEventListener('touchstart', this.#holdTransitionEnter, { passive: true });
+      this.container.addEventListener('touchend', this.#holdTransitionLeave, { passive: true });
+    }
+    let holdState = () => {
       this.container.addEventListener('mouseenter', this.#holdTransitionEnter);
       this.container.addEventListener('mouseleave', this.#holdTransitionLeave);
       // For mobile
@@ -348,6 +355,8 @@ export class LottieInteractivity {
     this.stateHandler.set('autoplay', autoplayState);
     this.stateHandler.set('click', clickState);
     this.stateHandler.set('hover', hoverState);
+    this.stateHandler.set('hold', holdState);
+    this.stateHandler.set('pauseHold', holdState);
 
     this.transitionHandler.set('click', clickTransition);
     this.transitionHandler.set('hover', hoverTransition);
@@ -495,11 +504,11 @@ export class LottieInteractivity {
    * The user held long enough and check if the current frame is within the segment limits
    *
    */
-  #holdTransitionHandler = () => {
+  #holdHandler = () => {
     let frames = this.actions[this.interactionIdx].frames;
 
     if ((frames && this.player.currentFrame >= frames[1]) || (this.player.currentFrame >= this.player.totalFrames - 1)) {
-      this.player.removeEventListener('enterFrame', this.#holdTransitionHandler);
+      this.player.removeEventListener('enterFrame', this.#holdHandler);
       this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
       this.container.removeEventListener('mouseleave', this.#holdTransitionLeave);
       // For mobile
@@ -509,6 +518,10 @@ export class LottieInteractivity {
 
       this.holdStatus = false;
       this.nextInteraction();
+    }
+    // Pause player so that reverse playback doesn't leave the set frame boundries
+    if (this.player.playDirection === -1 && frames && this.player.currentFrame < frames[0]) {
+      this.player.pause();
     }
   }
 
@@ -524,10 +537,14 @@ export class LottieInteractivity {
 
   // [cursor + chain mode]
   #holdTransitionLeave = () => {
-    if (this.actions[this.interactionIdx].transition === "hold" || this.actions[0].type === "hold") {
+    if (this.actions[this.interactionIdx].transition === "hold" ||
+      this.actions[this.interactionIdx].state === "hold" ||
+      this.actions[0].type === "hold") {
       this.player.setDirection(-1);
       this.player.play();
-    } else if (this.actions[this.interactionIdx].transition === "pauseHold" || this.actions[0].type === "pauseHold") {
+    } else if (this.actions[this.interactionIdx].transition === "pauseHold" ||
+      this.actions[this.interactionIdx].state === "pauseHold" ||
+      this.actions[0].type === "pauseHold") {
       this.player.pause();
     }
     this.holdStatus = false;
@@ -535,17 +552,32 @@ export class LottieInteractivity {
 
   // [chain mode]
   #clearStateListeners = () => {
-    let state = this.actions[this.interactionIdx].state;
-    let transition = this.actions[this.interactionIdx].transition;
+    this.container.removeEventListener('click', this.#clickHoverHandler);
+    this.container.removeEventListener('click', this.#clickHoverStateHandler);
 
-    if (state === "hover" || state === "click") {
-      this.container.removeEventListener('click', this.#clickHoverStateHandler);
-      this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
-    }
-    if (transition === "hover" || transition === "click") {
-      this.container.removeEventListener('click', this.#clickHoverHandler);
-      this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
-      this.container.removeEventListener('touchstart', this.#clickHoverHandler, { passive: true });
+    this.container.removeEventListener('mouseenter', this.#clickHoverHandler);
+    this.container.removeEventListener('touchstart', this.#clickHoverHandler);
+    this.container.removeEventListener('touchmove', this.#touchmoveHandler);
+    this.container.removeEventListener('mouseenter', this.#clickHoverStateHandler);
+    this.container.removeEventListener('touchstart', this.#clickHoverStateHandler);
+    this.container.removeEventListener('mouseenter', this.#holdTransitionEnter);
+    this.container.removeEventListener('touchstart', this.#holdTransitionEnter);
+
+    this.container.removeEventListener('mouseleave', this.#holdTransitionLeave);
+    this.container.removeEventListener('mousemove', this.#mousemoveHandler);
+    this.container.removeEventListener('mouseout', this.#mouseoutHandler);
+    this.container.removeEventListener('touchend', this.#holdTransitionLeave);
+
+    if (this.player) {
+      try {
+        this.player.removeEventListener('loopComplete', this.#onCompleteHandler);
+        this.player.removeEventListener('complete', this.#onCompleteHandler);
+        this.player.removeEventListener('enterFrame', this.#cursorSyncHandler);
+        this.player.removeEventListener('enterFrame', this.#holdHandler);
+      } catch (e) {
+        // User deleted the player before calling stop()
+        // Ignore
+      }
     }
   }
 
@@ -561,6 +593,7 @@ export class LottieInteractivity {
     this.oldInterctionIdx = this.interactionIdx;
     // If state is hover or click we need to remove listeners
     this.#clearStateListeners();
+    this.player.loop = false;
 
     // Check if theres a jump-to before incrementing
     let jumpToIndex = this.actions[this.interactionIdx].jumpTo;

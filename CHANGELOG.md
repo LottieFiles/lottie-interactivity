@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0
+
+### Minor Changes
+
+- 7b255ff: added pause and pauseHold state
+
 ## 1.5.2
 
 ### Patch Changes
