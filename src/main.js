@@ -272,7 +272,10 @@ export class LottieInteractivity {
         }
       }
     }
-    this.player = null;
+    if (this.player) {
+      this.player.destroy();
+      this.player = null;
+    }
   }
 
   /**
@@ -742,7 +745,6 @@ export class LottieInteractivity {
     } else {
       if (window.lottie) {
         this.stop();
-        this.player.destroy();
         // Removes svg animation contained inside
         this.container.innerHTML = "";
 
@@ -938,10 +940,18 @@ export class LottieInteractivity {
           }
         }
       }
-    } else if (action.type === 'play') {
+    } else if (action.type === 'play' || action.type === 'playOnce') {
       // Play: Reset segments and continue playing full animation from current position
-      if (!this.scrolledAndPlayed) {
+      if (action.type === 'playOnce' && !this.scrolledAndPlayed) {
         this.scrolledAndPlayed = true;
+        this.player.resetSegments(true);
+        if (action.frames) {
+          this.player.playSegments(action.frames, true);
+        } else {
+          this.player.play();
+        }
+        return;
+      } else if (action.type === 'play' && this.player.isPaused) {
         this.player.resetSegments(true);
         if (action.frames) {
           this.player.playSegments(action.frames, true);
