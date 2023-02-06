@@ -7,7 +7,7 @@ import { terser } from 'rollup-plugin-terser';
 const packageJson = require('./package.json');
 
 export default {
-  input: './src/main.js',
+  input: './src/lottie-interactivity.js',
 
   output: [
     {
